@@ -1,0 +1,60 @@
+{
+  "content_types": [
+    "PIE_CHART"
+  ],
+  "pie_charts": [
+    {
+      "title": "Non Interest Expense",
+      "as_of_date": "",
+      "slices": [
+        {
+          "name": "EDUCATIONAL AND PROMO...",
+          "percent": "321"
+        },
+        {
+          "name": "PROFESSIONAL AND OUTSI...",
+          "percent": "972"
+        },
+        {
+          "name": "OFFICE OPERATIONS EXPENSE",
+          "percent": "41"
+        },
+        {
+          "name": "EMPLOYEE COMPENSATION ...",
+          "percent": "1332"
+        },
+        {
+          "name": "TRAVEL AND CONFERENCE E...",
+          "percent": "853"
+        },
+        {
+          "name": "OFFICE OCCUPANCY EXPENSE",
+          "percent": "262"
+        },
+        {
+          "name": "MEMBER INSURANCE EXPEN...",
+          "percent": ""
+        }
+      ]
+    },
+    {
+      "title": "Non Interest Income",
+      "as_of_date": "",
+      "slices": [
+        {
+          "name": "OTHER NON-INTEREST INCO...",
+          "percent": "19"
+        },
+        {
+          "name": "FEE INCOME",
+          "percent": "1217"
+        },
+        {
+          "name": "OTHER INCOME (INCLUDES ...",
+          "percent": "1380"
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}

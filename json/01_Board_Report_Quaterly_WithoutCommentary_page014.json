@@ -1,0 +1,152 @@
+{
+  "content_types": [
+    "LINE_CHART"
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_line",
+      "title": "FUNDING STRUCTURE TREND",
+      "x_axis_label": "",
+      "y_axis_label": "%",
+      "x_axis_type": "time_period_line",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "CORE FUNDING RATIO",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "LOAN TO SHARE RATIO",
+          "values": [
+            85.64,
+            87.12,
+            89.38,
+            90.62,
+            89.38,
+            87.12,
+            85.64
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_line",
+      "title": "LIQUIDITY RATIO TREND",
+      "x_axis_label": "",
+      "y_axis_label": "%",
+      "x_axis_type": "time_period_line",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "",
+          "values": [
+            5.7,
+            5.08,
+            6.49,
+            5.2,
+            6.2,
+            7.3,
+            8.5
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_line",
+      "title": "LOAN & SHARE GROWTH TREND",
+      "x_axis_label": "",
+      "y_axis_label": "%",
+      "x_axis_type": "time_period_line",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "LOAN GROWTH",
+          "values": [
+            0,
+            0.49,
+            0.87,
+            2.2,
+            -0.3,
+            0.1,
+            5.47
+          ]
+        },
+        {
+          "name": "SHARE GROWTH",
+          "values": [
+            -6.1,
+            0.87,
+            6.9,
+            0.1,
+            1.2,
+            4.23,
+            4.99
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_line",
+      "title": "MEMBERSHIP GROWTH TREND",
+      "x_axis_label": "",
+      "y_axis_label": "%",
+      "x_axis_type": "time_period_line",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "",
+          "values": [
+            0,
+            0.87,
+            -9.4,
+            -2.2,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}

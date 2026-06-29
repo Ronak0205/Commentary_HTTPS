@@ -1,1 +1,0 @@
-extraction failed before parsing: model 'qwen3.5:4b' not found (status code: 404)

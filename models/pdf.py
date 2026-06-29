@@ -1,7 +1,7 @@
 import fitz
 
 
-def extract_page_images(pdf_path, output_dir, pdf_name, page_numbers, dpi=200):
+def extract_page_images(pdf_path, output_dir, pdf_name, page_numbers, dpi=300):
     doc = fitz.open(pdf_path)
     output_paths = []
 

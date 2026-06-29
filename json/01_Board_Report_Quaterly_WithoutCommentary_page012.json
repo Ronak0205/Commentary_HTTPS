@@ -1,0 +1,179 @@
+{
+  "content_types": [
+    "BAR_CHART",
+    "LINE_CHART",
+    "TABLE"
+  ],
+  "table": [
+    {
+      "COMPONENTS": "COST OF FUNDS / AVERAGE ASSETS",
+      "03-31-2026 ($,000)": "1.28%",
+      "Change from Last Quarter (bps)": -30.38,
+      "Change from Last Year End (bps)": -30.38,
+      "Change from the Same Quarter Last Year (bps)": -35.2
+    },
+    {
+      "COMPONENTS": "DELINQUENT LOANS/TOTAL LOANS",
+      "03-31-2026 ($,000)": "0.34%",
+      "Change from Last Quarter (bps)": 10.0,
+      "Change from Last Year End (bps)": 10.0,
+      "Change from the Same Quarter Last Year (bps)": -8.55
+    },
+    {
+      "COMPONENTS": "NET CHARGE-OFFS /AVE LOANS",
+      "03-31-2026 ($,000)": "0.22%",
+      "Change from Last Quarter (bps)": -13.77,
+      "Change from Last Year End (bps)": -13.77,
+      "Change from the Same Quarter Last Year (bps)": -26.75
+    },
+    {
+      "COMPONENTS": "NET INTEREST MARGIN / AVERAGE ASSETS",
+      "03-31-2026 ($,000)": "3.35%",
+      "Change from Last Quarter (bps)": 5.31,
+      "Change from Last Year End (bps)": 5.31,
+      "Change from the Same Quarter Last Year (bps)": 27.04
+    },
+    {
+      "COMPONENTS": "NET MARGIN / AVERAGE ASSETS",
+      "03-31-2026 ($,000)": "3.87%",
+      "Change from Last Quarter (bps)": 2.38,
+      "Change from Last Year End (bps)": 2.38,
+      "Change from the Same Quarter Last Year (bps)": 23.36
+    },
+    {
+      "COMPONENTS": "NET OPERATING EXPENSES / AVERAGE ASSETS",
+      "03-31-2026 ($,000)": "3.06%",
+      "Change from Last Quarter (bps)": -0.25,
+      "Change from Last Year End (bps)": -0.25,
+      "Change from the Same Quarter Last Year (bps)": 2.72
+    },
+    {
+      "COMPONENTS": "NET WORTH / TOTAL ASSETS",
+      "03-31-2026 ($,000)": "10.33%",
+      "Change from Last Quarter (bps)": 4.38,
+      "Change from Last Year End (bps)": 4.38,
+      "Change from the Same Quarter Last Year (bps)": 36.26
+    },
+    {
+      "COMPONENTS": "OPERATING EXPENSES / AVERAGE ASSETS",
+      "03-31-2026 ($,000)": "3.73%",
+      "Change from Last Quarter (bps)": -6.98,
+      "Change from Last Year End (bps)": -6.98,
+      "Change from the Same Quarter Last Year (bps)": -11.6
+    },
+    {
+      "COMPONENTS": "RETURN ON AVERAGE ASSETS",
+      "03-31-2026 ($,000)": "0.73%",
+      "Change from Last Quarter (bps)": 9.88,
+      "Change from Last Year End (bps)": 9.88,
+      "Change from the Same Quarter Last Year (bps)": 28.14
+    }
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_combo",
+      "title": "PROFITABILITY TREND",
+      "x_axis_label": "",
+      "y_axis_label": "% / bps (implied)",
+      "x_axis_type": "periods",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "NET INTEREST MARGIN / AVERAGE ASSETS",
+          "axis": "left",
+          "values": [
+            3.0,
+            3.0,
+            3.45,
+            3.78,
+            3.96,
+            4.12,
+            4.1
+          ]
+        },
+        {
+          "name": "RETURN ON AVERAGE ASSETS",
+          "axis": "left",
+          "values": [
+            0.5,
+            0.4,
+            0.78,
+            0.93,
+            1.02,
+            1.06,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_grouped",
+      "title": "YIELD STRUCTURE TREND",
+      "x_axis_label": "",
+      "y_axis_label": "% / bps (implied)",
+      "x_axis_type": "periods",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "YIELD ON AVERAGE LOANS",
+          "values": [
+            4.8,
+            5.7,
+            5.9,
+            5.9,
+            5.9,
+            5.9,
+            5.6
+          ]
+        },
+        {
+          "name": "COST OF FUNDS / AVERAGE ASSETS",
+          "values": [
+            103,
+            248,
+            175,
+            175,
+            175,
+            175,
+            139
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "category",
+      "title": "",
+      "x_axis_label": "",
+      "y_axis_label": "% / bps (implied)",
+      "x_axis_type": "category",
+      "periods": [],
+      "series": [
+        {
+          "name": "NIM",
+          "values": []
+        },
+        {
+          "name": "ROAA",
+          "values": []
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}

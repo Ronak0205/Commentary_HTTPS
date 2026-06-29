@@ -1,0 +1,142 @@
+{
+  "content_types": [
+    "LINE_CHART"
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_line",
+      "title": "NET WORTH RATIO TREND",
+      "x_axis_label": "",
+      "y_axis_label": "",
+      "x_axis_type": "time_period_line",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "",
+          "values": [
+            10.1,
+            10.04,
+            9.98,
+            10.27,
+            10.53,
+            10.28,
+            10.3
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_line",
+      "title": "NET WORTH GROWTH TREND",
+      "x_axis_label": "",
+      "y_axis_label": "",
+      "x_axis_type": "time_period_line",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "",
+          "values": [
+            5.0,
+            3.8,
+            4.7,
+            6.3,
+            9.0,
+            8.0,
+            7.5
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_line",
+      "title": "ASSET QUALITY TREND",
+      "x_axis_label": "",
+      "y_axis_label": "",
+      "x_axis_type": "time_period_combo",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "DELINQUENCY RATE",
+          "axis": "left",
+          "values": [
+            0.4,
+            0.4,
+            0.4,
+            0.4,
+            0.35,
+            0.28,
+            0.36
+          ]
+        },
+        {
+          "name": "NET CHARGE-OFFS RATE",
+          "axis": "left",
+          "values": [
+            0.27,
+            0.45,
+            0.41,
+            0.35,
+            0.38,
+            0.39,
+            0.2
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_line",
+      "title": "CAPITAL RISK EXPOUSURE TREND",
+      "x_axis_label": "",
+      "y_axis_label": "",
+      "x_axis_type": "time_period_line",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "",
+          "values": [
+            0.04,
+            0.04,
+            0.039,
+            0.037,
+            0.033,
+            0.032,
+            0.031
+          ]
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}

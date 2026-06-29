@@ -1,0 +1,162 @@
+```json
+{
+  "table": [
+    {
+      "COMPONENTS": "ASSETS",
+      "03-31-2026 ($,000)": 10493111,
+      "% of Total Assets": 100.0,
+      "% Change vs Previous Quarter": 1.6,
+      "% Change vs Previous Year End": 1.6,
+      "% Change over Quarter to Quarter": 4.3
+    },
+    {
+      "COMPONENTS": "CASH AND DEPOSITS",
+      "03-31-2026 ($,000)": 816687,
+      "% of Total Assets": 7.8,
+      "% Change vs Previous Quarter": 12.9,
+      "% Change vs Previous Year End": 12.9,
+      "% Change over Quarter to Quarter": 42.3
+    },
+    {
+      "COMPONENTS": "INVESTMENT SECURITIES",
+      "03-31-2026 ($,000)": 2204237,
+      "% of Total Assets": 21.0,
+      "% Change vs Previous Quarter": 2.7,
+      "% Change vs Previous Year End": 2.7,
+      "% Change over Quarter to Quarter": -1.6
+    },
+    {
+      "COMPONENTS": "LOANS AND LEASES",
+      "03-31-2026 ($,000)": 6628095,
+      "% of Total Assets": 63.2,
+      "% Change vs Previous Quarter": 0.2,
+      "% Change vs Previous Year End": 0.2,
+      "% Change over Quarter to Quarter": 1.6
+    },
+    {
+      "COMPONENTS": "OTHER ASSETS",
+      "03-31-2026 ($,000)": 836995,
+      "% of Total Assets": 8.0,
+      "% Change vs Previous Quarter": -0.7,
+      "% Change vs Previous Year End": -0.7,
+      "% Change over Quarter to Quarter": 17.4
+    },
+    {
+      "COMPONENTS": "OTHER INVESTMENTS",
+      "03-31-2026 ($,000)": 7125,
+      "% of Total Assets": 0.1,
+      "% Change vs Previous Quarter": 0.0,
+      "% Change vs Previous Year End": 0.0,
+      "% Change over Quarter to Quarter": 4.2
+    },
+    {
+      "COMPONENTS": "EQUITY",
+      "03-31-2026 ($,000)": 878005,
+      "% of Total Assets": 8.4,
+      "% Change vs Previous Quarter": 1.8,
+      "% Change vs Previous Year End": 1.8,
+      "% Change over Quarter to Quarter": 14.8
+    },
+    {
+      "COMPONENTS": "ACCUMULATED UNREALIZED GAINS (LOSSES) ON AVAILABLE FOR SALE DEBT SECURITIES",
+      "03-31-2026 ($,000)": -77885,
+      "% of Total Assets": -0.7,
+      "% Change vs Previous Quarter": 1.7,
+      "% Change vs Previous Year End": 1.7,
+      "% Change over Quarter to Quarter": -28.8
+    },
+    {
+      "COMPONENTS": "EQUITY ACQUIRED IN MERGER",
+      "03-31-2026 ($,000)": 22125,
+      "% of Total Assets": 0.2,
+      "% Change vs Previous Quarter": 0.0,
+      "% Change vs Previous Year End": 0.0,
+      "% Change over Quarter to Quarter": 373.2
+    },
+    {
+      "COMPONENTS": "UNDIVIDED EARNINGS",
+      "03-31-2026 ($,000)": 933765,
+      "% of Total Assets": 8.9,
+      "% Change vs Previous Quarter": 1.9,
+      "% Change vs Previous Year End": 1.9,
+      "% Change over Quarter to Quarter": 7.4
+    },
+    {
+      "COMPONENTS": "LIABILITIES",
+      "03-31-2026 ($,000)": 8505211,
+      "% of Total Assets": 81.1,
+      "% Change vs Previous Quarter": 1.3,
+      "% Change vs Previous Year End": 1.3,
+      "% Change over Quarter to Quarter": 4.0
+    },
+    {
+      "COMPONENTS": "ACCOUNTS PAYABLE, ACCRUED INTEREST ON BORROWINGS, AND OTHER LIABILITIES",
+      "03-31-2026 ($,000)": 36675,
+      "% of Total Assets": 0.3,
+      "% Change vs Previous Quarter": 40.9,
+      "% Change vs Previous Year End": 40.9,
+      "% Change over Quarter to Quarter": 23.9
+    },
+    {
+      "COMPONENTS": "ACCRUED DIVIDENDS & INTEREST PAYABLE ON SHARES & DEPOSITS",
+      "03-31-2026 ($,000)": 13815,
+      "% of Total Assets": 0.1,
+      "% Change vs Previous Quarter": -22.9,
+      "% Change vs Previous Year End": -22.9,
+      "% Change over Quarter to Quarter": -1.1
+    },
+    {
+      "COMPONENTS": "ALLOWANCE FOR CREDIT LOSSES ON OFF-BALANCE SHEET CREDIT EXPOSURES",
+      "03-31-2026 ($,000)": 05,
+      "% of Total Assets": 0.0,
+      "% Change vs Previous Quarter": -28.7,
+      "% Change vs Previous Year End": -28.7,
+      "% Change over Quarter to Quarter": -49.2
+    },
+    {
+      "COMPONENTS": "SHARES/DEPOSITS",
+      "03-31-2026 ($,000)": 8454721,
+      "% of Total Assets": 80.6,
+      "% Change vs Previous Quarter": 1.2,
+      "% Change vs Previous Year End": 1.2,
+      "% Change over Quarter to Quarter": 3.9
+    }
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_stacked",
+      "title": "Balance Sheet Trend",
+      "x_axis_label": "",
+      "y_axis_label": null,
+      "x_axis_type": "periods",
+      "periods": ["YE'23", "YE'24", "Q1'25", "Q2'25", "Q3'25", "YE'25", "Q2'26"],
+      "series": [
+        {
+          "name": "ACCOUNTS PAYABLE, ACCRUED INT...",
+          "values": []
+        },
+        {
+          "name": "ACCURED DIVIDENDS & INTEREST P...",
+          "values": []
+        },
+        {
+          "name": "ACCUMLATED UNREALIZED GAINS",
+          "values": [0, 0, 0, 0, 0, -78125, null]
+        },
+        {
+          "name": "ACCUMULATED UNREALIZED LOSSE...",
+          "values": []
+        },
+        {
+          "name": "ACCUMLATED UNREALIZED NET G...",
+          "values": [0, 0, -78125, null, null, -69345, null]
+        },
+        {
+          "name": "ALLOWANCE FOR CREDIT LOSSES O...",
+          "values": []
+        }
+      ]
+    }
+  ]
+}
+```

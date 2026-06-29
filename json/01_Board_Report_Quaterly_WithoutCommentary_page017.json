@@ -1,0 +1,139 @@
+{
+  "content_types": [
+    "BAR_CHART",
+    "TABLE"
+  ],
+  "table": [
+    {
+      "COMPONENTETS": "ALL OTHER SECURED NON-REAL ESTATE LOANS/LINES OF CREDIT",
+      "03-31-2026 ($,000)": 229,
+      "% Change vs Previous Quarter": 108.1,
+      "% Change vs Previous Year End": 108.1,
+      "% Change Quarter over Quarter": 104.9
+    },
+    {
+      "COMPONENTETS": "ALL OTHER UNSECURED",
+      "03-31-2026 ($,000)": 538,
+      "% Change vs Previous Quarter": 27.3,
+      "% Change vs Previous Year End": 27.3,
+      "% Change Quarter over Quarter": 50.3
+    },
+    {
+      "COMPONENTETS": "NEW VEHICLE",
+      "03-31-2026 ($,000)": 931,
+      "% Change vs Previous Quarter": -28.3,
+      "% Change vs Previous Year End": -28.3,
+      "% Change Quarter over Quarter": 8.1
+    },
+    {
+      "COMPONENTETS": "PAYDAY ALTERNATIVE LOANS (PALS LOANS) (FCU ONLY)",
+      "03-31-2026 ($,000)": 2,
+      "% Change vs Previous Quarter": -64.4,
+      "% Change vs Previous Year End": -64.4,
+      "% Change Quarter over Quarter": 25.7
+    },
+    {
+      "COMPONENTETS": "SECURED BY 1ST LIEN ON A SINGLE 1- TO 4-FAMILY RESIDENTIAL PROPERTY",
+      "03-31-2026 ($,000)": 1135,
+      "% Change vs Previous Quarter": -18.7,
+      "% Change vs Previous Year End": -18.7,
+      "% Change Quarter over Quarter": -35.4
+    },
+    {
+      "COMPONENTETS": "SECURED BY JUNIOR LIEN ON A SINGLE 1- TO 4-FAMILY RESIDENTIAL PROPERTY",
+      "03-31-2026 ($,000)": 517,
+      "% Change vs Previous Quarter": 80.5,
+      "% Change vs Previous Year End": 80.5,
+      "% Change Quarter over Quarter": 109.4
+    },
+    {
+      "COMPONENTETS": "SECURED BY OWNER OCCUPIED, NONFARM, NON-RESIDENTIAL PROPERTY",
+      "03-31-2026 ($,000)": 1816,
+      "% Change vs Previous Quarter": 184.3,
+      "% Change vs Previous Year End": 184.3,
+      "% Change Quarter over Quarter": 15.5
+    },
+    {
+      "COMPONENTETS": "Total",
+      "03-31-2026 ($,000)": 6752,
+      "% Change vs Previous Quarter": 17.6,
+      "% Change vs Previous Year End": 17.6,
+      "% Change Quarter over Quarter": 9.3
+    }
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_stacked",
+      "title": "DELINQUENCY TREND",
+      "x_axis_label": "",
+      "y_axis_label": null,
+      "x_axis_type": "category",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "USED VEHICLE"
+        },
+        {
+          "name": "UNSECURED REVOLVING LINES ..."
+        },
+        {
+          "name": "UNSECURED CREDIT CARD"
+        },
+        {
+          "name": "UNSECURED COMMERCIAL LOA..."
+        },
+        {
+          "name": "SECURED BY OWNER OCCUPIED, ..."
+        },
+        {
+          "name": "SECURED BY NON-OWNER OCC...."
+        },
+        {
+          "name": "SECURED BY JUNIOR LIEN ON A ..."
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_percent_stacked",
+      "title": "DELINQUENCY MIGRATION",
+      "x_axis_label": "",
+      "y_axis_label": null,
+      "x_axis_type": "category",
+      "periods": [
+        "YE'23",
+        "YE'24",
+        "Q1'25",
+        "Q2'25",
+        "Q3'25",
+        "YE'25",
+        "Q1'26"
+      ],
+      "series": [
+        {
+          "name": "> = 360 DAYS"
+        },
+        {
+          "name": "180 - 359 DAYS"
+        },
+        {
+          "name": "30 - 59 DAYS"
+        },
+        {
+          "name": "60 - 89 DAYS"
+        },
+        {
+          "name": "90 - 179 DAYS"
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}

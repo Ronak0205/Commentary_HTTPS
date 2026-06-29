@@ -28,14 +28,14 @@ SECTIONS = [
     },
     {
         "name": "loan",
-        "pages": [16, 17, 18, 19, 20],
+        "pages": [16, 17],
         "module": "loan",
         "system_prompt_var": "SYSTEM_PROMPT",
         "user_prompt_var": "USER_PROMPT",
     },
     {
         "name": "loan_continue",
-        "pages": [16, 17, 18, 19, 20],
+        "pages": [18, 19, 20],
         "module": "loan_continue",
         "system_prompt_var": "SYSTEM_PROMPT",
         "user_prompt_var": "USER_PROMPT",

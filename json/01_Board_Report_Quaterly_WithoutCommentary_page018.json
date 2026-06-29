@@ -1,0 +1,144 @@
+{
+  "content_types": [
+    "BAR_CHART",
+    "TABLE"
+  ],
+  "table": [
+    {
+      "COMPONENTS": "ALL OTHER NON-COMMERCIAL RE LOANS/LOC",
+      "03-31-2026 ($,000)": 0.0,
+      "% Change vs Previous Quarter": 0.0,
+      "% Change vs Previous Year End": 0.0,
+      "% Change Quarter over Quarter": 0.0
+    },
+    {
+      "COMPONENTS": "ALL OTHER SECURED NON-REAL ESTATE LOANS/LINES OF CREDIT",
+      "03-31-2026 ($,000)": 36.0,
+      "% Change vs Previous Quarter": -86.7,
+      "% Change vs Previous Year End": -86.7,
+      "% Change Quarter over Quarter": -45.6
+    },
+    {
+      "COMPONENTS": "ALL OTHER UNSECURED",
+      "03-31-2026 ($,000)": 162.0,
+      "% Change vs Previous Quarter": -86.1,
+      "% Change vs Previous Year End": -86.1,
+      "% Change Quarter over Quarter": -62.0
+    },
+    {
+      "COMPONENTS": "COMMERCIAL AND INDUSTRIAL LOANS",
+      "03-31-2026 ($,000)": 0.0,
+      "% Change vs Previous Quarter": 0.0,
+      "% Change vs Previous Year End": 0.0,
+      "% Change Quarter over Quarter": 0.0
+    },
+    {
+      "COMPONENTS": "LEASES RECEIVABLE",
+      "03-31-2026 ($,000)": 0.0,
+      "% Change vs Previous Quarter": 0.0,
+      "% Change vs Previous Year End": 0.0,
+      "% Change Quarter over Quarter": 0.0
+    },
+    {
+      "COMPONENTS": "NEW VEHICLE",
+      "03-31-2026 ($,000)": 336.0,
+      "% Change vs Previous Quarter": -66.4,
+      "% Change vs Previous Year End": -66.4,
+      "% Change Quarter over Quarter": -17.4
+    },
+    {
+      "COMPONENTS": "NON-FEDERALLY GUARANTEED STUDENT LOANS",
+      "03-31-2026 ($,000)": 0.0,
+      "% Change vs Previous Quarter": 0.0,
+      "% Change vs Previous Year End": 0.0,
+      "% Change Quarter over Quarter": 0.0
+    },
+    {
+      "COMPONENTS": "PAYDAY ALTERNATIVE LOANS (PALS I AND PALS II) (FCU ONLY)",
+      "03-31-2026 ($,000)": 2.0,
+      "% Change vs Previous Quarter": 40.3,
+      "% Change vs Previous Year End": 40.3,
+      "% Change Quarter over Quarter": 76.5
+    },
+    {
+      "COMPONENTS": "SECURED BY 1ST LIEN ON A SINGLE 1- TO 4-FAMILY RESIDENTIAL PROPERTY",
+      "03-31-2026 ($,000)": 0.0,
+      "% Change vs Previous Quarter": 0.0,
+      "% Change vs Previous Year End": 0.0,
+      "% Change Quarter over Quarter": 0.0
+    },
+    {
+      "COMPONENTS": "SECURED BY JUNIOR LIEN ON A SINGLE 1- TO 4-FAMILY RESIDENTIAL PROPERTY",
+      "03-31-2026 ($,000)": 0.0,
+      "% Change vs Previous Quarter": -100.0,
+      "% Change vs Previous Year End": -100.0,
+      "% Change Quarter over Quarter": -100.0
+    },
+    {
+      "COMPONENTS": "UNSECURED CREDIT CARD",
+      "03-31-2026 ($,000)": 69.0,
+      "% Change vs Previous Quarter": -77.8,
+      "% Change vs Previous Year End": -77.8,
+      "% Change Quarter over Quarter": 3.7
+    },
+    {
+      "COMPONENTS": "USED VEHICLE",
+      "03-31-2026 ($,000)": 307.0,
+      "% Change vs Previous Quarter": -79.6,
+      "% Change vs Previous Year End": -79.6,
+      "% Change Quarter over Quarter": -29.1
+    },
+    {
+      "COMPONENTS": "Total",
+      "03-31-2026 ($,000)": 911.0,
+      "% Change vs Previous Quarter": -79.0,
+      "% Change vs Previous Year End": -79.0,
+      "% Change Quarter over Quarter": -35.7
+    }
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_stacked",
+      "title": "YTD CHARGE OFF TREND",
+      "x_axis_label": "",
+      "y_axis_label": null,
+      "x_axis_type": "category",
+      "periods": [],
+      "series": [
+        {
+          "name": "ALL OTHER SECURED NON-REAL...",
+          "values": []
+        },
+        {
+          "name": "ALL OTHER UNSECURED",
+          "values": []
+        },
+        {
+          "name": "INDIRECT LOANS",
+          "values": []
+        },
+        {
+          "name": "NEW VEHICLE",
+          "values": []
+        },
+        {
+          "name": "PAYDAY ALTERNATIVE LOANS (P...",
+          "values": []
+        },
+        {
+          "name": "SECURED BY JUNIOR LIEN ON A ...",
+          "values": []
+        },
+        {
+          "name": "SECURED BY OWNER OCCUPIED,...",
+          "values": []
+        },
+        {
+          "name": "UNSECURED COMMERCIAL LOA...",
+          "values": []
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}
