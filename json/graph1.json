@@ -1,0 +1,155 @@
+{
+  "content_types": [
+    "BAR_CHART",
+    "PIE_CHART"
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_stacked",
+      "title": "LOANS AND LEASES",
+      "x_axis_label": "",
+      "y_axis_label": null,
+      "x_axis_type": "time_period_stacked",
+      "periods": [
+        "YE'22",
+        "YE'23",
+        "YE'24",
+        "YE'25",
+        "Q1'2026",
+        "Q2'2026"
+      ],
+      "series": [
+        {
+          "name": "ALL OTHER SECURED NON-REAL...",
+          "values": []
+        },
+        {
+          "name": "ALL OTHER UNSECURED LOANS...",
+          "values": [
+            150000,
+            230000,
+            480000,
+            670000,
+            90000,
+            10000
+          ]
+        },
+        {
+          "name": "LOANS GRANTED YEAR-TO-DATE",
+          "values": [
+            250000,
+            380000,
+            670000,
+            490000,
+            10000,
+            1000
+          ]
+        },
+        {
+          "name": "LOANS/LINES OF CREDIT SECURE...",
+          "values": [
+            250000,
+            380000,
+            670000,
+            490000,
+            10000,
+            1000
+          ]
+        },
+        {
+          "name": "NEW VEHICLE LOANS",
+          "values": [
+            250000,
+            380000,
+            670000,
+            490000,
+            10000,
+            1000
+          ]
+        },
+        {
+          "name": "USED VEHICLE LOANS",
+          "values": [
+            250000,
+            380000,
+            670000,
+            490000,
+            10000,
+            1000
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_percent_stacked",
+      "title": "",
+      "x_axis_label": null,
+      "y_axis_label": null,
+      "x_axis_type": "pie",
+      "periods": [
+        ""
+      ],
+      "series": [
+        {
+          "name": "USED VEHICLE LOANS",
+          "values": [
+            33.88
+          ]
+        },
+        {
+          "name": "NEW VEHICLE LOANS",
+          "values": [
+            28.19
+          ]
+        },
+        {
+          "name": "ALL OTHER UNSECURED LOANS...",
+          "values": [
+            25.36
+          ]
+        },
+        {
+          "name": "ALL OTHER SECURED NON-REAL...",
+          "values": [
+            6.88
+          ]
+        },
+        {
+          "name": "LOANS/LINES OF CREDIT SECURE...",
+          "values": [
+            5.69
+          ]
+        }
+      ]
+    }
+  ],
+  "pie_charts": [
+    {
+      "title": "",
+      "as_of_date": "May 31, 2026",
+      "slices": [
+        {
+          "name": "USED VEHICLE LOANS",
+          "percent": "33.88"
+        },
+        {
+          "name": "NEW VEHICLE LOANS",
+          "percent": "28.19"
+        },
+        {
+          "name": "ALL OTHER UNSECURED LOANS...",
+          "percent": "25.36"
+        },
+        {
+          "name": "LOANS/LINES OF CREDIT SECURE",
+          "percent": "6.88"
+        },
+        {
+          "name": "ALL OTHER SECURED NON-REAL",
+          "percent": "5.69"
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}

@@ -1,0 +1,96 @@
+{
+  "content_types": [
+    "BAR_CHART",
+    "PIE_CHART"
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_stacked",
+      "title": "YTD RECOVERIES TREND",
+      "x_axis_label": "",
+      "y_axis_label": "",
+      "x_axis_type": "time_period_stacked",
+      "periods": [
+        "YE22",
+        "YE23",
+        "YE24",
+        "YE25",
+        "Q1'2026"
+      ],
+      "series": []
+    },
+    {
+      "chart_type": "pie_chart",
+      "title": "CURRENT YTD RECOVERIES DISTRIBUTION",
+      "x_axis_label": "",
+      "y_axis_label": "",
+      "x_axis_type": "category_pie",
+      "periods": [],
+      "series": [
+        {
+          "name": "ALL OTHER NON-COMMERCIAL",
+          "values": []
+        },
+        {
+          "name": "ALL OTHER SECURED NON-R.",
+          "values": []
+        },
+        {
+          "name": "ALL OTHER UNSECURED LOAN",
+          "values": [
+            59.06
+          ]
+        },
+        {
+          "name": "COMMERCIAL AND INDUSTRIAL",
+          "values": []
+        },
+        {
+          "name": "CONSTRUCTION AND DEVELOPMENT",
+          "values": []
+        },
+        {
+          "name": "INDIRECT LOANS",
+          "values": [
+            39.22
+          ]
+        },
+        {
+          "name": "LEASES RECEIVABLE",
+          "values": []
+        },
+        {
+          "name": "LOANS TO FINANCE AGRICULTURE AND RURAL DEVELOPMENT",
+          "values": []
+        },
+        {
+          "name": "NEW VEHICLE LOANS",
+          "values": [
+            1.72
+          ]
+        }
+      ]
+    }
+  ],
+  "pie_charts": [
+    {
+      "title": "CURRENT YTD RECOVERIES DISTRIBUTION",
+      "as_of_date": "",
+      "slices": [
+        {
+          "name": "ALL OTHER NON-COMMERCIAL",
+          "percent": "59.06%"
+        },
+        {
+          "name": "INDIRECT LOANS",
+          "percent": "38.22%"
+        },
+        {
+          "name": "NEW VEHICLE LOANS",
+          "percent": "1.72%"
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}

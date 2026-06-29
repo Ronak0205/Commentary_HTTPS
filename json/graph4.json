@@ -1,0 +1,92 @@
+{
+  "content_types": [
+    "BAR_CHART",
+    "PIE_CHART"
+  ],
+  "charts": [
+    {
+      "chart_type": "time_period_stacked",
+      "title": "YTD CHARGE OFF TREND",
+      "x_axis_label": "",
+      "y_axis_label": null,
+      "x_axis_type": "time_period_stacked",
+      "periods": [
+        "YE22",
+        "YE23",
+        "YE24",
+        "YE25",
+        "Q1'2026"
+      ],
+      "series": [
+        {
+          "name": "ALL OTHER SECURED NON-R...",
+          "values": []
+        },
+        {
+          "name": "ALL OTHER UNSECURED LOA...",
+          "values": [
+            140,
+            235,
+            260,
+            270,
+            80
+          ]
+        },
+        {
+          "name": "NEW VEHICLE LOANS",
+          "values": []
+        },
+        {
+          "name": "USED VEHICLE LOANS",
+          "values": [
+            65,
+            23,
+            40,
+            18,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "chart_type": "time_period_percent_stacked",
+      "title": "CURRENT YTD CHARGE OFF DISTRIBUTION",
+      "x_axis_label": "",
+      "y_axis_label": null,
+      "x_axis_type": "time_period_percent_stacked",
+      "periods": [
+        ""
+      ],
+      "series": [
+        {
+          "name": "ALL OTHER UNSECURED LOA...",
+          "values": []
+        },
+        {
+          "name": "USED VEHICLE LOANS",
+          "highlighted_periods": [],
+          "values": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "pie_charts": [
+    {
+      "title": "CURRENT YTD CHARGE OFF DISTRIBUTION",
+      "as_of_date": "",
+      "slices": [
+        {
+          "name": "ALL OTHER UNSECURED LOA...",
+          "percent": "99.95"
+        },
+        {
+          "name": "USED VEHICLE LOANS",
+          "percent": "0.05"
+        }
+      ]
+    }
+  ],
+  "parse_error": false
+}
