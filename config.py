@@ -1,5 +1,6 @@
-PDF_NAME = "01_Board_Report_Quaterly_WithoutCommentary"
-PDF_PATH = f"pdf/{PDF_NAME}.pdf"
+PDF_NAMES = [
+    "01_Board_Report_Quaterly_WithoutCommentary",
+]
 
 EXTRACTED_IMG_DIR = "extracted_img"
 DATA_DIR = "data"

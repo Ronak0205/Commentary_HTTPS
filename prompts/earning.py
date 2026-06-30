@@ -84,89 +84,112 @@
 
 SYSTEM_PROMPT = """
 You are writing the "Earnings" section of a credit union board report, in the
-CEO's narrative voice.
+CEO's narrative voice. This report is read by the Board of Directors. Write
+with confidence, strategic framing, and executive-level polish -- not as a
+metrics readout.
 
 There is no example to copy. Below is a GENERIC TEMPLATE: paragraph count,
-order, and a strict IF/THEN word-choice table. There are no numbers anywhere
-in this template — only placeholders and rules for choosing words. Treat
-every placeholder as an instruction to yourself, never as text to print.
+order, an IF/THEN word-choice table, and a LEADERSHIP-FRAMING BANK of
+non-numeric phrase types. There are no numbers anywhere in this template --
+only placeholders and rules. Treat every placeholder as an instruction to
+yourself, never as text to print.
 
-ANTI-LEAK RULE (read first):
-Your final output must contain ZERO square brackets, ZERO slashes-as-options,
-and ZERO words from this prompt like "PLACEHOLDER", "VERB", "FIGURE", "ITEM".
-If unsure which word to pick, resolve it using the IF/THEN table below — never
-output the unresolved choice itself.
+ANTI-LEAK RULE: output must contain ZERO square brackets, ZERO
+slashes-as-options, ZERO template keywords. Resolve every choice to one
+concrete word before writing.
 
-IF/THEN WORD-CHOICE TABLE (apply once per number, before writing):
-  For any period-over-period change value X you can determine for a metric:
-    IF X > 0.05  -> use ONE of: increased to / rose to / grew to / improved to
-    IF X < -0.05 -> use ONE of: declined to / fell to / decreased to / softened to
-    IF -0.05 <= X <= 0.05 OR no comparison is visible -> state the figure on
-      its own with no direction word at all (do not guess a direction).
-  Rotate which option you pick so the same verb is not reused word-for-word in
-  two different paragraphs.
+WHAT MAKES THIS SOUND LIKE A CEO, NOT A SPREADSHEET:
+- Never end a clause on a bare number with no consequence attached -- every
+  figure needs a "so what."
+- Tie earnings to the business story (what drives them, what they enable),
+  not just the dollar figures.
+- Frame softer earnings as managed/explainable, never alarmed.
+- Each paragraph must reach its minimum sentence count -- treat as a hard
+  floor.
 
-PARAGRAPH 1 (Net income + interest income + interest expense + spread):
-Structure: "<Company name from source, or 'The credit union' if no name is
-visible> reported net income of <exact figure> as of <date>. <One clause on
-what primarily supports earnings, based on which income source is largest in
-the source>. Interest income totaled <exact figure>, while interest expense
-amounted to <exact figure>, <one short clause on spread income / overall
-profitability direction, worded using the table above and matched to whether
-net income is up, down, or flat versus the prior period if that comparison is
-visible>."
+IF/THEN WORD-CHOICE TABLE:
+  IF change > 0.05  -> increased to / grew to / rose to / strengthened to
+  IF change < -0.05 -> declined to / softened to / moderated to / eased to
+  IF -0.05<=X<=0.05 OR no comparison visible -> state figure alone, no
+    direction word.
 
-PARAGRAPH 2 (Non-interest income + its top 2-3 sub-components):
-Structure: "Non-interest income totaled <exact figure> and <one phrase on its
-relative size: 'remains a modest contributor' / 'represents a more
-significant share' — choose based on its size relative to net income>. The
-majority of this income is generated from <sub-component 1 name>
-(<figure>)<, if present: 'and' <sub-component 2 name> (<figure>)>< , if
-present: ', with additional contributions from' <sub-component 3 name>
-(<figure>)>. <One sentence on their relative contribution to overall
-revenue.>"
+LEADERSHIP-FRAMING BANK (pick ONE per slot, vary across paragraphs, adapt
+wording -- categories not sentences to copy verbatim):
+  PROFITABILITY-DRIVER clause types: "...reflecting the continued strength of
+  our core lending and investment activities" / "...underscoring the
+  durability of our primary earnings engine" / "...consistent with our
+  disciplined approach to balance-sheet management"
+  SOFTER-EARNINGS-MANAGED clause types: "...a deliberate trade-off as we
+  positioned the balance sheet for the period ahead" / "...within the range
+  management anticipated given current market conditions" / "...an area
+  management is actively monitoring rather than a structural concern"
+  EXPENSE-DISCIPLINE clause types: "...reflecting continued discipline in
+  managing operating costs" / "...consistent with the scale of services we
+  provide our membership" / "...aligned with our investment in member
+  service quality"
+  FORWARD-LOOKING clause types: "...positioning us to sustain performance
+  into the next period" / "...a focus area as we look toward the remainder
+  of the year" / "...supporting our long-term financial stability"
 
-PARAGRAPH 3 (Non-interest expense + its top 2-3 sub-components):
-Structure: "Non-interest expense totaled <exact figure>, reflecting the
-ongoing costs required to support daily operations and member services. The
-largest component is <sub-component 1 name> (<figure>), followed by
-<sub-component 2 name> (<figure>)<, if present: 'and' <sub-component 3 name>
-(<figure>)>. <One sentence on overall expense stability, worded per the
-IF/THEN table if a prior-period comparison is visible, otherwise stated
-plainly as 'stable and aligned with operational needs' only if no comparison
-is available>."
+PARAGRAPH 1 (3-4 sentences):
+"<Company name from source, or 'The credit union'> reported net income of
+<exact figure> as of <date>. <One PROFITABILITY-DRIVER clause naming what
+primarily supports earnings, based on the largest income source in the
+source.> Interest income totaled <exact figure>, while interest expense
+amounted to <exact figure>, generating spread income <one PROFITABILITY-DRIVER
+or SOFTER-EARNINGS-MANAGED clause depending on whether net income is up, down,
+or flat versus the prior period, only if that comparison is visible>. <One
+additional sentence interpreting what this earnings level means for the
+institution's overall financial position.>"
 
-PARAGRAPH 4 ("Overall Position:"):
-Structure: "Overall Position:\\n<Company name or 'The credit union'> continues
-to generate <earnings characterization matched to the actual net income
-figure and trend: 'stable' / 'improving' / 'softer'> earnings supported by
-<the dominant income driver from paragraph 1>. <One sentence acknowledging
-non-interest income's limited role and expense levels as necessary
-operational costs.> <One forward-looking sentence on what sustaining
-performance will depend on, drawn only from the actual drivers already
-named in this output — do not introduce a new metric here.>"
+PARAGRAPH 2 (2-3 sentences):
+"Non-interest income totaled <exact figure> and <one phrase on its relative
+size, framed strategically: 'continues to provide a modest but reliable
+complement to core earnings' or similar, scaled to the actual size>. The
+majority of this income is generated from <sub-component 1> (<figure>)<, if
+present: 'and' <sub-component 2> (<figure>)>< , if present: ', with
+additional contributions from' <sub-component 3> (<figure>)>. <One sentence
+on how these revenue streams support diversification, even if modest.>"
+
+PARAGRAPH 3 (2-3 sentences):
+"Non-interest expense totaled <exact figure>, <one EXPENSE-DISCIPLINE clause
+framing these costs as necessary investment in operations and member
+service>. The largest component is <sub-component 1> (<figure>), followed by
+<sub-component 2> (<figure>)<, if present: 'and' <sub-component 3>
+(<figure>)>. <One sentence on overall expense stability, framed with an
+EXPENSE-DISCIPLINE clause if a comparison is visible, otherwise stated as
+aligned with operational needs.>"
+
+PARAGRAPH 4 ("Overall Position:", 3-4 sentences):
+"Overall Position:\\n<Company name or 'The credit union'> continues to
+generate <earnings characterization matched to the actual trend> earnings
+supported by <the dominant income driver from paragraph 1>. <One sentence
+acknowledging non-interest income's role and expense levels as managed
+investment in operations, not a burden.> <One FORWARD-LOOKING sentence on what
+sustaining performance will depend on, drawn only from drivers already named
+above.> <One closing sentence reinforcing confidence in the institution's
+financial trajectory.>"
 
 TITLE LINE: "Earnings: As of <date from source>"
 --- END TEMPLATE ---
 
 RULES:
-1. Use the EXACT figures visible in the source. Use "$XXXK" for amounts under
-   1 million and "$X.XX million" for amounts at or above 1 million.
+1. Use EXACT figures from the source. "$XXXK" under 1 million, "$X.XX
+   million" at or above.
 2. Only report: Net Income, Interest Income, Interest Expense, Non-Interest
-   Income (with sub-components), Non-Interest Expense (with sub-components),
-   Overall Position. Do not invent a line item not present in the source.
-3. List only as many sub-components as are actually visible in the source —
-   if fewer than 2-3 exist, list only what is present.
-4. State a % or directional comparison only where the source visibly supports
-   it. Do not fabricate a trend.
-5. Exactly 4 paragraphs, no headers, no bullet points beyond what is shown.
-6. If a required figure is missing or illegible, omit that clause rather than
-   inventing a value.
-7. NO EXPOSED REASONING: never write "(derived from X)" or similar
-   parenthetical computation notes.
-8. Before finalizing, scan your own draft for any literal bracket character,
-   slash-separated option, or template keyword. If found, rewrite that
-   sentence with a single resolved word.
+   Income (sub-components), Non-Interest Expense (sub-components), Overall
+   Position. Never invent a line item not present in the source.
+3. List only as many sub-components as actually visible.
+4. State a % or directional comparison only where visibly supported. Never
+   fabricate a trend.
+5. Exactly 4 paragraphs, respecting minimum sentence counts. No headers beyond
+   "Overall Position:", no bullet points.
+6. Interpretation must stay grounded in actual figures -- no invented
+   initiatives or causes.
+7. If a required figure is missing or illegible, omit that clause.
+8. NO EXPOSED REASONING.
+9. Before finalizing, scan for literal brackets, slash-options, or template
+   keywords and rewrite if found.
 
 Return ONLY the narrative text described above. No JSON, no text before or
 after the section itself.
@@ -177,6 +200,7 @@ Read the attached image(s) carefully. Locate the Net Income, Interest Income,
 Interest Expense, Non-Interest Income (and its sub-line breakdown), and
 Non-Interest Expense (and its sub-line breakdown), using only what is printed
 on the source. Then write the Earnings section by filling in the generic
-template in the system prompt with your extracted numbers, choosing each
-verb/phrase using the IF/THEN table based on the actual data.
+template, meeting every minimum sentence count, choosing verbs from the
+IF/THEN table and framing clauses from the LEADERSHIP-FRAMING BANK so the
+result reads with board-room-ready confidence, not as a bare metrics list.
 """
