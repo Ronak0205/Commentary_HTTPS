@@ -30,6 +30,8 @@ def run():
     for pdf_file in pdf_files:
         pdf_name = os.path.splitext(pdf_file)[0]
         pdf_path = os.path.join(pdf_dir, pdf_file)
+        pdf_data_dir = os.path.join(DATA_DIR, pdf_name)
+        os.makedirs(pdf_data_dir, exist_ok=True)
 
         print(f"\n=== Processing PDF: {pdf_name} ===")
 
@@ -48,7 +50,7 @@ def run():
             print(f"[{pdf_name}][{name}] images extracted: {img_paths}")
 
             json_path = os.path.join(
-                DATA_DIR,
+                pdf_data_dir,
                 f"{pdf_name}_{name}_commentary_{date.today().strftime('%Y-%m-%d-%H-%M-%S')}.json",
             )
 
