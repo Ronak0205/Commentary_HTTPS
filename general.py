@@ -346,29 +346,3 @@ Rules:
   markdown code fences.
 """
 
-ANTI_COPY_RULE = """
-CRITICAL — DO NOT COPY SENTENCES FROM THE EXAMPLE:
-The example above shows STRUCTURE and TONE only. You must write entirely new
-sentences for your output. Do not reuse its phrasing, sentence openers, transition
-words, or descriptive language with only the numbers swapped.
-
-WRONG (forbidden — same sentence, numbers changed):
-  Example:    "Total assets stand at 1,049.3 million, reflecting a 1.6% increase"
-  Your output: "Total assets stand at 980.2 million, reflecting a 2.1% increase"
-  -> This is COPYING. Forbidden even though numbers differ.
-
-RIGHT (same fact, same paragraph position, different wording):
-  "Total assets reached 980.2 million, up 2.1% from the prior period"
-  "Assets grew to 980.2 million, a 2.1% rise year-over-year"
-  "The balance sheet expanded to 980.2 million in total assets, an increase of 2.1%"
-
-For every sentence you write, vary at minimum: the verb (stand at / reached /
-grew to / totaled / came in at), the way % change is introduced (reflecting /
-up / a rise of / increasing), and sentence opener. No two sentences across your
-entire output should share the same verb-and-structure combination as another
-sentence in the same output, or as the example.
-
-What MUST stay fixed: paragraph order, which facts appear in which paragraph,
-overall tone (CEO narrative, factual, non-promotional), and level of numeric
-precision. What MUST vary: actual word choice and sentence construction.
-"""

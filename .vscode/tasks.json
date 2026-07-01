@@ -1,0 +1,157 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "run-flow-loop",
+			"type": "shell",
+			"command": "c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\.venv\\Scripts\\python.exe",
+			"args": [
+				"c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\flow.py"
+			]
+		},
+		{
+			"label": "check-time",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-Item \"c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\data\\Board_Report_Quaterly_WithoutCommentary\\Board_Report_Quaterly_WithoutCommentary_balance_sheet_commentary_2026-07-01-00-00-00.json\" | Select-Object LastWriteTime | Format-List"
+			]
+		},
+		{
+			"label": "check-times-all",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-ChildItem \"c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\data\\Board_Report_Quaterly_WithoutCommentary\\*.json\" | Select-Object Name,LastWriteTime | Sort-Object LastWriteTime -Descending | Format-Table -AutoSize"
+			]
+		},
+		{
+			"label": "run-flow-loop-2",
+			"type": "shell",
+			"command": "c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\.venv\\Scripts\\python.exe",
+			"args": [
+				"c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\flow.py"
+			]
+		},
+		{
+			"label": "times-short",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p='c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\data\\Board_Report_Quaterly_WithoutCommentary'; Get-ChildItem $p\\*.json | Sort-Object LastWriteTime -Descending | ForEach-Object {\"$($_.Name)|$($_.LastWriteTime.ToString('HH:mm:ss'))\"}"
+			]
+		},
+		{
+			"label": "times-short-2",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$p='c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\data\\Board_Report_Quaterly_WithoutCommentary'; Get-ChildItem \"$p\\*.json\" | Sort-Object LastWriteTime -Descending | ForEach-Object { '{0}|{1}' -f $_.Name, $_.LastWriteTime.ToString('HH:mm:ss') }"
+			]
+		},
+		{
+			"label": "list-active-shell-python",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-Process | Where-Object { $_.ProcessName -match 'python|powershell|pwsh' } | Select-Object ProcessName,Id,StartTime,CPU,Path | Sort-Object StartTime | Format-Table -AutoSize"
+			]
+		},
+		{
+			"label": "list-active-shell-python-2",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"& { Get-Process | Where-Object { $_.ProcessName -match \"python|powershell|pwsh\" } | Select-Object ProcessName,Id,StartTime,CPU,Path | Sort-Object StartTime | Format-Table -AutoSize }"
+			]
+		},
+		{
+			"label": "tasklist-shell-python",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"tasklist | findstr /I \"python powershell pwsh\""
+			]
+		},
+		{
+			"label": "getproc-simple",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-Process python,powershell,pwsh -ErrorAction SilentlyContinue | Format-Table Name,Id,StartTime,CPU -AutoSize"
+			]
+		},
+		{
+			"label": "kill-workspace-python",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-Process python -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Milliseconds 300; Get-Process python,powershell -ErrorAction SilentlyContinue | Format-Table Name,Id,StartTime,CPU -AutoSize"
+			]
+		},
+		{
+			"label": "kill-python-final",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-Process python -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Get-Process python,powershell -ErrorAction SilentlyContinue | Format-Table Name,Id,StartTime,CPU -AutoSize"
+			]
+		},
+		{
+			"label": "run-single-flow",
+			"type": "shell",
+			"command": "c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\.venv\\Scripts\\python.exe",
+			"args": [
+				"c:\\Users\\ronak.chaturvedi\\Documents\\ollam\\flow.py"
+			]
+		},
+		{
+			"label": "keep-one-flow-process",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$procs = Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^python(\\\\.exe)?$' -and $_.CommandLine -match 'flow.py' } | Sort-Object CreationDate; if (-not $procs) { Write-Output 'No flow.py process found.'; exit 0 }; $keep = $procs[-1]; $kills = @($procs | Where-Object { $_.ProcessId -ne $keep.ProcessId }); foreach ($p in $kills) { Invoke-CimMethod -InputObject $p -MethodName Terminate | Out-Null }; Write-Output (\"Kept PID: \" + $keep.ProcessId); if ($kills.Count -gt 0) { Write-Output (\"Killed PIDs: \" + (($kills | ForEach-Object { $_.ProcessId }) -join ', ')) } else { Write-Output 'No duplicates to kill.' }; $remaining = Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^python(\\\\.exe)?$' -and $_.CommandLine -match 'flow.py' } | Sort-Object CreationDate; Write-Output 'Remaining flow.py PIDs:'; $remaining | ForEach-Object { Write-Output $_.ProcessId }"
+			]
+		},
+		{
+			"label": "keep-one-flow-process-2",
+			"type": "shell",
+			"command": "$procs = Get-CimInstance Win32_Process | Where-Object { $_.Name -like 'python*' -and $_.CommandLine -like '*flow.py*' } | Sort-Object CreationDate; if (-not $procs) { Write-Output 'No flow.py process found.'; exit 0 }; $keep = $procs[-1]; $kills = @($procs | Where-Object { $_.ProcessId -ne $keep.ProcessId }); foreach ($p in $kills) { Invoke-CimMethod -InputObject $p -MethodName Terminate | Out-Null }; Write-Output ('Kept PID: ' + $keep.ProcessId); if ($kills.Count -gt 0) { Write-Output ('Killed PIDs: ' + (($kills | ForEach-Object { $_.ProcessId }) -join ', ')) } else { Write-Output 'No duplicates to kill.' }; $remaining = Get-CimInstance Win32_Process | Where-Object { $_.Name -like 'python*' -and $_.CommandLine -like '*flow.py*' } | Sort-Object CreationDate; Write-Output 'Remaining flow.py PIDs:'; $remaining | ForEach-Object { Write-Output $_.ProcessId }"
+		},
+		{
+			"label": "verify-flow-processes",
+			"type": "shell",
+			"command": "Get-CimInstance Win32_Process | Where-Object { $_.Name -like 'python*' -and $_.CommandLine -like '*flow.py*' } | Select-Object ProcessId,Name,CreationDate,CommandLine | Format-Table -AutoSize"
+		},
+		{
+			"label": "Run prompt optimization loop",
+			"type": "shell",
+			"command": "c:/Users/ronak.chaturvedi/Documents/ollam/.venv/Scripts/python.exe",
+			"args": [
+				"run_prompt_loop.py"
+			],
+			"isBackground": false
+		}
+	]
+}

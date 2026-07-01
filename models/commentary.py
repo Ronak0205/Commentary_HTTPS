@@ -2,7 +2,7 @@
 # import re
 # from ollama import chat
 # from general import JSON_WRAP_RULE
-# from prompts.balance import SYSTEM_PROMPT,USER_PROMPT
+# from prompts_v1.balance import SYSTEM_PROMPT,USER_PROMPT
 
 # system_prompt =  SYSTEM_PROMPT + JSON_WRAP_RULE
 
@@ -57,7 +57,7 @@ from general import JSON_WRAP_RULE
 
 
 def generate_commentary(image_paths, output_json_path, module, system_prompt_var, user_prompt_var):
-    prompt_module = importlib.import_module(f"prompts.{module}")
+    prompt_module = importlib.import_module(f"prompts_v1.{module}")
     system_prompt_text = getattr(prompt_module, system_prompt_var)
     user_prompt_text = getattr(prompt_module, user_prompt_var)
 

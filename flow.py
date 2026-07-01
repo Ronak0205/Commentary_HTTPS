@@ -4,6 +4,7 @@ import sys
 from config import EXTRACTED_IMG_DIR, DATA_DIR, SECTIONS
 from models.pdf import extract_page_images
 from models.commentary import generate_commentary
+from models.summary_commentary import generate_ceo_and_action_commentary
 
 
 def run():
@@ -32,6 +33,7 @@ def run():
         pdf_path = os.path.join(pdf_dir, pdf_file)
         pdf_data_dir = os.path.join(DATA_DIR, pdf_name)
         os.makedirs(pdf_data_dir, exist_ok=True)
+        section_output_paths = {}
 
         print(f"\n=== Processing PDF: {pdf_name} ===")
 
@@ -60,11 +62,27 @@ def run():
 
             if result:
                 print(f"[{pdf_name}][{name}] commentary saved: {json_path}")
+                section_output_paths[name] = json_path
             else:
                 print(
                     f"[{pdf_name}][{name}] no JSON found, stopping at module: {name}"
                 )
                 sys.exit(1)
+
+        ceo_output, action_output = generate_ceo_and_action_commentary(
+            pdf_name, pdf_data_dir, section_output_paths
+        )
+        if not ceo_output:
+            print(f"[{pdf_name}][ceo_report] no JSON found, stopping run")
+            sys.exit(1)
+
+        print(f"[{pdf_name}][ceo_report] commentary saved: {ceo_output}")
+
+        if not action_output:
+            print(f"[{pdf_name}][action_recommended] no JSON found, stopping run")
+            sys.exit(1)
+
+        print(f"[{pdf_name}][action_recommended] commentary saved: {action_output}")
 
         print(f"=== Completed PDF: {pdf_name} ===")
 
