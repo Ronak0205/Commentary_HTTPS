@@ -14,6 +14,66 @@ def _load_commentary_file(path):
         return json.load(f)
 
 
+def _load_json_with_cleanup(candidate):
+    try:
+        return json.loads(candidate)
+    except json.JSONDecodeError:
+        # Tolerate common model mistake: trailing commas before ] or }.
+        cleaned = re.sub(r",\s*([}\]])", r"\1", candidate)
+        try:
+            return json.loads(cleaned)
+        except json.JSONDecodeError:
+            return None
+
+
+def _salvage_title_content_json(raw_text):
+    """
+    Recover a minimal valid payload when the model breaks JSON by splitting
+    "content" into multiple quoted chunks outside the object.
+    """
+    title_match = re.search(
+        r'"title"\s*:\s*("(?:\\.|[^"\\])*")', raw_text, re.DOTALL
+    )
+    content_match = re.search(
+        r'"content"\s*:\s*("(?:\\.|[^"\\])*")', raw_text, re.DOTALL
+    )
+    if not title_match or not content_match:
+        return None
+
+    try:
+        title = json.loads(title_match.group(1))
+        first_content_chunk = json.loads(content_match.group(1))
+    except json.JSONDecodeError:
+        return None
+
+    tail = raw_text[content_match.end() :]
+
+    extra_chunks = []
+    for token in re.findall(r'("(?:\\.|[^"\\])*")', tail, re.DOTALL):
+        try:
+            decoded = json.loads(token).strip()
+        except json.JSONDecodeError:
+            continue
+        if decoded:
+            extra_chunks.append(decoded)
+
+    trailing_bullets = []
+    for line in tail.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("- "):
+            trailing_bullets.append(stripped.rstrip('"').strip())
+
+    content_parts = [first_content_chunk.strip()]
+    content_parts.extend(extra_chunks)
+    content_parts.extend(trailing_bullets)
+
+    merged_content = "\n\n".join([part for part in content_parts if part])
+    if not merged_content:
+        return None
+
+    return {"title": title, "content": merged_content}
+
+
 def _extract_json_from_response(raw_text):
     candidates = []
 
@@ -26,15 +86,13 @@ def _extract_json_from_response(raw_text):
         candidates.append(first_last.group())
 
     for candidate in candidates:
-        try:
-            return json.loads(candidate)
-        except json.JSONDecodeError:
-            # Tolerate common model mistake: trailing commas before ] or }.
-            cleaned = re.sub(r",\s*([}\]])", r"\1", candidate)
-            try:
-                return json.loads(cleaned)
-            except json.JSONDecodeError:
-                continue
+        parsed = _load_json_with_cleanup(candidate)
+        if parsed is not None:
+            return parsed
+
+    salvaged = _salvage_title_content_json(raw_text)
+    if salvaged is not None:
+        return salvaged
 
     return None
 
@@ -62,6 +120,13 @@ def _generate_from_prompt(module_name, user_payload, output_json_path):
 
     raw_output = response.message.content
     parsed = _extract_json_from_response(raw_output)
+    if parsed and (
+        not isinstance(parsed, dict)
+        or "title" not in parsed
+        or "content" not in parsed
+    ):
+        parsed = None
+
     if not parsed:
         failed_path = os.path.join(
             os.path.dirname(output_json_path),

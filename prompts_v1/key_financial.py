@@ -27,6 +27,13 @@ its metric type (e.g. a net worth ratio in single or low double digits, not
 hundreds of percent unless it is a solvency ratio expressed that way). If
 a figure looks implausible, re-read the source before writing.
 
+Contradiction check: Before finalizing, scan the full draft for any metric
+mentioned in more than one paragraph (e.g. delinquency ratio in both
+Paragraph 2 and Paragraph 5's closing). Confirm the figure and direction
+word are identical everywhere it appears. If two mentions conflict, keep
+only the version verified in the Per-metric direction check and correct
+the other instance.
+
 Strength language check: Only use "exceptionally strong" or similar
 superlatives for capital if the net worth ratio is materially above a
 typical 7% well-capitalized threshold. A ratio merely at the minimum does

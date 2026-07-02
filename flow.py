@@ -53,7 +53,7 @@ def run():
 
             json_path = os.path.join(
                 pdf_data_dir,
-                f"{pdf_name}_{name}_commentary_{date.today().strftime('%Y-%m-%d-%H-%M-%S')}.json",
+                f"{pdf_name}_{name}_commentary_{date.today().strftime('%d-%m-%Y_%H-%M-%S')}.json",
             )
 
             result = generate_commentary(

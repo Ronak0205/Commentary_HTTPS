@@ -13,9 +13,20 @@ IDENTITY CHECK: Read the institution name from the source image.
 
 VERIFICATION (do these silently before writing):
 
-Per-metric compliance: For each metric, independently compare its figure
-to its own stated limit or target. Determine whether it is compliant or in
-breach. Do not assume all metrics move in the same direction.
+Per-metric compliance (mechanical, three-step — do not skip steps):
+1. State this metric's favorable direction: is HIGHER favorable (e.g. net
+   worth ratio, ROAA, loan yield) or is LOWER favorable (e.g. delinquency
+   ratio, cost of funds)?
+2. State the limit type: minimum floor (must stay AT OR ABOVE) or maximum
+   ceiling (must stay AT OR BELOW).
+3. Compare the actual figure to the limit using that specific direction.
+   A metric above a minimum floor is COMPLIANT. A metric below a maximum
+   ceiling is COMPLIANT. Only a figure on the unfavorable side of its
+   limit is a breach.
+Do not write "misses," "falls short of," or "exceeds" (as a breach) for
+any metric without completing this sequence. If the sentence you're about
+to write and the three-step result disagree, the sentence is wrong —
+recompute, don't override the computation with intuition.
 
 Verdict calibration: Before writing the opening verdict, count how many
 metrics actually breach their stated limits. Zero or one breach → "largely
