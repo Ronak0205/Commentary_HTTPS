@@ -67,6 +67,11 @@ Sub-header "Allowance & CECL Position":
   Paragraph 1 — State the CECL allowance level and its % change if shown.
   Connect it to the charge-off and loan balance trends as parallel
   observations, not causal claims.
+  Depth requirement: Before the bullet block, add one sentence connecting
+the allowance level to its coverage relative to total loans or total
+delinquent loans — but only if that coverage ratio is printed on the
+source. State the printed ratio only; never compute a new one (per the
+no-computed-ratio rule).
   Then list exactly this bullet block:
   "Reserve levels address:
   - Risk concentrations within [named segment(s)] portfolios

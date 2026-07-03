@@ -30,6 +30,20 @@ Largest-segment check: Before calling any segment the primary concentration,
 compare all segment dollar figures directly. The top two by dollar size are
 the primary concentration.
 
+Combined-percentage check: Before stating that two or more segments
+"together" represent a given percentage, compute that percentage yourself
+by summing the individual verified segment percentages from the Segment
+reconciliation check above. Never state a combined percentage you have
+not explicitly summed.
+
+Delinquency-proportion check: Before using concentration language
+("nearly all," "the vast majority," "virtually all") for where
+delinquencies trace, compute that segment's delinquency dollar figure as
+a % of total delinquent loans. "Virtually the entire" requires ≥90% of
+total delinquent loans; "the majority" requires 50-90%. Below 50%, state
+the segment's delinquency figure and its share plainly — no concentration
+language.
+
 CECL: Include reserve commentary only if the source explicitly states a
 reserve figure, ratio, or direction. Never fabricate one.
 

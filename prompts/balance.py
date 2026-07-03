@@ -499,6 +499,12 @@ not say "loans are X% of the portfolio" — say what the loan balance means
 for earning assets. Minor categories that moved little get one combined
 sentence, not equal individual treatment.
 
+Materiality gate: Give a full explanatory sentence (figure + business
+implication) only to the two largest absolute-dollar-change categories on
+the asset side. All other categories are named with their figure only,
+folded into the combined minor-movements sentence — no individual
+implication attached to them.
+
 Permitted business implications per asset category:
 - Cash up: improved the institution's near-term liquidity position
 - Cash down: reduced near-term liquidity as funds moved elsewhere

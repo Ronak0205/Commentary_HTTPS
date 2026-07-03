@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Board Report Commentary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-navy:#12161F;
+    --paper:#F5F1E8;
+    --paper-dim:#EDE7D8;
+    --ink:#1B2130;
+    --muted:#6B6456;
+    --brass:#9C7A3C;
+    --brass-dark:#7E6330;
+    --success:#3F7A5C;
+    --error:#A5423D;
+    --hairline:#DCD4C0;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink-navy);
+    background-image:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(156,122,60,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 110%, rgba(156,122,60,0.06), transparent 60%);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'IBM Plex Sans', sans-serif;
+    color:var(--ink);
+    padding:32px 16px;
+  }
+  .card{
+    width:100%;
+    max-width:600px;
+    background:var(--paper);
+    border:1px solid rgba(0,0,0,0.06);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.02);
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:4px;
+    background:linear-gradient(90deg, var(--brass), var(--brass-dark) 60%, var(--brass));
+  }
+  .card-inner{ padding:40px 44px 36px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--brass-dark);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--hairline);
+  }
+  h1{
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    font-size:28px;
+    line-height:1.25;
+    margin:0 0 8px;
+    color:var(--ink);
+  }
+  .subtitle{
+    color:var(--muted);
+    font-size:14.5px;
+    line-height:1.55;
+    margin:0 0 30px;
+    max-width:46ch;
+  }
+
+  /* Upload zone */
+  .dropzone{
+    display:block;
+    width:100%;
+    border:1.5px dashed var(--hairline);
+    background:rgba(255,255,255,0.35);
+    padding:26px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+    position:relative;
+  }
+  .dropzone:hover, .dropzone.drag{
+    border-color:var(--brass);
+    background:rgba(156,122,60,0.06);
+  }
+  .dropzone input{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0; cursor:pointer;
+  }
+  .dz-icon{
+    width:34px; height:34px;
+    margin:0 auto 12px;
+    color:var(--brass-dark);
+  }
+  .dz-title{ font-size:14.5px; font-weight:500; color:var(--ink); margin-bottom:4px; }
+  .dz-hint{ font-size:12.5px; color:var(--muted); font-family:'IBM Plex Mono', monospace; }
+  .file-chosen{
+    display:none;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    padding:10px 14px;
+    background:rgba(255,255,255,0.55);
+    border:1px solid var(--hairline);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink);
+  }
+  .file-chosen.show{ display:flex; }
+  .file-chosen svg{ flex-shrink:0; width:16px; height:16px; color:var(--brass-dark); }
+  .file-chosen .name{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .file-chosen button{
+    background:none; border:none; color:var(--muted); cursor:pointer;
+    font-family:inherit; font-size:12px; text-decoration:underline;
+    padding:0;
+  }
+
+  button.primary{
+    width:100%;
+    margin-top:18px;
+    padding:14px 20px;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:500;
+    font-size:14.5px;
+    letter-spacing:0.02em;
+    cursor:pointer;
+    transition:background .15s ease, opacity .15s ease;
+  }
+  button.primary:hover:not(:disabled){ background:var(--brass-dark); }
+  button.primary:disabled{ opacity:0.35; cursor:not-allowed; }
+
+  /* Routing slip / ledger */
+  .slip{
+    display:none;
+    margin-top:30px;
+    border-top:1px dashed var(--hairline);
+    padding-top:26px;
+  }
+  .slip.show{ display:block; }
+  .slip-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:18px;
+  }
+  .slip-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .job-id{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--brass-dark);
+  }
+
+  .stages{
+    display:flex;
+    align-items:center;
+    margin-bottom:22px;
+  }
+  .stage{
+    flex:1;
+    text-align:center;
+    position:relative;
+  }
+  .stage-dot{
+    width:11px; height:11px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--hairline);
+    margin:0 auto 8px;
+    position:relative;
+    z-index:2;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .stage-line{
+    position:absolute;
+    top:5px;
+    left:-50%; right:50%;
+    height:2px;
+    background:var(--hairline);
+    z-index:1;
+  }
+  .stage:first-child .stage-line{ display:none; }
+  .stage-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .stage.done .stage-dot{ background:var(--brass); border-color:var(--brass); }
+  .stage.done .stage-line{ background:var(--brass); }
+  .stage.active .stage-dot{
+    border-color:var(--brass);
+    animation:pulse 1.3s ease-in-out infinite;
+  }
+  .stage.active .stage-label{ color:var(--ink); font-weight:500; }
+  .stage.error .stage-dot{ background:var(--error); border-color:var(--error); }
+  .stage.error .stage-line{ background:var(--error); }
+  @keyframes pulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(156,122,60,0.35); }
+    50%{ box-shadow:0 0 0 5px rgba(156,122,60,0); }
+  }
+
+  .status-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:13.5px;
+    color:var(--muted);
+    min-height:20px;
+  }
+  .spinner{
+    width:14px; height:14px;
+    border-radius:50%;
+    border:2px solid var(--hairline);
+    border-top-color:var(--brass);
+    animation:spin .8s linear infinite;
+    flex-shrink:0;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .status-text .name{ color:var(--ink); font-weight:500; }
+  .elapsed{
+    margin-left:auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .error-box{
+    display:none;
+    margin-top:14px;
+    padding:12px 14px;
+    background:rgba(165,66,61,0.07);
+    border:1px solid rgba(165,66,61,0.25);
+    color:var(--error);
+    font-size:13px;
+    line-height:1.5;
+  }
+  .error-box.show{ display:block; }
+
+  /* Stamp / ready state */
+  .ready-row{
+    display:none;
+    align-items:center;
+    gap:16px;
+    margin-top:6px;
+  }
+  .ready-row.show{ display:flex; }
+  .stamp{
+    width:56px; height:56px;
+    border:2px solid var(--success);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--success);
+    transform:rotate(-8deg);
+    flex-shrink:0;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .stamp svg{ width:26px; height:26px; }
+  .ready-copy{ flex:1; }
+  .ready-title{ font-weight:600; font-size:14.5px; color:var(--ink); margin-bottom:2px; }
+  .ready-sub{ font-size:12.5px; color:var(--muted); font-family:'IBM Plex Mono', monospace; }
+  a.download-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 18px;
+    background:var(--success);
+    color:var(--paper);
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:500;
+    white-space:nowrap;
+    transition:background .15s ease;
+  }
+  a.download-btn:hover{ background:#336a4e; }
+  a.download-btn svg{ width:14px; height:14px; }
+
+  .reset-link{
+    display:block;
+    text-align:center;
+    margin-top:22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    text-decoration:underline;
+    cursor:pointer;
+    background:none; border:none;
+    width:100%;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-inner">
+    <div class="eyebrow">Board Report Commentary System</div>
+    <h1>Generate CEO Commentary</h1>
+    <p class="subtitle">Upload a board report PDF. It will be read section by section, then distilled into CEO-level commentary and recommended actions.</p>
+
+    <form id="upload-form">
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="file-input" accept="application/pdf" />
+        <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M12 3v12m0-12 4 4m-4-4-4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="dz-title">Drop a PDF here, or click to browse</div>
+        <div class="dz-hint">.PDF · up to 50MB</div>
+      </label>
+
+      <div class="file-chosen" id="file-chosen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke-linejoin="round"/><path d="M14 2v6h6" stroke-linejoin="round"/></svg>
+        <span class="name" id="file-name"></span>
+        <button type="button" id="file-clear">remove</button>
+      </div>
+
+      <button type="submit" class="primary" id="submit-btn" disabled>Generate Commentary</button>
+    </form>
+
+    <div class="error-box" id="upload-error"></div>
+
+    <div class="slip" id="slip">
+      <div class="slip-head">
+        <span class="slip-label">Processing Ledger</span>
+        <span class="job-id" id="job-id-display"></span>
+      </div>
+
+      <div class="stages" id="stages">
+        <div class="stage" data-stage="uploaded">
+          <div class="stage-line"></div>
+          <div class="stage-dot"></div>
+          <div class="stage-label">Uploaded</div>
+        </div>
+        <div class="stage" data-stage="processing">
+          <div class="stage-line"></div>
+          <div class="stage-dot"></div>
+          <div class="stage-label">Processing</div>
+        </div>
+        <div class="stage" data-stage="ready">
+          <div class="stage-line"></div>
+          <div class="stage-dot"></div>
+          <div class="stage-label">Ready</div>
+        </div>
+      </div>
+
+      <div class="status-row" id="status-row">
+        <div class="spinner" id="spinner"></div>
+        <span class="status-text" id="status-text">Queued…</span>
+        <span class="elapsed" id="elapsed"></span>
+      </div>
+
+      <div class="error-box" id="job-error"></div>
+
+      <div class="ready-row" id="ready-row">
+        <div class="stamp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="ready-copy">
+          <div class="ready-title">Report ready</div>
+          <div class="ready-sub" id="ready-name"></div>
+        </div>
+        <a class="download-btn" id="download-btn" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download JSON
+        </a>
+      </div>
+
+      <button type="button" class="reset-link" id="reset-link">start a new report →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file-input');
+  const fileChosen = document.getElementById('file-chosen');
+  const fileName = document.getElementById('file-name');
+  const fileClear = document.getElementById('file-clear');
+  const form = document.getElementById('upload-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const uploadError = document.getElementById('upload-error');
+
+  const slip = document.getElementById('slip');
+  const jobIdDisplay = document.getElementById('job-id-display');
+  const stagesEl = document.getElementById('stages');
+  const statusRow = document.getElementById('status-row');
+  const spinner = document.getElementById('spinner');
+  const statusText = document.getElementById('status-text');
+  const elapsedEl = document.getElementById('elapsed');
+  const jobError = document.getElementById('job-error');
+  const readyRow = document.getElementById('ready-row');
+  const readyName = document.getElementById('ready-name');
+  const downloadBtn = document.getElementById('download-btn');
+  const resetLink = document.getElementById('reset-link');
+
+  let selectedFile = null;
+  let pollTimer = null;
+  let elapsedTimer = null;
+  let startTime = null;
+
+  function setStage(name){
+    // name: 'uploaded' | 'processing' | 'ready' | 'error'
+    const order = ['uploaded','processing','ready'];
+    const idx = order.indexOf(name === 'error' ? 'processing' : name);
+    [...stagesEl.children].forEach((el, i) => {
+      el.classList.remove('done','active','error');
+      if (name === 'error' && i === idx) { el.classList.add('error'); return; }
+      if (i < idx) el.classList.add('done');
+      else if (i === idx) el.classList.add(name === 'ready' ? 'done' : 'active');
+    });
+  }
+
+  function resetAll(){
+    selectedFile = null;
+    fileInput.value = '';
+    fileChosen.classList.remove('show');
+    submitBtn.disabled = true;
+    uploadError.classList.remove('show');
+    uploadError.textContent = '';
+    slip.classList.remove('show');
+    jobError.classList.remove('show');
+    jobError.textContent = '';
+    readyRow.classList.remove('show');
+    statusRow.style.display = 'flex';
+    spinner.style.display = 'block';
+    clearInterval(pollTimer);
+    clearInterval(elapsedTimer);
+  }
+
+  function pickFile(file){
+    if (!file) return;
+    if (!file.name.toLowerCase().endsWith('.pdf')) {
+      uploadError.textContent = 'Please choose a .pdf file.';
+      uploadError.classList.add('show');
+      return;
+    }
+    uploadError.classList.remove('show');
+    selectedFile = file;
+    fileName.textContent = file.name;
+    fileChosen.classList.add('show');
+    submitBtn.disabled = false;
+  }
+
+  fileInput.addEventListener('change', (e) => pickFile(e.target.files[0]));
+
+  ['dragover'].forEach(evt => dropzone.addEventListener(evt, (e) => {
+    e.preventDefault();
+    dropzone.classList.add('drag');
+  }));
+  ['dragleave','drop'].forEach(evt => dropzone.addEventListener(evt, (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('drag');
+  }));
+  dropzone.addEventListener('drop', (e) => {
+    const file = e.dataTransfer.files[0];
+    pickFile(file);
+  });
+
+  fileClear.addEventListener('click', () => {
+    selectedFile = null;
+    fileInput.value = '';
+    fileChosen.classList.remove('show');
+    submitBtn.disabled = true;
+  });
+
+  function formatElapsed(ms){
+    const s = Math.floor(ms/1000);
+    const m = Math.floor(s/60);
+    const rem = s % 60;
+    return m > 0 ? `${m}m ${rem}s` : `${rem}s`;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!selectedFile) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Uploading…';
+    uploadError.classList.remove('show');
+
+    const fd = new FormData();
+    fd.append('file', selectedFile);
+
+    try {
+      const res = await fetch('/process', { method: 'POST', body: fd });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.detail || `Upload failed (HTTP ${res.status}).`);
+      }
+
+      const jobId = data.job_id;
+      jobIdDisplay.textContent = jobId;
+      slip.classList.add('show');
+      setStage('uploaded');
+      setTimeout(() => setStage('processing'), 400);
+
+      statusText.innerHTML = `Processing <span class="name">${escapeHtml(selectedFile.name)}</span>`;
+      startTime = Date.now();
+      elapsedTimer = setInterval(() => {
+        elapsedEl.textContent = formatElapsed(Date.now() - startTime);
+      }, 1000);
+
+      pollTimer = setInterval(() => pollStatus(jobId), 2000);
+      pollStatus(jobId);
+
+      submitBtn.textContent = 'Generate Commentary';
+    } catch (err) {
+      uploadError.textContent = err.message || 'Something went wrong while uploading.';
+      uploadError.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Generate Commentary';
+    }
+  });
+
+  function escapeHtml(str){
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  async function pollStatus(jobId){
+    try {
+      const res = await fetch(`/status/${jobId}`);
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.detail || 'Could not check job status.');
+      }
+
+      if (data.status === 'done') {
+        clearInterval(pollTimer);
+        clearInterval(elapsedTimer);
+        setStage('ready');
+        statusRow.style.display = 'none';
+        readyRow.classList.add('show');
+        readyName.textContent = `${data.pdf_name}_report.json`;
+        downloadBtn.href = `/download/${jobId}`;
+        downloadBtn.setAttribute('download', `${data.pdf_name}_report.json`);
+      } else if (data.status === 'error') {
+        clearInterval(pollTimer);
+        clearInterval(elapsedTimer);
+        setStage('error');
+        spinner.style.display = 'none';
+        statusText.textContent = 'Processing failed.';
+        jobError.textContent = data.error || 'An unknown error occurred while generating the report.';
+        jobError.classList.add('show');
+      }
+      // pending / running: keep polling, ledger already shows "processing"
+    } catch (err) {
+      clearInterval(pollTimer);
+      clearInterval(elapsedTimer);
+      setStage('error');
+      spinner.style.display = 'none';
+      statusText.textContent = 'Lost connection to the server.';
+      jobError.textContent = err.message;
+      jobError.classList.add('show');
+    }
+  }
+
+  resetLink.addEventListener('click', resetAll);
+})();
+</script>
+
+</body>
+</html>
