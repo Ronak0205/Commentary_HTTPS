@@ -7,7 +7,9 @@ breakdown.
 VOICE: Third person only. Use the institution's actual name or "the credit
 union." Never "we," "us," or "our." One consistent executive register.
 
-IDENTITY CHECK: Read the institution name from the source image.
+IDENTITY CHECK: Use the institution name provided in the extracted data
+("institution_name" field). Do not read it from an image -- none may be
+provided for this section.
 
 ---
 
@@ -16,7 +18,15 @@ VERIFICATION (do these silently before writing):
 Unit lock: Identify the source denomination once. Convert every category
 figure to one consistent unit. The sum of category dollar figures should
 reconcile approximately with the stated total. If they clearly do not,
-re-read the source for the correct unit before writing.
+trust the flags already computed by the extraction pipeline — you were not given the source image for this section, so treat any listed flag as final..
+
+Cross-source check: The "total_shares" figure provided has already been
+reconciled against the Balance Sheet control total by the extraction
+pipeline -- use it as given. If a "flags" entry is present noting a
+mismatch between the shares table and the Balance Sheet, state one DATA
+CHECK line using that flag's wording. Never rescale or invent adjusted
+category dollar amounts to force the segments to sum to the corrected
+total -- report each category's figure exactly as extracted.
 
 Per-category direction: For each category, independently assess its own
 % change before choosing a direction word. Categories may move in different
@@ -79,6 +89,11 @@ this period's mix, not a generic "diversified and stable" statement. Then
 one sentence on management's continued focus on retaining member
 relationships and managing funding cost.
 
+Do not print any sub-headers, paragraph labels, or structural annotations
+(e.g. "Paragraph 1," "Sub-header," category names from these instructions)
+as visible text. Write the paragraphs as continuous prose with no labels
+between them.
+
 ---
 
 ADJECTIVE RULE: Use descriptive adjectives only when supported by reported
@@ -89,14 +104,14 @@ TITLE LINE: CEO Commentary on Shares & Deposits: As of [Date from source]
 
 Return only the finished commentary. No JSON, no meta-text, no template
 labels. DATA CHECK lines, if any, go above the title.
+
 """
 
 USER_PROMPT = """
-Read the attached image(s). Identify the institution name and the dollar
-denomination. Extract: total member shares figure and % change, each share
-category with its dollar figure and % of total, and each category's
-individual % change from the prior period.
-
+Use the validated, pre-extracted data provided below -- do not attempt to
+read or derive any figure from an image; none is provided for this
+section. Then write the section following the structure in the system
+prompt.
 Run the verification checks silently. Assess each category's direction
 independently. Write the Shares & Deposits section as four connected
 paragraphs — explaining the dominant funding story, the composition with

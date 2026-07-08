@@ -1,13 +1,15 @@
-
-
 import json
 import os
 from datetime import date
 
-from config import EXTRACTED_IMG_DIR, DATA_DIR, SECTIONS
+from config.config import EXTRACTED_IMG_DIR, DATA_DIR, SECTIONS
 from services.pdf import extract_page_images
 from services.commentary import generate_commentary
 from services.summary_commentary import generate_ceo_and_action_commentary
+
+from config.extraction_config import EXTRACTION_CONFIG
+from services.pdf_extract import extract_section_data
+from pipeline.validate import validate_section, validate_cross_source
 
 
 class PipelineError(Exception):
@@ -25,7 +27,65 @@ def process_pdf(pdf_path, pdf_name, extracted_img_dir=None, data_dir=None):
     os.makedirs(pdf_data_dir, exist_ok=True)
 
     section_output_paths = {}
+    extracted_payloads = {}
 
+    # ------------------------------------------------------------------
+    # PHASE 1: Extract + validate every section's data BEFORE any
+    # commentary is generated. This is what lets cross-section checks
+    # (e.g. Shares table vs Balance Sheet control total) actually resolve
+    # in time to affect the commentary -- running this after generation,
+    # as the previous version did, meant the fix was computed too late to
+    # matter.
+    # ------------------------------------------------------------------
+    for section in SECTIONS:
+        name = section["name"]
+        pages = section["pages"]
+        page_numbers = [p - 1 for p in pages]
+
+        cfg = EXTRACTION_CONFIG.get(name, {})
+        extracted_payload = None
+
+        if cfg.get("extractable"):
+            raw = extract_section_data(pdf_path, name, page_numbers)
+            validated = validate_section(name, raw)
+            if validated:
+                extracted_payload = validated
+
+        extracted_payloads[name] = extracted_payload
+
+    # ------------------------------------------------------------------
+    # Cross-section reconciliation: Shares table total vs Balance Sheet's
+    # Shares/Deposits control total. Runs once, here, before any section
+    # is written to disk or handed to the model.
+    # ------------------------------------------------------------------
+    share_extracted = extracted_payloads.get("share")
+    balance_extracted = extracted_payloads.get("balance_sheet")
+
+    if share_extracted and balance_extracted:
+        control_value = (balance_extracted.get("data", {})
+                          .get("shares_deposits", {}) or {}).get("amount")
+        other_value = share_extracted.get("data", {}).get("total_shares")
+
+        cross_flag = validate_cross_source(
+            control_value=control_value,
+            other_value=other_value,
+            control_label="Balance Sheet shares/deposits",
+            other_label="Shares section total",
+        )
+
+        if cross_flag["status"] == "DATA_CHECK":
+            # Resolve to the control total and attach the flag so it's
+            # visible to whoever reviews this run, and so the commentary
+            # generation step below sees the corrected figure, not the
+            # unreconciled one.
+            share_extracted["data"]["total_shares"] = cross_flag["value"]
+            share_extracted.setdefault("flags", []).append(cross_flag)
+
+    # ------------------------------------------------------------------
+    # PHASE 2: Generate commentary for each section, now that every
+    # extracted_payload (including the cross-source-corrected share data)
+    # is finalized.
+    # ------------------------------------------------------------------
     for section in SECTIONS:
         name = section["name"]
         pages = section["pages"]
@@ -34,10 +94,24 @@ def process_pdf(pdf_path, pdf_name, extracted_img_dir=None, data_dir=None):
         user_prompt_var = section["user_prompt_var"]
 
         page_numbers = [p - 1 for p in pages]
+        cfg = EXTRACTION_CONFIG.get(name, {})
 
-        img_paths = extract_page_images(
-            pdf_path, extracted_img_dir, f"{pdf_name}_{name}", page_numbers
+        # Only sections that are NOT fully covered by text extraction (i.e.
+        # not extractable at all, or explicitly marked "hybrid" because
+        # part of their content is chart-only, e.g. key_financial's page
+        # 13-14 stat callouts) still need the rendered page image sent to
+        # the model. Fully-covered sections skip image generation entirely
+        # -- this also avoids the "image + data disagree" confusion risk,
+        # since the model has no picture to second-guess the validated
+        # JSON against.
+        needs_image = (not cfg.get("extractable")) or cfg.get("hybrid", False)
+
+        img_paths = (
+            extract_page_images(pdf_path, extracted_img_dir, f"{pdf_name}_{name}", page_numbers)
+            if needs_image else []
         )
+
+        extracted_payload = extracted_payloads.get(name)
 
         json_path = os.path.join(
             pdf_data_dir,
@@ -45,7 +119,9 @@ def process_pdf(pdf_path, pdf_name, extracted_img_dir=None, data_dir=None):
         )
 
         result = generate_commentary(
-            img_paths, json_path, module, system_prompt_var, user_prompt_var
+            img_paths, json_path, module, system_prompt_var, user_prompt_var,
+            extracted_data=extracted_payload,
+            needs_image=needs_image,
         )
 
         if not result:

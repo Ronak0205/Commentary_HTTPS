@@ -1,0 +1,1290 @@
+==========================================================================================
+EXTRACTION INSPECTION REPORT
+PDF: pdf/BOPTI_Board_Report_May26.pdf
+==========================================================================================
+
+
+##########################################################################################
+SECTION: balance_sheet   (config pages: [7])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 7]
+Power BI Desktop
+7
+ BOPTI FEDERAL CREDIT UNION
+5. BALANCE SHEET OVERVIEW
+COMPONENTS 05-31-2026 % of Total Assets % Change vs
+R
+Previous Year End
+e
+
+p…
+ASSETS 63,654,928 100.0% 7.8%
+CASH AND DEPOSITS 3,603,141 5.7% 247.6%
+INVESTMENT SECURITIES 39,273,170 61.7% 13.2%
+OTHER INVESTMENTS 109,776 0.2% 0.0%
+LOANS AND LEASES 19,790,334 31.1% -11.1%
+OTHER ASSETS 878,507 1.4% -9.1%
+LIABILITIES 47,948,105 75.3% -5.5%
+ACCOUNTS PAYABLE, ACCRUED 820,726 1.3% 72.0%
+INTEREST ON BORROWINGS, AND
+OTHER LIABILITIES
+SHARES/DEPOSITS 47,127,379 74.0% -6.3%
+EQUITY 15,706,823 24.7% 1.7%
+UNDIVIDED EARNINGS 15,706,823 24.7% 1.7%
+Balance Sheet Trend
+100,000,000
+COMPONENTS
+CASH AND DEPOSITS
+50,000,000
+INVESTMENT SECURITIES
+LOANS AND LEASES
+OTHER ASSETS 0
+ACCOUNTS PAYABLE, ACC…
+TOTAL LIABILITIES
+-50,000,000
+UNDIVIDED EARNINGS
+NET INCOME *
+-100,000,000
+YE'22 YE'23 YE'24 YE'25 Q2'2026
+*UNLESS THIS AMOUNT IS ALREADY INCLUDED IN RETAINED EARNINGS
+** APPROPRIATIONS OF UNDIVIDED EARNINGS
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+status: OK
+flags: none
+
+parsed data:
+    total_assets:
+      amount: 63654928.0
+      pct_of_total: 100.0
+      pct_change: 7.8
+    cash_deposits:
+      amount: 3603141.0
+      pct_of_total: 5.7
+      pct_change: 247.6
+    investment_securities:
+      amount: 39273170.0
+      pct_of_total: 61.7
+      pct_change: 13.2
+    other_investments:
+      amount: 109776.0
+      pct_of_total: 0.2
+      pct_change: 0.0
+    loans_leases:
+      amount: 19790334.0
+      pct_of_total: 31.1
+      pct_change: -11.1
+    other_assets:
+      amount: 878507.0
+      pct_of_total: 1.4
+      pct_change: -9.1
+    total_liabilities:
+      amount: 47948105.0
+      pct_of_total: 75.3
+      pct_change: -5.5
+    accrued_liabilities:
+      amount: 820726.0
+      pct_of_total: 1.3
+      pct_change: 72.0
+    shares_deposits:
+      amount: 47127379.0
+      pct_of_total: 74.0
+      pct_change: -6.3
+    total_equity:
+      amount: 15706823.0
+      pct_of_total: 24.7
+      pct_change: 1.7
+    undivided_earnings:
+      amount: 15706823.0
+      pct_of_total: 24.7
+      pct_change: 1.7
+    reserves: None
+    raw_rows:
+      [0]
+        label:  BOPTI FEDERAL CREDIT UNION 5. BALANCE SHEET OVERVIEW COMPONENTS 05-31-2026 % of Total Assets % Change vs R Previous Year End e  p…
+        values:
+          [0]
+            7.0
+      [1]
+        label: ASSETS
+        values:
+          [0]
+            63654928.0
+          [1]
+            100.0
+          [2]
+            7.8
+      [2]
+        label: CASH AND DEPOSITS
+        values:
+          [0]
+            3603141.0
+          [1]
+            5.7
+          [2]
+            247.6
+      [3]
+        label: INVESTMENT SECURITIES
+        values:
+          [0]
+            39273170.0
+          [1]
+            61.7
+          [2]
+            13.2
+      [4]
+        label: OTHER INVESTMENTS
+        values:
+          [0]
+            109776.0
+          [1]
+            0.2
+          [2]
+            0.0
+      [5]
+        label: LOANS AND LEASES
+        values:
+          [0]
+            19790334.0
+          [1]
+            31.1
+          [2]
+            -11.1
+      [6]
+        label: OTHER ASSETS
+        values:
+          [0]
+            878507.0
+          [1]
+            1.4
+          [2]
+            -9.1
+      [7]
+        label: LIABILITIES
+        values:
+          [0]
+            47948105.0
+          [1]
+            75.3
+          [2]
+            -5.5
+      [8]
+        label: ACCOUNTS PAYABLE, ACCRUED INTEREST ON BORROWINGS, AND OTHER LIABILITIES
+        values:
+          [0]
+            820726.0
+          [1]
+            1.3
+          [2]
+            72.0
+      [9]
+        label: SHARES/DEPOSITS
+        values:
+          [0]
+            47127379.0
+          [1]
+            74.0
+          [2]
+            -6.3
+      [10]
+        label: EQUITY
+        values:
+          [0]
+            15706823.0
+          [1]
+            24.7
+          [2]
+            1.7
+      [11]
+        label: UNDIVIDED EARNINGS
+        values:
+          [0]
+            15706823.0
+          [1]
+            24.7
+          [2]
+            1.7
+
+
+##########################################################################################
+SECTION: earning   (config pages: [9, 10])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 9]
+Power BI Desktop
+
+9
+BOPTI FEDERAL CREDIT UNION
+6. EARNINGS
+R COMPONENTS YE'22 YE'23 YE'24 YE'25 Q2'2026
+e 
+p… INTEREST INCOME 2,150,578 2,429,547 2,670,114 2,937,327 1,178,992
+INTEREST EXPENSE 594,609 1,198,940 1,247,431 1,101,601 393,101
+NON-INTEREST INCOME 116,293 111,646 143,781 144,694 61,283
+NON-INTEREST EXPENSE 1,115,177 1,125,045 1,268,541 1,325,550 560,366
+NET INCOME 557,085 -174,825 21,417 427,307 265,377
+INCOME STATEMENT TREND
+6,000,000
+COMPONENTS 4,000,000
+INTEREST INCOME
+INTEREST EXPENSE
+NON-INTEREST INCOME
+2,000,000
+NON-INTEREST EXPENSE
+0
+YE'22 YE'23 YE'24 YE'25 Q2'2026
+1,178,992
+COMPONENTS
+INTEREST INCOME
+393,101
+INTEREST EXPENSE
+NON-INTEREST INCOME
+NON-INTEREST EXPENSE
+61,283
+560,366
+BOARD REPORT As of May 31, 2026
+
+[Page 10]
+Power BI Desktop
+
+10
+BOPTI FEDERAL CREDIT UNION
+Non Interest Expense
+44,516
+COMPONENTS
+4,938
+EMPLOYEE COMPENSATION …
+TRAVEL AND CONFERENCE E…
+85,472
+OFFICE OCCUPANCY EXPENSE
+OFFICE OPERATIONS EXPENSE
+EDUCATIONAL AND PROMO…
+24,498
+LOAN SERVICING EXPENSE 312,790
+184
+PROFESSIONAL AND OUTSI…
+MEMBER INSURANCE EXPEN…
+87,671
+OPERATING FEES
+MISCELLANEOUS NON-INTE… 297
+Non Interest Income
+COMPONENTS
+FEE INCOME
+23,889
+OVERDRAFT FEE INCOME
+NON-SUFFICIENT FUNDS FE… 28,579
+OTHER INCOME
+GAIN
+GAIN FROM BARGAIN PURC…
+OTHER NON-INTEREST INCO…
+8,815
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+SKIPPED -- not configured as extractable in extraction_config.py
+
+
+##########################################################################################
+SECTION: key_financial   (config pages: [12, 13, 14])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 12]
+Rep
+Power BI Desktop
+ort 12 BOPTI FEDERAL CREDIT UNION
+Filt…
+
+7. KEY FINANCIAL PERFORMANCE
+Re COMPONENTS 05-31-2026 Change from Last Year
+por End (bps)
+t …
+COST OF FUNDS / AVERAGE ASSETS 1.41% -12.29
+DELINQUENT LOANS/TOTAL LOANS 1.73% 35.00
+NET CHARGE-OFFS /AVE LOANS 0.50% -62.00
+NET INTEREST MARGIN / AVERAGE 2.85% 28.52
+ASSETS
+NET MARGIN / AVERAGE ASSETS 2.95% 30.26
+NET OPERATING EXPENSES / AVERAGE 1.91% 14.90
+ASSETS
+NET WORTH / TOTAL ASSETS 24.67% 253.00
+OPERATING EXPENSES / AVERAGE ASSETS 2.11% -5.47
+RETURN ON AVERAGE ASSETS 0.95% 35.00
+PROFITABILITY
+CURRENT
+PROFITABILITY TREND
+NIM
+2.8% 2%
+0%
+ROAA
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+0.95%
+NET INTEREST MARGIN / AVERAGE ASSETS RETURN ON AVERAGE ASSETS
+YIELD STRUCTURE TREND
+10% 700
+Rep
+ort
+5% 600
+Filt…
+
+0% 500
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+YIELD ON AVERAGE LOANS COST OF FUNDS / AVERAGE ASSETS NET INTEREST SPREAD (BPS)
+BOARD REPORT As of May 31, 2026
+
+[Page 13]
+Rep
+Power BI Desktop
+ort 13 BOPTI FEDERAL CREDIT UNION
+Filt…
+
+CAPITAL & SOLVENCY
+Re CURRENT NET WORTH RATIO TREND
+por
+t … NET WORTH RATIO
+25%
+24.67%
+SOLVENCY EVALUATI…
+20%
+1.33
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+NET WORTH GROWTH TREND
+5%
+0%
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+ASSET QUALITY
+CURRENT
+ASSET QUALITY TREND
+DELINQUENCY RATE 2%
+1.73%
+1%
+NET CHARGE-OFFS R…
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+0.50%
+DELINQUENCY RATE NET CHARGE-OFFS RATE
+CAPITAL RISK EXPOUSURE TREND
+2%
+0%
+CLASSIFIED ASSETS TO NET WORTH
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+BOARD REPORT As of May 31, 2026
+
+[Page 14]
+Rep
+Power BI Desktop
+ort 14 BOPTI FEDERAL CREDIT UNION
+Filt…
+
+LIQUIDITY & FUNDING
+Re CURRENT FUNDING STRUCTURE TREND
+por
+t … CORE FUNDING RATIO
+60%
+57.70%
+40%
+LOAN TO SHARE RAT…
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+42.25%
+CORE FUNDING RATIO LOAN TO SHARE RATIO
+LIQUIDITY RATIO TREND
+5%
+0%
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+GROWTH
+CURRENT LOAN & SHARE GROWTH TREND
+LOAN GROWTH 20%
+-27.52% 0%
+-20%
+SHARE GROWTH -40%
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+-11.03%
+LOAN GROWTH SHARE GROWTH
+MEMBERSHIP GROWTH TREND
+0%
+-10%
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+status: OK
+flags: none
+
+parsed data:
+    raw_rows:
+      [0]
+        label: COST OF FUNDS / AVERAGE ASSETS
+        values:
+          [0]
+            1.41
+          [1]
+            -12.29
+      [1]
+        label: DELINQUENT LOANS/TOTAL LOANS
+        values:
+          [0]
+            1.73
+          [1]
+            35.0
+      [2]
+        label: NET CHARGE-OFFS /AVE LOANS
+        values:
+          [0]
+            0.5
+          [1]
+            -62.0
+      [3]
+        label: NET INTEREST MARGIN / AVERAGE ASSETS
+        values:
+          [0]
+            2.85
+          [1]
+            28.52
+      [4]
+        label: NET MARGIN / AVERAGE ASSETS
+        values:
+          [0]
+            2.95
+          [1]
+            30.26
+      [5]
+        label: NET OPERATING EXPENSES / AVERAGE ASSETS
+        values:
+          [0]
+            1.91
+          [1]
+            14.9
+      [6]
+        label: NET WORTH / TOTAL ASSETS
+        values:
+          [0]
+            24.67
+          [1]
+            253.0
+      [7]
+        label: OPERATING EXPENSES / AVERAGE ASSETS
+        values:
+          [0]
+            2.11
+          [1]
+            -5.47
+      [8]
+        label: RETURN ON AVERAGE ASSETS PROFITABILITY CURRENT
+        values:
+          [0]
+            0.95
+          [1]
+            35.0
+      [9]
+        label: SOLVENCY EVALUATI…
+        values:
+          [0]
+            24.67
+      [10]
+        label: YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+        values:
+          [0]
+            1.33
+      [11]
+        label: LOAN TO SHARE RAT… YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+        values:
+          [0]
+            40.0
+      [12]
+        label: CORE FUNDING RATIO LOAN TO SHARE RATIO
+        values:
+          [0]
+            42.25
+
+
+##########################################################################################
+SECTION: loan   (config pages: [16, 17])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 16]
+ Power BI Desktop
+16
+BOPTI FEDERAL CREDIT UNION
+8. LOANS AND LEASES
+COMPONENTS 05-31-2026 Loan Weight % % Change vs Previous
+Year End
+ALL OTHER SECURED NON-REAL 1,369,804 6.9% -13.0%
+Repo
+ESTATE LOANS/LINES OF CREDIT
+rt
+Filt… ALL OTHER UNSECURED LOANS/LINES 5,049,676 25.4% -10.4%
+OF CREDIT
+LOANS/LINES OF CREDIT SECURED BY 1,133,512 5.7% -2.2%
+A FIRST LIEN
+NEW VEHICLE LOANS 5,613,213 28.2% -15.0%
+USED VEHICLE LOANS 6,746,204 33.9% -10.2%
+Total 19,912,409 100.0% -11.5%
+LOANS AND LEASES
+40,000,000
+COMPONENTS
+30,000,000
+ALL OTHER SECURED NON-REA…
+ALL OTHER UNSECURED LOANS…
+LOANS GRANTED YEAR-TO-DATE 20,000,000
+LOANS/LINES OF CREDIT SECUR…
+NEW VEHICLE LOANS 10,000,000
+USED VEHICLE LOANS
+0
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+5.69%
+6.88%
+COMPONENTS 33.88%
+USED VEHICLE LOANS
+NEW VEHICLE LOANS
+25.36%
+ALL OTHER UNSECURED LOANS/…
+ALL OTHER SECURED NON-REAL …
+LOANS/LINES OF CREDIT SECURE…
+28.19%
+BOARD REPORT As of May 31, 2026
+
+[Page 17]
+ Power BI Desktop
+17
+BOPTI FEDERAL CREDIT UNION
+Rep
+ort
+Filt… 9. DELINQUENCIES
+COMPONENETS 05-31-2026 % Change vs Previous Year
+End
+
+USED VEHICLE LOANS 192,016 27.1%
+NEW VEHICLE LOANS 62,053 -3.9%
+ALL OTHER SECURED NON-REAL ESTATE 68,094 -6.9%
+LOANS/LINES OF CREDIT
+ALL OTHER UNSECURED LOANS/LINES 256,431 -9.2%
+OF CREDIT
+Total 578,594 1.3%
+DELINQUENCY TREND
+2,000,000
+1,500,000
+COMPONENTS
+USED VEHICLE LOANS
+TOTAL DELINQUENT LOANS …
+1,000,000
+NEW VEHICLE LOANS
+ALL OTHER UNSECURED LOA…
+500,000
+ALL OTHER SECURED NON-R…
+0
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+DELINQUENCY MIGRATION
+100%
+COMPONENTS
+30 - 59 days
+60 - 89 days
+50%
+90 - 179 days
+180 - 359 days
+>=360 days
+0%
+YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+status: OK
+flags: none
+
+parsed data:
+    raw_rows:
+      [0]
+        label: BOPTI FEDERAL CREDIT UNION 8. LOANS AND LEASES COMPONENTS 05-31-2026 Loan Weight % % Change vs Previous Year End
+        values:
+          [0]
+            16.0
+      [1]
+        label: ALL OTHER SECURED NON-REAL Repo ESTATE LOANS/LINES OF CREDIT rt
+        values:
+          [0]
+            1369804.0
+          [1]
+            6.9
+          [2]
+            -13.0
+      [2]
+        label: Filt… ALL OTHER UNSECURED LOANS/LINES OF CREDIT
+        values:
+          [0]
+            5049676.0
+          [1]
+            25.4
+          [2]
+            -10.4
+      [3]
+        label: LOANS/LINES OF CREDIT SECURED BY A FIRST LIEN
+        values:
+          [0]
+            1133512.0
+          [1]
+            5.7
+          [2]
+            -2.2
+      [4]
+        label: NEW VEHICLE LOANS
+        values:
+          [0]
+            5613213.0
+          [1]
+            28.2
+          [2]
+            -15.0
+      [5]
+        label: USED VEHICLE LOANS
+        values:
+          [0]
+            6746204.0
+          [1]
+            33.9
+          [2]
+            -10.2
+      [6]
+        label: Total LOANS AND LEASES
+        values:
+          [0]
+            19912409.0
+          [1]
+            100.0
+          [2]
+            -11.5
+      [7]
+        label: COMPONENTS
+        values:
+          [0]
+            40000000.0
+      [8]
+        label: ALL OTHER SECURED NON-REA… ALL OTHER UNSECURED LOANS…
+        values:
+          [0]
+            30000000.0
+      [9]
+        label: LOANS GRANTED YEAR-TO-DATE LOANS/LINES OF CREDIT SECUR…
+        values:
+          [0]
+            20000000.0
+      [10]
+        label: NEW VEHICLE LOANS USED VEHICLE LOANS
+        values:
+          [0]
+            10000000.0
+      [11]
+        label: YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
+        values:
+          [0]
+            0.0
+      [12]
+        label: COMPONENTS USED VEHICLE LOANS NEW VEHICLE LOANS
+        values:
+          [0]
+            33.88
+      [13]
+        label: ALL OTHER UNSECURED LOANS/… ALL OTHER SECURED NON-REAL … LOANS/LINES OF CREDIT SECURE…
+        values:
+          [0]
+            25.36
+      [14]
+        label: BOPTI FEDERAL CREDIT UNION Rep ort Filt… 9. DELINQUENCIES COMPONENETS 05-31-2026 % Change vs Previous Year End 
+        values:
+          [0]
+            17.0
+      [15]
+        label: USED VEHICLE LOANS
+        values:
+          [0]
+            192016.0
+          [1]
+            27.1
+      [16]
+        label: NEW VEHICLE LOANS
+        values:
+          [0]
+            62053.0
+          [1]
+            -3.9
+      [17]
+        label: ALL OTHER SECURED NON-REAL ESTATE LOANS/LINES OF CREDIT
+        values:
+          [0]
+            68094.0
+          [1]
+            -6.9
+      [18]
+        label: ALL OTHER UNSECURED LOANS/LINES OF CREDIT
+        values:
+          [0]
+            256431.0
+          [1]
+            -9.2
+      [19]
+        label: Total
+        values:
+          [0]
+            578594.0
+          [1]
+            1.3
+    total_delinquent_loans: None
+
+
+##########################################################################################
+SECTION: loan_continue   (config pages: [18, 19, 20])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 18]
+ Power BI Desktop
+18
+BOPTI FEDERAL CREDIT UNION
+Repo
+rt
+Filt… 10. CHARGE-OFFS AND RECOVERIES
+COMPONENTS 03-31-2026 % Change vs Previous Year End
+
+ALL OTHER UNSECURED LOANS/LINES OF 64,797 -71.8%
+CREDIT
+USED VEHICLE LOANS 30 -83.2%
+Total 64,827 -73.5%
+YTD CHARGE OFF TREND
+300,000
+COMPONENTS 200,000
+ALL OTHER SECURED NON-R…
+ALL OTHER UNSECURED LOA…
+NEW VEHICLE LOANS
+100,000
+USED VEHICLE LOANS
+0
+YE'22 YE'23 YE'24 YE'25 Q1'2026
+CURRENT YTD CHARGE OFF DISTRIBUTION
+0.05%
+COMPONENTS
+ALL OTHER UNSECURED LOA…
+USED VEHICLE LOANS
+99.95%
+Note: No charge-off and recovery data was available to GP, so data as of 03/31/2026 has been used from the call report.
+Zero charge-off periods are hidden from visualization.
+BOARD REPORT As of May 31, 2026
+
+[Page 19]
+ Power BI Desktop
+19
+BOPTI FEDERAL CREDIT UNION
+Rep
+ort COMPONENTS 03-31-2026 % Change vs Previous
+Filt… Year End
+ALL OTHER UNSECURED LOANS/LINES OF CREDIT 12,328 -71.8%
+NEW VEHICLE LOANS 359 0.0%
+USED VEHICLE LOANS 8,185 -83.2%
+Total 20,872 -73.4%
+YTD RECOVERIES TREND
+80,000
+60,000
+40,000
+20,000
+0
+YE'22 YE'23 YE'24 YE'25 Q1'2026
+CURRENT YTD RECOVERIES DISTRIBUTION
+COMPONENTS
+ALL OTHER NON-COMMERCI…
+ALL OTHER SECURED NON-R…
+ALL OTHER UNSECURED LOA…
+39.22%
+COMMERCIAL AND INDUSTR…
+CONSTRUCTION AND DEVEL…
+INDIRECT LOANS
+59.06%
+LEASES RECEIVABLE
+LOANS TO FINANCE AGRICUL…
+NEW VEHICLE LOANS 1.72%
+Note: No charge-off and recovery data was available to GP, so data as of 03/31/2026 has been used from the call report.
+Zero Recovery Data are hidden from visualization.
+BOARD REPORT As of May 31, 2026
+
+[Page 20]
+Power BI Desktop
+R 20
+e BOPTI FEDERAL CREDIT UNION
+p…
+Repo
+rt
+11. CECL
+Filt…
+CECL Reserve 05-31-2026 % Change vs
+Previous Year
+End
+LESS: ALLOWANCE FOR CREDIT LOSSES ON LOANS & LEASES - ENTER -122,075 -46.71%
+AN AMOUNT IF YOU HAVE ADOPTED ASC TOPIC 326: FINANCIAL
+INSTRUMENTS - CREDIT LOSSES
+CECL Reserve
+-300,000
+Repo
+rt
+Filt…
+-200,000
+-100,000
+0
+YE'22 YE'23 YE'24 YE'25 Q2'2026
+CECL Coverage to Net Loss
+1.0
+200,000
+100,000 0.5
+0 0.0
+YE'22 YE'23 YE'24 YE'25 Q2'2026
+CECL Reserve YTD Net Charge Offs Projected Year End Net Charge Off Coverage Ratio (YEP)
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+status: OK
+flags: none
+
+parsed data:
+    raw_rows:
+      [0]
+        label: BOPTI FEDERAL CREDIT UNION Repo rt Filt… 10. CHARGE-OFFS AND RECOVERIES COMPONENTS 03-31-2026 % Change vs Previous Year End 
+        values:
+          [0]
+            18.0
+      [1]
+        label: ALL OTHER UNSECURED LOANS/LINES OF CREDIT
+        values:
+          [0]
+            64797.0
+          [1]
+            -71.8
+      [2]
+        label: USED VEHICLE LOANS
+        values:
+          [0]
+            30.0
+          [1]
+            -83.2
+      [3]
+        label: Total
+        values:
+          [0]
+            64827.0
+          [1]
+            -73.5
+      [4]
+        label: BOPTI FEDERAL CREDIT UNION Rep ort COMPONENTS 03-31-2026 % Change vs Previous Filt… Year End
+        values:
+          [0]
+            19.0
+      [5]
+        label: ALL OTHER UNSECURED LOANS/LINES OF CREDIT
+        values:
+          [0]
+            12328.0
+          [1]
+            -71.8
+      [6]
+        label: NEW VEHICLE LOANS
+        values:
+          [0]
+            359.0
+          [1]
+            0.0
+      [7]
+        label: USED VEHICLE LOANS
+        values:
+          [0]
+            8185.0
+          [1]
+            -83.2
+      [8]
+        label: Total
+        values:
+          [0]
+            20872.0
+          [1]
+            -73.4
+      [9]
+        label: R e BOPTI FEDERAL CREDIT UNION p… Repo rt 11. CECL Filt… CECL Reserve 05-31-2026 % Change vs Previous Year End
+        values:
+          [0]
+            20.0
+      [10]
+        label: LESS: ALLOWANCE FOR CREDIT LOSSES ON LOANS & LEASES - ENTER AN AMOUNT IF YOU HAVE ADOPTED ASC TOPIC 326: FINANCIAL INSTRUMENTS - CREDIT LOSSES CECL Reserve
+        values:
+          [0]
+            -122075.0
+          [1]
+            -46.71
+      [11]
+        label: Repo rt Filt…
+        values:
+          [0]
+            -300000.0
+      [12]
+        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 CECL Coverage to Net Loss
+        values:
+          [0]
+            0.0
+      [13]
+        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 CECL Reserve YTD Net Charge Offs Projected Year End Net Charge Off Coverage Ratio (YEP)
+        values:
+          [0]
+            0.0
+          [1]
+            0.0
+
+
+##########################################################################################
+SECTION: share   (config pages: [23])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 23]
+Rep Power BI Desktop
+ort 23
+Fil… BOPTI FEDERAL CREDIT UNION
+
+12. SHARES
+Rep
+ort
+Fil… Component 05-31-2026 % of Shares % Change vs Previous
+Year End
+
+IRA/KEOGH Accounts 7,123,495 14.8% -8.4%
+Regular Shares 27,627,411 57.2% -3.5%
+Share Certificates 11,682,713 24.2% -3.4%
+Share Drafts 1,663,979 3.4% -1.0%
+All Other Shares 193,560 0.4% 66.5%
+Total 48,291,158 100.0% -4.0%
+Shares/Deposits Component Distribution
+60,000,000
+COMPONENTS
+All Other Shares
+IRA/KEOGH Accounts 40,000,000
+Money Market Shares
+Nonmember Deposits
+20,000,000
+Regular Shares
+Share Certificates
+Share Drafts
+0
+YE'22 YE'23 YE'24 YE'25 Q2'2026
+Shares/Deposits Component Distribution
+3.4%
+COMPONENTS 14.8%
+Regular Shares
+Share Certificates
+IRA/KEOGH Accounts
+Share Drafts
+57.2%
+All Other Shares
+24.2%
+Money Market Shares
+Nonmember Deposits
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+status: OK
+flags: none
+
+parsed data:
+    raw_rows:
+      [0]
+        label: ort Fil… BOPTI FEDERAL CREDIT UNION  12. SHARES Rep ort Fil… Component 05-31-2026 % of Shares % Change vs Previous Year End 
+        values:
+          [0]
+            23.0
+      [1]
+        label: IRA/KEOGH Accounts
+        values:
+          [0]
+            7123495.0
+          [1]
+            14.8
+          [2]
+            -8.4
+      [2]
+        label: Regular Shares
+        values:
+          [0]
+            27627411.0
+          [1]
+            57.2
+          [2]
+            -3.5
+      [3]
+        label: Share Certificates
+        values:
+          [0]
+            11682713.0
+          [1]
+            24.2
+          [2]
+            -3.4
+      [4]
+        label: Share Drafts
+        values:
+          [0]
+            1663979.0
+          [1]
+            3.4
+          [2]
+            -1.0
+      [5]
+        label: All Other Shares
+        values:
+          [0]
+            193560.0
+          [1]
+            0.4
+          [2]
+            66.5
+      [6]
+        label: Total Shares/Deposits Component Distribution
+        values:
+          [0]
+            48291158.0
+          [1]
+            100.0
+          [2]
+            -4.0
+      [7]
+        label: COMPONENTS All Other Shares
+        values:
+          [0]
+            60000000.0
+      [8]
+        label: IRA/KEOGH Accounts Money Market Shares Nonmember Deposits
+        values:
+          [0]
+            40000000.0
+      [9]
+        label: Regular Shares Share Certificates Share Drafts
+        values:
+          [0]
+            20000000.0
+      [10]
+        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 Shares/Deposits Component Distribution
+        values:
+          [0]
+            0.0
+      [11]
+        label: COMPONENTS Regular Shares Share Certificates IRA/KEOGH Accounts Share Drafts
+        values:
+          [0]
+            14.8
+      [12]
+        label: All Other Shares
+        values:
+          [0]
+            57.2
+      [13]
+        label: Money Market Shares Nonmember Deposits
+        values:
+          [0]
+            24.2
+
+
+##########################################################################################
+SECTION: investment   (config pages: [25])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 25]
+Rep Power BI Desktop
+ort 25
+Fil… BOPTI FEDERAL CREDIT UNION
+
+13. INVESTMENT
+COMPONENTS 05-31-2026 % Change vs Previous Year End
+Rep
+Held-to-Maturity Debt Securities 39,299,007 13.3%
+ort
+Fil… Other Investments 109,776 0.0%
+Total 39,408,783 13.2%
+Investment Maturity Distribution
+100,000,000
+Maturity
+<= 1 Year
+> 10 Years
+> 1-3 Years
+50,000,000
+> 3-5 Years
+> 5-10 Years
+0
+YE'22 YE'23 YE'24 YE'25 Q2'2026
+Investment Composition
+109,776
+COMPONENTS
+Held-to-Maturity Debt Securi…
+Other Investments
+39,299,007
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+status: OK
+flags: none
+
+parsed data:
+    raw_rows:
+      [0]
+        label: ort Fil… BOPTI FEDERAL CREDIT UNION  13. INVESTMENT COMPONENTS 05-31-2026 % Change vs Previous Year End Rep
+        values:
+          [0]
+            25.0
+      [1]
+        label: Held-to-Maturity Debt Securities ort
+        values:
+          [0]
+            39299007.0
+          [1]
+            13.3
+      [2]
+        label: Fil… Other Investments
+        values:
+          [0]
+            109776.0
+          [1]
+            0.0
+      [3]
+        label: Total Investment Maturity Distribution
+        values:
+          [0]
+            39408783.0
+          [1]
+            13.2
+      [4]
+        label: Maturity <= 1 Year > 10 Years > 1-3 Years
+        values:
+          [0]
+            100000000.0
+      [5]
+        label: > 3-5 Years > 5-10 Years
+        values:
+          [0]
+            50000000.0
+      [6]
+        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 Investment Composition
+        values:
+          [0]
+            0.0
+      [7]
+        label: COMPONENTS Held-to-Maturity Debt Securi… Other Investments
+        values:
+          [0]
+            109776.0
+
+
+##########################################################################################
+SECTION: membership   (config pages: [27])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 27]
+Power BI Desktop
+R 27
+e BOPTI FEDERAL CREDIT UNION
+14. MEMBERS
+COMPONENTS 03-31-2026 % Change vs % Change vs % Change
+Previous Previous Year Quarter Over
+Quarter End Quarter
+
+Number of potential members 12,661 0.0% 0.0% 0.0%
+Number of current members (not 4,274 0.0% 0.2% -0.8%
+number of accounts)
+Total 16,935 0.0% 0.0% -0.2%
+MEMBERSHIP GROWTH TREND
+0%
+-10%
+YE'22 YE'23 YE'24 YE'25 Q1'2026
+MEMBERS PER FULL TIME EMPLOYEES
+1,000
+Re
+po
+800
+r… YE'22 YE'23 YE'24 YE'25 Q1'2026
+
+SHARES PER MEMBER TREND
+14,000
+12,000
+YE'22 YE'23 YE'24 YE'25 Q1'2026
+Note: No charge-off and recovery data was available to GP, so data as of 03/31/2026 has been used from the call report.
+Zero charge-off periods are hidden from visualization.
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+SKIPPED -- not configured as extractable in extraction_config.py
+
+
+##########################################################################################
+SECTION: policy   (config pages: [29])
+##########################################################################################
+
+--- RAW extract_text() PER PAGE ---
+
+[Page 29]
+Rep
+Power BI Desktop
+ort 29
+Filt… BOPTI FEDERAL CREDIT UNION
+
+16. POLICY/LIMITS COMPLIANCE
+CATEGORY METRICS 05-31-2026 BEST PRACTICE COMPLIANCE
+
+PROFITABILITY NET MARGIN / AVERAGE 2.95% ≥ 1.00% Within Target
+ASSETS
+PROFITABILITY NET OPERATING EXPENSES 1.91% ≤ 3.00% Within Limit
+/ AVERAGE ASSETS
+PROFITABILITY RETURN ON AVERAGE 0.95% ≥ 0.80% Within Target
+ASSETS
+LIQUIDITY & MIX CASH AND SHORT-TERM 5.66% 8% – 15% Below Range
+INVESTMENTS / TOTAL
+ASSETS
+LIQUIDITY & MIX REGULAR SHARES / TOTAL 57.70% ≥ 70% Below Target
+SHARES & BORROWINGS
+LIQUIDITY & MIX TOTAL LOANS / TOTAL 31.28% 65% – 80% Below Range
+ASSETS
+LIQUIDITY & MIX TOTAL LOANS / TOTAL 42.25% 70% – 90% Below Range
+SHARES
+INTEREST & FUNDING COST OF FUNDS / 1.41% ≤ 1.50% Within Limit
+AVERAGE ASSETS
+INTEREST & FUNDING NET INTEREST MARGIN / 2.85% ≥ 3.00% Below Target
+AVERAGE ASSETS
+INTEREST & FUNDING YIELD ON AVERAGE LOANS 8.25% ≥ 4.00% Within Target
+GROWTH & MARKET LOAN GROWTH -27.52% 5% – 10% Below Range
+GROWTH & MARKET MARKET (SHARE) GROWTH -11.03% ≥ Market Avg
+GROWTH & MARKET MEMBERSHIP GROWTH -1.95% 3% – 7% Below Range
+EFFICIENCY OPERATING EXPENSES / 2.11% ≤ 3.50% Within Limit
+AVERAGE ASSETS
+CAPITAL & SOLVENCY NET WORTH / TOTAL 24.67% ≥ 10% Within Target
+ASSETS
+CAPITAL & SOLVENCY NET WORTH GROWTH 4.12% ≥ 5% YoY Below Target
+CAPITAL & SOLVENCY SOLVENCY EVALUATION 133.33% ≥ 7% Within Target
+ASSET QUALITY CLASSIFIED ASSETS/NET -0.78% < 40% Within Limit
+WORTH
+ASSET QUALITY DELINQUENT 1.73% < 1.5% Above Limit
+LOANS/TOTAL LOANS
+ASSET QUALITY NET CHARGE-OFFS /AVE 0.50% < 0.75% Within Limit
+LOANS
+BOARD REPORT As of May 31, 2026
+
+--- PARSED RESULT ---
+status: OK
+flags: none
+
+parsed data:
+    raw_rows:
+      [0]
+        label: ort Filt… BOPTI FEDERAL CREDIT UNION  16. POLICY/LIMITS COMPLIANCE CATEGORY METRICS 05-31-2026 BEST PRACTICE COMPLIANCE  PROFITABILITY NET MARGIN / AVERAGE 2.95% ≥ 1.00% Within Target ASSETS PROFITABILITY NET OPERATING EXPENSES 1.91% ≤ 3.00% Within Limit / AVERAGE ASSETS PROFITABILITY RETURN ON AVERAGE 0.95% ≥ 0.80% Within Target ASSETS LIQUIDITY & MIX CASH AND SHORT-TERM 5.66% 8% – 15% Below Range INVESTMENTS / TOTAL ASSETS LIQUIDITY & MIX REGULAR SHARES / TOTAL 57.70% ≥ 70% Below Target SHARES & BORROWINGS LIQUIDITY & MIX TOTAL LOANS / TOTAL 31.28% 65% – 80% Below Range ASSETS LIQUIDITY & MIX TOTAL LOANS / TOTAL 42.25% 70% – 90% Below Range SHARES INTEREST & FUNDING COST OF FUNDS / 1.41% ≤ 1.50% Within Limit AVERAGE ASSETS INTEREST & FUNDING NET INTEREST MARGIN / 2.85% ≥ 3.00% Below Target AVERAGE ASSETS INTEREST & FUNDING YIELD ON AVERAGE LOANS 8.25% ≥ 4.00% Within Target GROWTH & MARKET LOAN GROWTH -27.52% 5% – 10% Below Range GROWTH & MARKET MARKET (SHARE) GROWTH -11.03% ≥ Market Avg GROWTH & MARKET MEMBERSHIP GROWTH -1.95% 3% – 7% Below Range EFFICIENCY OPERATING EXPENSES / 2.11% ≤ 3.50% Within Limit AVERAGE ASSETS CAPITAL & SOLVENCY NET WORTH / TOTAL 24.67% ≥ 10% Within Target ASSETS CAPITAL & SOLVENCY NET WORTH GROWTH 4.12% ≥ 5% YoY Below Target CAPITAL & SOLVENCY SOLVENCY EVALUATION 133.33% ≥ 7% Within Target ASSET QUALITY CLASSIFIED ASSETS/NET -0.78% < 40% Within Limit WORTH ASSET QUALITY DELINQUENT 1.73% < 1.5% Above Limit LOANS/TOTAL LOANS ASSET QUALITY NET CHARGE-OFFS /AVE 0.50% < 0.75% Within Limit LOANS
+        values:
+          [0]
+            29.0

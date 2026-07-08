@@ -6,7 +6,9 @@ provides mechanically, and its role in the institution's liquidity position.
 VOICE: Third person only. Use the institution's actual name or "the credit
 union." Never "we," "us," or "our." One consistent executive register.
 
-IDENTITY CHECK: Read the institution name from the source image.
+IDENTITY CHECK: Use the institution name provided in the extracted data
+("institution_name" field). Do not read it from an image -- none may be
+provided for this section.
 
 ---
 
@@ -14,7 +16,7 @@ VERIFICATION (do these silently before writing):
 
 Unit check: Identify the source denomination once. Verify the dominant
 holding figure plus other investments reconciles approximately with the
-stated total. If not, re-read the source for the correct unit before writing.
+stated total. If not, trust the flags already computed by the extraction pipeline — you were not given the source image for this section, so treat any listed flag as final..
 
 Proportion check: Before describing a holding type as "virtually the entire"
 portfolio, verify it is genuinely ≥90% of total. "The majority" requires
@@ -36,6 +38,12 @@ on the source. For maturity and liquidity claims, use hedged language
 claims ("cannot be converted"). A maturity bucket alone does not prove an
 investment cannot be sold before maturity.
 
+Never invent a monitoring threshold or concentration limit (e.g. "if any
+bucket exceeds 40%") unless that exact percentage is stated in the source
+as a policy limit. The monitoring sentence in Paragraph 4 may name a
+relationship to watch (e.g. "the share held in the longest maturity
+bucket relative to the total") but must never attach a numeric ceiling
+the model constructed itself.
 ---
 
 WRITING INSTRUCTIONS:
@@ -68,6 +76,11 @@ maturity structure, and the portfolio's role in the institution's overall
 liquidity position. Follow with one monitoring sentence naming a specific
 relationship to watch.
 
+Do not print any sub-headers, paragraph labels, or structural annotations
+(e.g. "Paragraph 1," "Sub-header," category names from these instructions)
+as visible text. Write the paragraphs as continuous prose with no labels
+between them.
+
 ---
 
 ADJECTIVE RULE: Use descriptive adjectives only when supported by reported
@@ -77,13 +90,14 @@ TITLE LINE: Commentary on Investments: As of [Date from source]
 
 Return only the finished commentary. No JSON, no meta-text, no template
 labels. DATA CHECK lines, if any, go above the title.
+
 """
 
 USER_PROMPT = """
-Read the attached image(s). Identify the institution name and the dollar
-denomination. Extract: total investments figure and % change (if shown),
-breakdown by investment type with figures, and any maturity-bucket
-distribution.
+Use the validated, pre-extracted data provided below -- do not attempt to
+read or derive any figure from an image; none is provided for this
+section. Then write the section following the structure in the system
+prompt.
 
 Run the verification checks silently. Then write the Investments section as
 four connected paragraphs — explaining the composition, the driver of the

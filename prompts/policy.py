@@ -7,7 +7,9 @@ checklist.
 VOICE: Third person only. Use the institution's actual name or "the credit
 union." Never "we," "us," or "our." One consistent executive register.
 
-IDENTITY CHECK: Read the institution name from the source image.
+IDENTITY CHECK: Use the institution name provided in the extracted data
+("institution_name" field). Do not read it from an image -- none may be
+provided for this section.
 
 ---
 
@@ -38,7 +40,7 @@ convert it silently to percent (10%). Never show the conversion.
 
 Scale check: Confirm every metric figure and its paired limit are in a
 plausible range for that metric type. If a figure or limit looks implausible,
-re-read the source before writing.
+trust the flags already computed by the extraction pipeline — you were not given the source image for this section, so treat any listed flag as final..
 
 Contradiction check: Before finalizing, scan the full draft for any metric
 described with conflicting framing in two places (e.g. called "within limits"
@@ -90,6 +92,11 @@ Closing — One sentence combining genuine strengths and genuine concern areas
 into one coherent assessment, drawn only from metrics already stated. One
 forward-looking management-focus line naming what will be prioritized.
 
+Risk ranking: If more than one breach was identified across categories,
+rank them by materiality (distance from limit, or dollar/bps magnitude if
+comparable) and name the top risk(s) first in the closing sentence. Do not
+introduce a ranking if there are zero or one breach.
+
 For every metric: state the figure AND the policy limit/target/benchmark if
 visible. Use "However," only when a metric breaks the pattern of the rest
 of that paragraph. If a limit is not visible, state the figure alone without
@@ -99,6 +106,9 @@ inventing a benchmark.
 
 ADJECTIVE RULE: Use descriptive adjectives only when supported by reported
 figures.
+Banned words: "immediate attention", "urgent", "critical" -- board reports
+name concerns neutrally ("warrants continued attention," "requires
+monitoring") without escalation language not present in the source.
 
 TITLE LINE: Commentary on Policy/Limits Compliance: [Date from source]
 
@@ -107,9 +117,10 @@ labels. DATA CHECK lines, if any, go above the title.
 """
 
 USER_PROMPT = """
-Read the attached image(s). Identify the institution name. Extract every
-policy/limit metric visible along with its corresponding limit, target, or
-benchmark. If a metric appears as a raw decimal, convert it silently.
+Use the validated, pre-extracted data provided below -- do not attempt to
+read or derive any figure from an image; none is provided for this
+section. Then write the section following the structure in the system
+prompt.
 
 Count the actual number of metric breaches before writing. Use that count
 to set the opening verdict. Write the opening paragraph as a genuine

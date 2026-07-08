@@ -7,7 +7,9 @@ not to restate the income statement line by line.
 VOICE: Third person only. Use the institution's actual name or "the credit
 union." Never "we," "us," or "our."
 
-IDENTITY CHECK: Read the institution name from the source image first.
+IDENTITY CHECK: Use the institution name provided in the extracted data
+("institution_name" field). Do not read it from an image -- none may be
+provided for this section.
 
 ---
 
@@ -29,11 +31,56 @@ BEFORE WRITING — DO THESE CHECKS SILENTLY:
 5. Confirm sub-components sum approximately to their stated totals. If a
    sub-component clearly exceeds its total, flag as DATA CHECK.
 
-6. Only state a directional comparison (earnings increased/declined) if a
+6. Reconciliation preference: If Non-Interest Income or Non-Interest Expense
+   is shown both as a total and as a sub-component breakdown, sum the
+   sub-components yourself. If that sum matches one stated total but not
+   another figure stated elsewhere, use the reconciled sub-component sum as
+   the validated figure in your narrative, and place a DATA CHECK line
+   above the title naming the other, unreconciled figure. Do not default to
+   a headline narrative number just because it appears first or looks
+   authoritative -- the mathematically self-consistent total wins.
+
+7. Component mapping check: Match each dollar figure in a sub-component
+   breakdown to its label using the order the source lists them in, not by
+   assumption or name-similarity between categories (e.g. "Office Occupancy
+   Expense" and "Office Operations Expense" are different line items --
+   verify which figure belongs to which label before naming it in prose).
+
+8. Table-origin lock: Non-Interest Income sub-components may only come from
+   the Non-Interest Income chart/table. Non-Interest Expense sub-components
+   may only come from the Non-Interest Expense chart/table. If both charts
+   appear on the same page, verify each figure against its own chart's
+   title/legend before naming it -- never carry a figure from one chart
+   into the other paragraph, even if the dollar values look plausible.
+
+9. Reconciliation gate (mandatory, not advisory): Before writing Paragraph
+   2 or 3, sum the sub-components you are about to name. If that sum
+   already exceeds or falls far short of the stated total (more than ~15%
+   off), this is a signal you have the wrong figures -- re-check the source
+   before writing, and if still unresolved, place a DATA CHECK line and
+   state only the total, omitting the sub-component breakdown.
+
+10. Cross-source check: If Non-Interest Expense (or any other figure) appears
+   on more than one source document (e.g. an income statement page and a
+   separate Board Report narrative) with different totals, do not silently
+   pick one. Place a DATA CHECK line above the title naming both figures
+   and their sources, and state in the narrative only the figure that
+   matches the audited/primary financial statement page, not a summary
+   narrative figure, until the discrepancy is resolved.   
+   
+11. Only state a directional comparison (earnings increased/declined) if a
    prior-period figure or % change is printed on the source. Do not compute
    derived percentages not shown on the source.
 
----
+10.Disclosure exhaustion check: Before stating that non-interest income or
+expense sub-components "are not individually detailed" or "not provided,"
+confirm they don't appear anywhere on the source, including separate
+breakdown charts or tables elsewhere in the packet. Only use a missing-data
+statement after that check fails.
+
+Never output a literal bracket placeholder (e.g. "[Date from source]") 
+--
+always substitute the actual extracted value.
 
 EVIDENCE DISCIPLINE:
 
@@ -97,7 +144,7 @@ instructions. DATA CHECK lines, if needed, go above the title.
 """
 
 USER_PROMPT = """
-Read the attached image(s). Identify the institution name. Locate Net Income,
+Identify the institution name. Locate Net Income,
 Interest Income, Interest Expense, Non-Interest Income with its sub-line
 breakdown, and Non-Interest Expense with its sub-line breakdown.
 

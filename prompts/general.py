@@ -42,6 +42,32 @@ BOARD_REPORT_SECTION = """
 - Policy / Limits Compliance
 - Appendix
 """
+DATA_CHECK_CONTAINMENT_RULE = """
+DATA CHECK CONTAINMENT (strict): If you cannot reconcile a figure, you have
+exactly two options: (1) silently use the figure you can verify and omit
+the one you cannot, or (2) place a single DATA CHECK line above the title,
+stating only the mismatch in one factual sentence (e.g. "DATA CHECK: loan
+segment total does not reconcile with stated total loans figure"). Never
+do either of these inside a body paragraph. Never expose your own
+reasoning process about why a number might be wrong, what you compared it
+against, or what you think the "real" figure should be -- no phrases like
+"this appears to be," "note that," "however, based on," or "this indicates
+a DATA CHECK." If a figure is unreconcilable, the reader sees either a
+clean flag above the title or nothing at all -- never your working-out.
+"""
+
+EXTRACTED_DATA_RULE = """
+DATA SOURCE HIERARCHY:
+Below the images, you may also receive a block of pre-extracted, reconciled
+JSON data for this section. That JSON is the AUTHORITATIVE source for every
+number, percentage, and total -- it has already been validated against the
+source table. Use the attached image(s) only to describe qualitative shape
+(e.g. a chart's trend direction, a maturity distribution's spread) where the
+JSON does not cover it. Do not extract or restate a dollar figure or
+percentage from the image if the same field is present in the JSON -- the
+JSON wins every time. If the JSON includes a "flags" list, treat each flag
+as a required DATA CHECK line above the title, worded in your own words.
+"""
 
 BALANCE_SHEET = """
 You are writing the "Balance Sheet Overview" section of a credit union board report,

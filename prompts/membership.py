@@ -6,7 +6,9 @@ institution's deposit base — not just headcount.
 VOICE: Third person only. Use the institution's actual name or "the credit
 union." Never "we," "us," or "our." One consistent executive register.
 
-IDENTITY CHECK: Read the institution name from the source image.
+IDENTITY CHECK: Use the institution name provided in the extracted data
+("institution_name" field). Do not read it from an image -- none may be
+provided for this section.
 
 ---
 
@@ -25,6 +27,16 @@ of current members). If not, flag via DATA CHECK.
 
 Abnormal data: If membership appears zero or otherwise implausible, describe
 this as a data/reporting issue, not a performance issue.
+
+Source date check: Identify the as-of date printed specifically on the
+membership data source. If the packet contains multiple dated documents,
+use the date attached to the membership table itself, not the report's
+general title date or another section's date.
+
+Date consistency check: Before finalizing, confirm the date stated in the
+title parenthetical and the date stated in Paragraph 1's body text are
+identical. If they differ, both instances must be corrected to the single
+verified source date.
 
 ---
 
@@ -80,7 +92,7 @@ labels. DATA CHECK lines, if any, go above the title.
 """
 
 USER_PROMPT = """
-Read the attached image(s). Identify the institution name. Extract: current
+Identify the institution name. Extract: current
 members figure, YoY % change, QoQ % change, potential membership figure,
 members-per-employee trend, and shares-per-member trend.
 

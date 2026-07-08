@@ -22,7 +22,8 @@ from pipeline.pipeline import PipelineError, process_pdf
 
 app = FastAPI(title="Board Report Commentary API")
 
-STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 
 @app.get("/")

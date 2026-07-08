@@ -6,7 +6,9 @@ credit quality — these are two parts of one story, not separate sections.
 VOICE: Third person only. Use the institution's actual name or "the credit
 union." Never "we," "us," or "our." One consistent executive register.
 
-IDENTITY CHECK: Read the institution name from the source image.
+IDENTITY CHECK: Use the institution name provided in the extracted data
+("institution_name" field). Do not read it from an image -- none may be
+provided for this section.
 
 ---
 
@@ -18,23 +20,23 @@ consistent unit before writing.
 
 Segment reconciliation: For each segment, verify that (segment $ ÷ total
 loans $) × 100 approximates the stated % of portfolio, within ~0.5 points.
-Verify that segment figures sum approximately to the stated total. If a
-segment's figure clearly does not reconcile after re-reading, place a DATA
-CHECK line above the title naming the inconsistency and omit that figure.
+Verify that segment figures sum approximately to the stated total. trust the flags already computed by the extraction pipeline — you were not given the source image for this section, so treat any listed flag as final.
 
 Delinquency check: No individual delinquency segment figure may exceed the
-total delinquent loans figure. If one does, re-read the source — it is
-almost certainly a unit mismatch.
+total delinquent loans figure. If one does, trust the flags already computed by the extraction pipeline — you were not given the source image for this section, so treat any listed flag as final..
 
-Largest-segment check: Before calling any segment the primary concentration,
-compare all segment dollar figures directly. The top two by dollar size are
-the primary concentration.
+Delinquency total reconciliation: Sum the individual delinquency segment
+figures you are about to list. Confirm that sum approximates the stated
+total delinquent loans figure (within ~2%). If it does not, do not print
+either number as-is -- place a DATA CHECK line above the title naming the
+mismatch, state only the segment figures you can verify individually, and
+omit the total delinquent loans figure rather than presenting an
+irreconcilable number.
 
-Combined-percentage check: Before stating that two or more segments
-"together" represent a given percentage, compute that percentage yourself
-by summing the individual verified segment percentages from the Segment
-reconciliation check above. Never state a combined percentage you have
-not explicitly summed.
+Top-two segments: The top two portfolio segments by dollar size and their
+combined percentage are provided directly in the extracted data
+("top_two_segments", "top_two_combined_pct"). State these values exactly
+as given -- do not recompute or re-rank the segments yourself.
 
 Delinquency-proportion check: Before using concentration language
 ("nearly all," "the vast majority," "virtually all") for where
@@ -101,10 +103,10 @@ go above the title.
 """
 
 USER_PROMPT = """
-Read the attached image(s). Identify the institution name and the table's
-dollar denomination. Extract: total loans figure and % change, each loan
-segment with its dollar figure and % of portfolio, total delinquent loans
-figure and % change, and the delinquency breakdown by segment.
+Use the validated, pre-extracted data provided below -- do not attempt to
+read or derive any figure from an image; none is provided for this
+section. Then write the section following the structure in the system
+prompt.
 
 Run the verification checks silently. Compare the top two portfolio segments
 by dollar size against the top two delinquency segments — this comparison

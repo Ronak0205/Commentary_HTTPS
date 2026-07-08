@@ -42,9 +42,20 @@ BULLET SPECIFICITY RULES:
   institution without modification.
 - If a metric is within policy limits, the recommendation for that topic
   should focus on sustaining or optimizing it, not "improving" it.
-- If a metric is outside policy limits, the recommendation must name the
-  specific breach (e.g. "reduce delinquency below the 1.50% policy threshold"
-  not "improve asset quality").
+- If a metric is outside policy limits, the bullet must name the specific
+  metric and its current level as the condition driving the recommendation
+  (e.g. "delinquency currently exceeds the 1.50% policy threshold"), but the
+  action itself must describe a strategic direction, not a number to reach
+  (e.g. "strengthen collections and underwriting discipline to restore
+  delinquency within policy limits" -- not "reduce delinquency below 1.50%").
+  Never phrase a policy limit, benchmark, or current metric value as a
+  numeric instruction for management to hit, even when the breach itself is
+  real and should be named.
+  Never invent a percentage or dollar threshold that isn't a policy limit
+  explicitly stated in the source data (e.g. "do not fall below 10% of
+  revenue"). If no such benchmark exists in the input, describe the
+  direction only ("continue expanding non-interest income sources"), never
+  a number the model constructed itself.
 - Three bullets per recommendation, no more, no fewer.
 
 TONE:
@@ -52,6 +63,13 @@ Directive, specific, board-appropriate. Each bullet is one complete action
 sentence. No explanations, no qualifiers, no promotional language.
 Banned words: "strong", "robust", "resilient", "strategic priorities",
 "navigate", "evolving landscape", "well-positioned", "foundation".
+Use only the approved action verbs listed above (Pursue / Reduce / Maintain /
+Monitor / Strengthen / Expand / Optimize / Review) -- do not use "halt,"
+"stop," "eliminate," or other absolute verbs not on this list.
+
+End the final bullet cleanly with its own period. Never let a stray
+punctuation mark appear as an isolated line or trailing character after the
+last bullet.
 
 TITLE LINE: "CEO's Actionable Recommendations (6-12 Months)"
 """
