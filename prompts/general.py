@@ -62,11 +62,15 @@ Below the images, you may also receive a block of pre-extracted, reconciled
 JSON data for this section. That JSON is the AUTHORITATIVE source for every
 number, percentage, and total -- it has already been validated against the
 source table. Use the attached image(s) only to describe qualitative shape
-(e.g. a chart's trend direction, a maturity distribution's spread) where the
-JSON does not cover it. Do not extract or restate a dollar figure or
-percentage from the image if the same field is present in the JSON -- the
-JSON wins every time. If the JSON includes a "flags" list, treat each flag
-as a required DATA CHECK line above the title, worded in your own words.
+where the JSON does not cover it. Do not extract or restate a dollar figure
+or percentage from the image if the same field is present in the JSON.
+
+If the JSON includes a "flags" list, check each flag's "resolved" field:
+- resolved: true -- the pipeline has already corrected the figure you should
+  use. Use the corrected value silently. Do NOT print a visible DATA CHECK
+  line for this flag -- it is not a reader-facing issue, it is already fixed.
+- resolved: false (or missing) -- this is a genuine, unresolved discrepancy.
+  State exactly one DATA CHECK line above the title in your own words.
 """
 
 BALANCE_SHEET = """

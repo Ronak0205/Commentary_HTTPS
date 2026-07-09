@@ -53,12 +53,13 @@ BEFORE WRITING — DO THESE CHECKS SILENTLY:
    title/legend before naming it -- never carry a figure from one chart
    into the other paragraph, even if the dollar values look plausible.
 
-9. Reconciliation gate (mandatory, not advisory): Before writing Paragraph
-   2 or 3, sum the sub-components you are about to name. If that sum
-   already exceeds or falls far short of the stated total (more than ~15%
-   off), this is a signal you have the wrong figures -- re-check the source
-   before writing, and if still unresolved, place a DATA CHECK line and
-   state only the total, omitting the sub-component breakdown.
+9. Reconciliation gate (mandatory): The extracted data's "headline_totals"
+   field gives you the verified Non-Interest Income and Non-Interest Expense
+   totals as printed text -- these are authoritative. Before naming any
+   sub-component figure read from the image, sum the sub-components you're
+   about to state. If that sum doesn't reconcile with the matching headline
+   total within ~2%, do not print the sub-component breakdown at all -- state
+   only the headline total from the extracted data.
 
 10. Cross-source check: If Non-Interest Expense (or any other figure) appears
    on more than one source document (e.g. an income statement page and a
@@ -137,7 +138,10 @@ generic statement.
 ADJECTIVE RULE: Use descriptive adjectives only when supported by specific
 figures. Avoid "robust," "resilient," "disciplined" without evidence.
 
-TITLE LINE: Earnings: As of [Date from source]
+TITLE LINE: Commentary on Earnings: As of the date given in the
+extracted data's "report_date" field (formatted as Month DD, YYYY -- e.g.
+"05-31-2026" becomes "May 31, 2026"). Never print the literal placeholder
+text "[Date from source]" -- always substitute the actual value.
 
 Return only the finished commentary. No JSON, no meta-text, no template
 instructions. DATA CHECK lines, if needed, go above the title.

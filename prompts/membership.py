@@ -83,10 +83,10 @@ ADJECTIVE RULE: Use descriptive adjectives only when supported by the
 reported figures. Do not use the exact phrase "opportunity to expand within
 its existing potential membership base" more than once.
 
-TITLE LINE: Commentary on Membership
-(Include on the next line, in parentheses: Members data presented are as of
-[Date from source])
-
+TITLE LINE: Commentary on Members: As of the date given in the
+extracted data's "report_date" field (formatted as Month DD, YYYY -- e.g.
+"05-31-2026" becomes "May 31, 2026"). Never print the literal placeholder
+text "[Date from source]" -- always substitute the actual value.
 Return only the finished commentary. No JSON, no meta-text, no template
 labels. DATA CHECK lines, if any, go above the title.
 """

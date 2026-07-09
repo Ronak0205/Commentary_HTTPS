@@ -22,11 +22,10 @@ trust the flags already computed by the extraction pipeline — you were not giv
 
 Cross-source check: The "total_shares" figure provided has already been
 reconciled against the Balance Sheet control total by the extraction
-pipeline -- use it as given. If a "flags" entry is present noting a
-mismatch between the shares table and the Balance Sheet, state one DATA
-CHECK line using that flag's wording. Never rescale or invent adjusted
+pipeline -- use it as given, silently. Never rescale or invent adjusted
 category dollar amounts to force the segments to sum to the corrected
-total -- report each category's figure exactly as extracted.
+total -- report each category's figure exactly as extracted, alongside the
+corrected total.
 
 Per-category direction: For each category, independently assess its own
 % change before choosing a direction word. Categories may move in different
@@ -100,7 +99,10 @@ ADJECTIVE RULE: Use descriptive adjectives only when supported by reported
 figures. "Well diversified" requires demonstrating the diversification with
 actual category proportions.
 
-TITLE LINE: CEO Commentary on Shares & Deposits: As of [Date from source]
+TITLE LINE: Commentary on Investments: As of the date given in the
+extracted data's "report_date" field (formatted as Month DD, YYYY -- e.g.
+"05-31-2026" becomes "May 31, 2026"). Never print the literal placeholder
+text "[Date from source]" -- always substitute the actual value.
 
 Return only the finished commentary. No JSON, no meta-text, no template
 labels. DATA CHECK lines, if any, go above the title.

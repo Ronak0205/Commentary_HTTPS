@@ -33,7 +33,8 @@ def generate_commentary(image_paths, output_json_path, module, system_prompt_var
     result = response["message"]["content"]
     match = re.search(r"\{.*\}", result, re.DOTALL)
     if match:
-        data = json.loads(match.group())
+        raw_json = match.group()
+        data = json.loads(raw_json, strict=False)
         with open(output_json_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
         return output_json_path

@@ -8,7 +8,7 @@ from services.commentary import generate_commentary
 from services.summary_commentary import generate_ceo_and_action_commentary
 
 from config.extraction_config import EXTRACTION_CONFIG
-from services.pdf_extract import extract_section_data
+from services.pdf_extract import extract_section_data, extract_institution_name, extract_report_date
 from pipeline.validate import validate_section, validate_cross_source
 
 
@@ -28,15 +28,10 @@ def process_pdf(pdf_path, pdf_name, extracted_img_dir=None, data_dir=None):
 
     section_output_paths = {}
     extracted_payloads = {}
-
-    # ------------------------------------------------------------------
-    # PHASE 1: Extract + validate every section's data BEFORE any
-    # commentary is generated. This is what lets cross-section checks
-    # (e.g. Shares table vs Balance Sheet control total) actually resolve
-    # in time to affect the commentary -- running this after generation,
-    # as the previous version did, meant the fix was computed too late to
-    # matter.
-    # ------------------------------------------------------------------
+    
+    institution_name = extract_institution_name(pdf_path)
+    report_date = extract_report_date(pdf_path, page_number=SECTIONS[0]["pages"][0] - 1)
+    
     for section in SECTIONS:
         name = section["name"]
         pages = section["pages"]
@@ -52,7 +47,9 @@ def process_pdf(pdf_path, pdf_name, extracted_img_dir=None, data_dir=None):
                 extracted_payload = validated
 
         extracted_payloads[name] = extracted_payload
-
+        if extracted_payload:
+              extracted_payload["data"]["institution_name"] = institution_name
+              extracted_payload["data"]["report_date"] = report_date
     # ------------------------------------------------------------------
     # Cross-section reconciliation: Shares table total vs Balance Sheet's
     # Shares/Deposits control total. Runs once, here, before any section

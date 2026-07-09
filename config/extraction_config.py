@@ -6,6 +6,6 @@ EXTRACTION_CONFIG = {
     "investment": {"extractable": True, "parser": "parse_investment"},
     "policy": {"extractable": True, "parser": "parse_policy"},
     "key_financial": {"extractable": True, "parser": "parse_key_financial", "hybrid": True},
-    "earning": {"extractable": False},
+    "earning": {"extractable": True, "parser": "parse_earning", "hybrid": True},
     "membership": {"extractable": False},
 }

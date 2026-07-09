@@ -2,6 +2,7 @@
 import pdfplumber
 import re
 
+_DATE_RE = re.compile(r"\b(\d{2}-\d{2}-\d{4})\b")
 _TOTAL_RE = re.compile(r"^\s*total\b", re.IGNORECASE)
 _PCT_CELL_RE = re.compile(r"^-?\d+\.?\d*%$")
 _INSTITUTION_RE = re.compile(r"([A-Z][A-Z .&]+(?:CREDIT UNION|FEDERAL CREDIT UNION))")
@@ -41,6 +42,13 @@ def _segments_from_rows(rows, aliases):
 
     return segments, total
 
+EARNING_TOTAL_ALIASES = {
+    "net_income": "NET INCOME",
+    "interest_income": "INTEREST INCOME",
+    "interest_expense": "INTEREST EXPENSE",
+    "non_interest_income_total": "NON-INTEREST INCOME",
+    "non_interest_expense_total": "NON-INTEREST EXPENSE",
+}
 
 LOAN_ALIASES = {
     "used_vehicle": "USED VEHICLE LOANS",
@@ -81,6 +89,14 @@ INVESTMENT_ALIASES = {
     "htm_debt_securities": "HELD-TO-MATURITY DEBT SECURITIES",
     "other_investments": "OTHER INVESTMENTS",
 }
+
+def extract_report_date(pdf_path, page_number=0):
+    with pdfplumber.open(pdf_path) as pdf:
+        if page_number >= len(pdf.pages):
+            return None
+        text = pdf.pages[page_number].extract_text() or ""
+    match = _DATE_RE.search(text)
+    return match.group(1) if match else None
 
 def extract_institution_name(pdf_path):
     with pdfplumber.open(pdf_path) as pdf:
@@ -247,6 +263,27 @@ def parse_balance_sheet(pdf_path, page_numbers):
         "raw_rows": rows,  # keep for debugging / inspection
     }
 
+def parse_earning(pdf_path, page_numbers):
+    rows = _extract_rows(pdf_path, page_numbers)
+    totals = {}
+    for row in rows:
+        label_upper = row["label"].upper()
+        for name, alias in EARNING_TOTAL_ALIASES.items():
+            if alias in label_upper and name not in totals and row["values"]:
+                totals[name] = row["values"][0]
+    return {
+        "headline_totals": totals,
+        "note": (
+            "Only headline totals above are extracted from text. "
+            "Non-interest income/expense SUB-COMPONENT breakdowns are "
+            "chart-legend based and must still be read from the attached "
+            "image -- but any sub-component figures you read must sum to "
+            "within ~2% of the corresponding headline total above. If they "
+            "don't, trust the headline total and state only that figure, "
+            "omitting the sub-component breakdown, rather than presenting "
+            "unreconciled numbers."
+        ),
+    }
 
 def parse_loan(pdf_path, page_numbers):
     """page_numbers[0] = portfolio page, page_numbers[1] = delinquency page."""
@@ -283,6 +320,9 @@ def parse_loan_continue(pdf_path, page_numbers):
 
     cecl_row = next((r for r in rows_cecl if "ALLOWANCE FOR CREDIT LOSSES" in r["label"].upper()), None)
 
+    schedule_date = None
+    if len(page_numbers) > 0:
+        schedule_date = extract_report_date(pdf_path, page_number=page_numbers[0])
     return {
         "charge_off_segments": co_segments,
         "total_charge_offs": co_total["amount"] if co_total else None,
@@ -292,6 +332,7 @@ def parse_loan_continue(pdf_path, page_numbers):
         "total_recoveries_pct_change": rec_total["pct_change"] if rec_total else None,
         "cecl_allowance": abs(cecl_row["values"][0]) if cecl_row and cecl_row["values"] else None,
         "cecl_allowance_pct_change": cecl_row["values"][-1] if cecl_row and len(cecl_row["values"]) > 1 else None,
+        "schedule_as_of_date": schedule_date,
     }
 
 

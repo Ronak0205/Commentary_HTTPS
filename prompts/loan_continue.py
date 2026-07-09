@@ -44,11 +44,10 @@ Condition page. Only state "Recovery data was not disclosed in the source
 materials for this period" after that check fails. Do not write a vague
 hedge sentence implying you found something when you did not.
 
-Source date check: The charge-off, recovery, and CECL figures may come from
-a call-report schedule with its own as-of date, which can differ from the
-main Loan Condition page's date. Identify the date printed on that specific
-schedule and state it explicitly (e.g. "based on March 31, 2026 call report
-data") rather than assuming the overall report's date applies.
+Source date check: The charge-off, recovery, and CECL figures' as-of date
+is provided directly in the extracted data ("schedule_as_of_date" field).
+State it explicitly (e.g. "based on March 31, 2026 call report data")
+using that value -- do not infer or guess a date from context.
 
 ---
 

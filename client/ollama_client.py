@@ -6,7 +6,7 @@ import requests
 
 BASE_URL = "http://localhost:11434"
 
-DEFAULT_TIMEOUT = 300
+DEFAULT_TIMEOUT = 900
 
 
 class OllamaError(Exception):

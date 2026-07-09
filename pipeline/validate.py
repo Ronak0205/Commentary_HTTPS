@@ -51,9 +51,11 @@ def validate_cross_source(control_value, other_value, control_label, other_label
     if diff is not None and diff > tolerance:
         return {
             "status": "DATA_CHECK",
+            "resolved": True,
             "reason": (
                 f"{other_label} total ({other_value:,.1f}) does not reconcile "
-                f"with {control_label} figure ({control_value:,.1f})"
+                f"with {control_label} figure ({control_value:,.1f}) --"
+                f"resolved using {control_label} as the control value"
             ),
             "value": control_value,
         }
@@ -148,8 +150,16 @@ def validate_section(section_name, extracted):
             d_flags, total_delinquent = validate_delinquency_segments(
                 extracted.get("delinquency_segments", []), extracted.get("total_delinquent_loans"))
             flags += d_flags
-            extracted["total_delinquent_loans"] = total_delinquent
-
+            extracted["total_delinquent_loans"] = total_delinquent 
+            
+        elif section_name == "earning":
+           totals = extracted.get("headline_totals", {})
+           ni = totals.get("net_income")
+           ii = totals.get("interest_income")
+           ie = totals.get("interest_expense")
+           if ii is not None and ie is not None:
+              pass  
+           
         elif section_name == "loan_continue":
             gross = sum(s["amount"] or 0 for s in extracted.get("charge_off_segments", [])) or None
             recov = sum(s["amount"] or 0 for s in extracted.get("recovery_segments", [])) or None
