@@ -47,6 +47,24 @@ superlatives for capital if the net worth ratio is materially above a
 typical 7% well-capitalized threshold. A ratio merely at the minimum does
 not justify superlatives.
 
+DATA SOURCE MAP (read before extracting anything): net worth ratio,
+delinquency ratio, net charge-off ratio, ROAA, net interest margin, net
+operating expense ratio are all present in the pre-extracted table data
+provided to you -- use those values exactly. Solvency ratio, loans-to-shares
+ratio, loan balance % change, shares/deposits % change, and core funding
+ratio are NOT in that table data; they exist only as visual callouts
+elsewhere in the source. Treat those five as lower-confidence: state a
+value for one of them only if you can identify it unambiguously as that
+specific named metric, not merely a percentage that resembles it. This
+report contains several distinct percentage figures in a similar range
+(loan growth, membership growth, market share change, shares/deposits
+change) -- before writing "shares/deposits % change" or "loans-to-shares
+ratio," confirm the figure is attached to that exact label where you found
+it. If you cannot confirm which metric a number belongs to, omit that
+metric from Paragraph 4 rather than guessing from a similarly-sized figure
+seen elsewhere in the source. A wrong number attached to the wrong metric
+name is a more serious error than leaving the metric out.
+
 ---
 
 EVIDENCE DISCIPLINE:

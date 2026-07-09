@@ -68,7 +68,8 @@ BANNED HEDGE/INFERENCE WORDS (do not use, in any section, under any
 framing): "suggests", "indicates", "likely", "may reflect", "appears to",
 "could indicate", "points toward", "probably", "implies", "allowing...
 rather than", "rather than forced sales", "monitoring should focus on
-whether".
+whether""reflects a reliance on", "demonstrates", "shows that
+management", "relied more heavily on", "limiting flexibility for".
 
 BANNED CONSULTANT PHRASING: Do not describe a mix, structure, or
 composition as something that "allows," "enables," or "supports" a
@@ -78,6 +79,7 @@ reasoning. Example -- write "The investment portfolio remains
 conservative, liquid, and well diversified." NOT "This diversified
 composition and balanced maturity distribution allow the institution
 to..."
+
 
 NEVER invent a cause for a balance-sheet or funding movement (e.g. never
 write "member deposits declined, allowing assets to expand through
@@ -93,6 +95,27 @@ SENTENCE LENGTH: Prefer one clear sentence per fact over a single sentence
 carrying fact + explanation + implication + comparison. If a sentence has
 more than one subordinate clause explaining "why," split it or cut the
 explanatory clause.
+
+SOURCE-SILENCE (applies to every section, extracted data or image-only):
+Never write about where a number came from. Banned words/phrases in any
+section: "JSON", "payload", "chart", "chart callout", "image", "page",
+"table", "visually", "as shown". If something can't be confirmed, omit it
+or use a DATA CHECK line -- never narrate that a figure is unlabeled,
+approximate, or artifact-sourced inside a body paragraph.
+"""
+NUMERIC_INTEGRITY_RULE = """
+NUMERIC INTEGRITY (strict): Every dollar figure in the extracted data or
+source image is already in whole, correct units -- never re-scale, rebase,
+or shift its decimal point for any reason, including during $K / $million
+formatting. Converting to that display convention changes the LABEL, never
+the digits: $1,123,123 becomes "$1.12 million," not "$11.2 million";
+$123,123 becomes "$123K," not "$12.3 million." Before writing any dollar
+figure, count its digits against the source number -- if your formatted
+figure and the source figure don't represent the identical quantity, the
+formatting is wrong, not the source. Never assume a table is "in
+thousands" or "in millions" unless that exact denomination label is
+printed in the source; if no denomination label is visible, the number is
+already in whole dollars.
 """
 
 EXTRACTED_DATA_RULE = """
@@ -110,6 +133,19 @@ If the JSON includes a "flags" list, check each flag's "resolved" field:
   line for this flag -- it is not a reader-facing issue, it is already fixed.
 - resolved: false (or missing) -- this is a genuine, unresolved discrepancy.
   State exactly one DATA CHECK line above the title in your own words.
+
+SOURCE-SILENCE RULE (strict): Never reference where any figure came from,
+in any form. Banned words and phrases, in any section, regardless of
+framing: "JSON", "payload", "data provided", "extracted data", "chart",
+"chart callout", "chart legend", "image", "page", "table", "visually",
+"as shown", "per the source", "not disclosed in the source materials"
+(the one narrow exception: the specific missing-recoveries sentence a
+module's own instructions explicitly authorize verbatim). A board report
+states facts as facts. If a figure cannot be confirmed, either omit it
+silently or raise it as a DATA CHECK line -- never explain in body text
+that a figure is missing, unlabeled, or came from a chart/image/JSON
+field. Writing about the artifact you read the number from is a failure
+condition exactly like a wrong number would be.
 """
 
 BALANCE_SHEET = """
@@ -414,4 +450,3 @@ Rules:
   "{" and the last character must be "}". No text before or after it, no
   markdown code fences.
 """
-

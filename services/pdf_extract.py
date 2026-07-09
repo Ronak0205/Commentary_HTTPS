@@ -295,16 +295,16 @@ def parse_earning(pdf_path, page_numbers):
                 totals[name] = row["values"][-1]
     return {
         "headline_totals": totals,
-        "note": (
-            "Only headline totals above are extracted from text. "
-            "Non-interest income/expense SUB-COMPONENT breakdowns are "
-            "chart-legend based and must still be read from the attached "
-            "image -- but any sub-component figures you read must sum to "
-            "within ~2% of the corresponding headline total above. If they "
-            "don't, trust the headline total and state only that figure, "
-            "omitting the sub-component breakdown, rather than presenting "
-            "unreconciled numbers."
-        ),
+        # NOTE: this used to carry a free-text "note" field with pipeline
+        # instructions for the model (e.g. "must still be read from the
+        # attached image"). That field was reaching the LLM verbatim via
+        # commentary.py's json.dumps of extracted_data, and the model
+        # echoed its exact phrasing ("chart-legend based", "the attached
+        # image") into board-facing commentary. That instruction now lives
+        # in earning.py's own SYSTEM_PROMPT (reconciliation checks 3-9)
+        # instead of riding along inside the data payload. Do not
+        # reintroduce a free-text instructional field here -- if the model
+        # needs new guidance, add it to the relevant prompts/*.py file.
     }
 
 def parse_loan(pdf_path, page_numbers):
@@ -384,10 +384,12 @@ def parse_key_financial(pdf_path, page_numbers):
                 }
     return {
         "metrics_from_table": metrics,
-        "note": "solvency_ratio, classified_assets_to_net_worth, core_funding_ratio, "
-                "loan_to_share_ratio, loan/share/membership growth are NOT in this "
-                "payload -- they only appear as chart callouts on pages 13-14 and "
-                "must still be read from the attached images.",
+        # NOTE: see comment in parse_earning above -- a free-text "note"
+        # field here previously leaked into commentary output verbatim
+        # ("...per chart callout on page 14"). The guidance that
+        # solvency_ratio / core_funding_ratio / loans-to-shares / growth
+        # metrics are image-only now lives in key_financial.py's own
+        # SYSTEM_PROMPT and USER_PROMPT, not in this data payload.
     }
 
 

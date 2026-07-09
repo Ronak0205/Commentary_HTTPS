@@ -3,7 +3,7 @@ EXTRACTION_CONFIG = {
     "loan": {"extractable": True, "parser": "parse_loan"},
     "loan_continue": {"extractable": True, "parser": "parse_loan_continue"},
     "share": {"extractable": True, "parser": "parse_share"},
-    "investment": {"extractable": True, "parser": "parse_investment"},
+    "investment": {"extractable": True, "parser": "parse_investment","hybrid": True},
     "policy": {"extractable": True, "parser": "parse_policy"},
     "key_financial": {"extractable": True, "parser": "parse_key_financial", "hybrid": True},
     "earning": {"extractable": True, "parser": "parse_earning", "hybrid": True},

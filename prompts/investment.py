@@ -97,10 +97,12 @@ labels. DATA CHECK lines, if any, go above the title.
 """
 
 USER_PROMPT = """
-Use the validated, pre-extracted data provided below -- do not attempt to
-read or derive any figure from an image; none is provided for this
-section. Then write the section following the structure in the system
-prompt.
+Use the validated, pre-extracted data provided below for total investments,
+the holding composition, and their %-of-total breakdown -- these are
+authoritative, do not re-derive them from the image. Use the attached image
+only to identify the maturity distribution across time horizons (short,
+intermediate, long), since that breakdown is chart-based and not present in
+the extracted data.
 
 Run the verification checks silently. Then write the Investments section as
 four connected paragraphs — explaining the composition, the driver of the

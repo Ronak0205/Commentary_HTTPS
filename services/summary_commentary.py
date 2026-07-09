@@ -1,4 +1,3 @@
-
 import json
 import os
 import re
@@ -6,6 +5,53 @@ import importlib
 from datetime import date
 from client.ollama_client import chat
 from prompts.general import JSON_WRAP_RULE
+
+# Modules that require genuine multi-document synthesis (reading all 9
+# section commentaries and producing something new) rather than a
+# templated single-source rewrite. These get think=True: under
+# think=False a 9B model facing this jump in task difficulty has been
+# observed to fall back to copying the largest/first input section
+# verbatim (e.g. CEO Summary duplicating Balance Sheet word-for-word)
+# instead of actually synthesizing.
+_SYNTHESIS_MODULES = {"ceo_report", "action_recommended"}
+
+# How much verbatim n-gram overlap between the generated content and any
+# single input section is tolerated before we treat it as a copy failure
+# rather than a legitimate shared fact (e.g. both saying "total assets
+# grew 7.8%" is fine; both sharing long runs of identical wording is not).
+_NGRAM_SIZE = 8
+_MAX_OVERLAP_RATIO = 0.35
+
+
+def _ngrams(text, n=_NGRAM_SIZE):
+    words = re.findall(r"\w+", text.lower())
+    return {tuple(words[i:i + n]) for i in range(len(words) - n + 1)}
+
+
+def _overlap_ratio(candidate_text, source_text):
+    cand = _ngrams(candidate_text)
+    if not cand:
+        return 0.0
+    src = _ngrams(source_text)
+    if not src:
+        return 0.0
+    shared = cand & src
+    return len(shared) / len(cand)
+
+
+def _copied_from_a_section(parsed, section_payload):
+    """Return the name of the first section this output looks copied
+    from, or None if overlap is within normal bounds for every section."""
+    candidate_text = (parsed or {}).get("content", "")
+    if not candidate_text:
+        return None
+    for section_name, section_data in section_payload.get("sections", {}).items():
+        source_text = (section_data or {}).get("content", "")
+        if not source_text:
+            continue
+        if _overlap_ratio(candidate_text, source_text) > _MAX_OVERLAP_RATIO:
+            return section_name
+    return None
 
 
 def _load_commentary_file(path):
@@ -100,12 +146,18 @@ def _build_user_prompt(prompt_template, payload_obj):
     return prompt_template.format(all_sections_json=payload_text)
 
 
-def _generate_from_prompt(module_name, user_payload, output_json_path):
-    prompt_module = importlib.import_module(f"prompts.{module_name}")
-    system_prompt = getattr(prompt_module, "SYSTEM_PROMPT") + JSON_WRAP_RULE
-    user_prompt_template = getattr(prompt_module, "USER_PROMPT")
-    user_prompt = _build_user_prompt(user_prompt_template, user_payload)
-
+def _call_model(module_name, system_prompt, user_prompt, force_no_copy=False):
+    think = module_name in _SYNTHESIS_MODULES
+    if force_no_copy:
+        user_prompt += (
+            "\n\nIMPORTANT CORRECTION: Your previous attempt at this section "
+            "copied a single input section's wording almost verbatim instead "
+            "of synthesizing across all sections. Re-do this from scratch: "
+            "pull the key figures out, restate them in new sentences, and "
+            "connect them into the structure the system prompt requires. Do "
+            "not reuse more than a short factual phrase from any one input "
+            "section's commentary."
+        )
     response = chat(
         model="qwen3.5:9b",
         messages=[
@@ -115,8 +167,17 @@ def _generate_from_prompt(module_name, user_payload, output_json_path):
         think=False,
         options={"temperature": 0.2, "num_ctx": 16384},
     )
+    return response["message"]["content"]
 
-    raw_output = response["message"]["content"]
+
+def _generate_from_prompt(module_name, user_payload, output_json_path,
+                           section_payload_for_copy_check=None):
+    prompt_module = importlib.import_module(f"prompts.{module_name}")
+    system_prompt = getattr(prompt_module, "SYSTEM_PROMPT") + JSON_WRAP_RULE
+    user_prompt_template = getattr(prompt_module, "USER_PROMPT")
+    user_prompt = _build_user_prompt(user_prompt_template, user_payload)
+
+    raw_output = _call_model(module_name, system_prompt, user_prompt)
     parsed = _extract_json_from_response(raw_output)
     if parsed and (
         not isinstance(parsed, dict)
@@ -124,6 +185,35 @@ def _generate_from_prompt(module_name, user_payload, output_json_path):
         or "content" not in parsed
     ):
         parsed = None
+
+    # Anti-copy guard: only meaningful for the synthesis modules, and only
+    # if the caller handed us the full section payload to check against.
+    if parsed and section_payload_for_copy_check is not None:
+        copied_from = _copied_from_a_section(parsed, section_payload_for_copy_check)
+        if copied_from:
+            first_attempt = parsed
+            raw_output = _call_model(
+                module_name, system_prompt, user_prompt, force_no_copy=True
+            )
+            retried = _extract_json_from_response(raw_output)
+            if retried and isinstance(retried, dict) and "title" in retried and "content" in retried:
+                if not _copied_from_a_section(retried, section_payload_for_copy_check):
+                    parsed = retried
+                else:
+                    # Fail-soft: a false-positive overlap check must never be
+                    # worse than the duplication bug it guards against. Keep
+                    # the original (already-valid JSON) output and just log
+                    # a warning instead of nulling it out and halting the run.
+                    print(
+                        f"[warn][{module_name}] anti-copy guard flagged overlap "
+                        f"with '{copied_from}' on both attempts -- keeping "
+                        f"first attempt's output, not blocking the pipeline."
+                    )
+                    parsed = first_attempt
+            else:
+                # Retry didn't even produce valid JSON -- keep the original
+                # valid output rather than discarding a working result.
+                parsed = first_attempt
 
     if not parsed:
         failed_path = os.path.join(
@@ -154,7 +244,10 @@ def generate_ceo_and_action_commentary(pdf_name, pdf_data_dir, section_output_pa
         pdf_data_dir,
         f"{pdf_name}_ceo_report_commentary_{date.today().strftime('%Y-%m-%d-%H-%M-%S')}.json",
     )
-    ceo_result = _generate_from_prompt("ceo_report", section_payload, ceo_output_path)
+    ceo_result = _generate_from_prompt(
+        "ceo_report", section_payload, ceo_output_path,
+        section_payload_for_copy_check=section_payload,
+    )
     if not ceo_result:
         return None, None
 
