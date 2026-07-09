@@ -1,7 +1,7 @@
 import json
 import importlib
 import re
-from prompts.general import JSON_WRAP_RULE, EXTRACTED_DATA_RULE, DATA_CHECK_CONTAINMENT_RULE
+from prompts.general import BENCHMARK_TONE_RULE, JSON_WRAP_RULE, EXTRACTED_DATA_RULE, DATA_CHECK_CONTAINMENT_RULE
 from client.ollama_client import chat
 
 def generate_commentary(image_paths, output_json_path, module, system_prompt_var,
@@ -10,11 +10,11 @@ def generate_commentary(image_paths, output_json_path, module, system_prompt_var
     system_prompt_text = getattr(prompt_module, system_prompt_var)
     user_prompt_text = getattr(prompt_module, user_prompt_var)
 
-    system_prompt = system_prompt_text + JSON_WRAP_RULE + DATA_CHECK_CONTAINMENT_RULE
+    system_prompt = system_prompt_text + JSON_WRAP_RULE + DATA_CHECK_CONTAINMENT_RULE + BENCHMARK_TONE_RULE
     user_content = user_prompt_text
 
     if extracted_data:
-        system_prompt = system_prompt_text + EXTRACTED_DATA_RULE + JSON_WRAP_RULE + DATA_CHECK_CONTAINMENT_RULE
+        system_prompt = system_prompt_text + EXTRACTED_DATA_RULE + JSON_WRAP_RULE + DATA_CHECK_CONTAINMENT_RULE + BENCHMARK_TONE_RULE
         user_content += (
             "\n\nValidated extracted data for this section (authoritative for "
             "all numbers):\n" + json.dumps(extracted_data, indent=2, ensure_ascii=False)

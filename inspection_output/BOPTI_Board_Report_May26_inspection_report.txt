@@ -105,12 +105,12 @@ parsed data:
     reserves: None
     raw_rows:
       [0]
-        label:  BOPTI FEDERAL CREDIT UNION 5. BALANCE SHEET OVERVIEW COMPONENTS 05-31-2026 % of Total Assets % Change vs R Previous Year End e  p…
+        label: Power BI Desktop
         values:
           [0]
             7.0
       [1]
-        label: ASSETS
+        label:  BOPTI FEDERAL CREDIT UNION 5. BALANCE SHEET OVERVIEW COMPONENTS 05-31-2026 % of Total Assets % Change vs R Previous Year End e  p… ASSETS
         values:
           [0]
             63654928.0
@@ -173,7 +173,7 @@ parsed data:
           [2]
             -5.5
       [8]
-        label: ACCOUNTS PAYABLE, ACCRUED INTEREST ON BORROWINGS, AND OTHER LIABILITIES
+        label: ACCOUNTS PAYABLE, ACCRUED
         values:
           [0]
             820726.0
@@ -182,7 +182,7 @@ parsed data:
           [2]
             72.0
       [9]
-        label: SHARES/DEPOSITS
+        label: INTEREST ON BORROWINGS, AND OTHER LIABILITIES SHARES/DEPOSITS
         values:
           [0]
             47127379.0
@@ -287,7 +287,17 @@ OTHER NON-INTEREST INCO…
 BOARD REPORT As of May 31, 2026
 
 --- PARSED RESULT ---
-SKIPPED -- not configured as extractable in extraction_config.py
+status: OK
+flags: none
+
+parsed data:
+    headline_totals:
+      interest_income: 1178992.0
+      interest_expense: 393101.0
+      non_interest_income_total: 61283.0
+      non_interest_expense_total: 560366.0
+      net_income: 265377.0
+    note: Only headline totals above are extracted from text. Non-interest income/expense SUB-COMPONENT breakdowns are chart-legend based and must still be read from the attached image -- but any sub-component figures you read must sum to within ~2% of the corresponding headline total above. If they don't, trust the headline total and state only that figure, omitting the sub-component breakdown, rather than presenting unreconciled numbers.
 
 
 ##########################################################################################
@@ -417,90 +427,35 @@ status: OK
 flags: none
 
 parsed data:
-    raw_rows:
-      [0]
-        label: COST OF FUNDS / AVERAGE ASSETS
-        values:
-          [0]
-            1.41
-          [1]
-            -12.29
-      [1]
-        label: DELINQUENT LOANS/TOTAL LOANS
-        values:
-          [0]
-            1.73
-          [1]
-            35.0
-      [2]
-        label: NET CHARGE-OFFS /AVE LOANS
-        values:
-          [0]
-            0.5
-          [1]
-            -62.0
-      [3]
-        label: NET INTEREST MARGIN / AVERAGE ASSETS
-        values:
-          [0]
-            2.85
-          [1]
-            28.52
-      [4]
-        label: NET MARGIN / AVERAGE ASSETS
-        values:
-          [0]
-            2.95
-          [1]
-            30.26
-      [5]
-        label: NET OPERATING EXPENSES / AVERAGE ASSETS
-        values:
-          [0]
-            1.91
-          [1]
-            14.9
-      [6]
-        label: NET WORTH / TOTAL ASSETS
-        values:
-          [0]
-            24.67
-          [1]
-            253.0
-      [7]
-        label: OPERATING EXPENSES / AVERAGE ASSETS
-        values:
-          [0]
-            2.11
-          [1]
-            -5.47
-      [8]
-        label: RETURN ON AVERAGE ASSETS PROFITABILITY CURRENT
-        values:
-          [0]
-            0.95
-          [1]
-            35.0
-      [9]
-        label: SOLVENCY EVALUATI…
-        values:
-          [0]
-            24.67
-      [10]
-        label: YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
-        values:
-          [0]
-            1.33
-      [11]
-        label: LOAN TO SHARE RAT… YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
-        values:
-          [0]
-            40.0
-      [12]
-        label: CORE FUNDING RATIO LOAN TO SHARE RATIO
-        values:
-          [0]
-            42.25
+    metrics_from_table:
+      cost_of_funds:
+        value: 1.41
+        bps_change: -12.29
+      delinquency_ratio:
+        value: 1.73
+        bps_change: 35.0
+      net_charge_off_ratio:
+        value: 0.5
+        bps_change: -62.0
+      nim:
+        value: 2.85
+        bps_change: 28.52
+      net_margin:
+        value: 2.95
+        bps_change: 30.26
+      net_operating_expense_ratio:
+        value: 1.91
+        bps_change: 14.9
+      operating_expense_ratio:
+        value: 1.91
+        bps_change: 14.9
+      net_worth_ratio:
+        value: 24.67
+        bps_change: 253.0
+      roaa:
+        value: 0.95
+        bps_change: 35.0
+    note: solvency_ratio, classified_assets_to_net_worth, core_funding_ratio, loan_to_share_ratio, loan/share/membership growth are NOT in this payload -- they only appear as chart callouts on pages 13-14 and must still be read from the attached images.
 
 
 ##########################################################################################
@@ -599,142 +554,63 @@ status: OK
 flags: none
 
 parsed data:
-    raw_rows:
+    portfolio_segments:
       [0]
-        label: BOPTI FEDERAL CREDIT UNION 8. LOANS AND LEASES COMPONENTS 05-31-2026 Loan Weight % % Change vs Previous Year End
-        values:
-          [0]
-            16.0
+        label: used_vehicle
+        amount: 6746204.0
+        pct: 33.9
+        pct_change: -10.2
       [1]
-        label: ALL OTHER SECURED NON-REAL Repo ESTATE LOANS/LINES OF CREDIT rt
-        values:
-          [0]
-            1369804.0
-          [1]
-            6.9
-          [2]
-            -13.0
+        label: new_vehicle
+        amount: 5613213.0
+        pct: 28.2
+        pct_change: -15.0
       [2]
-        label: Filt… ALL OTHER UNSECURED LOANS/LINES OF CREDIT
-        values:
-          [0]
-            5049676.0
-          [1]
-            25.4
-          [2]
-            -10.4
+        label: unsecured
+        amount: 5049676.0
+        pct: 25.4
+        pct_change: -10.4
       [3]
-        label: LOANS/LINES OF CREDIT SECURED BY A FIRST LIEN
-        values:
-          [0]
-            1133512.0
-          [1]
-            5.7
-          [2]
-            -2.2
+        label: other_secured_non_re
+        amount: 1369804.0
+        pct: 6.9
+        pct_change: -13.0
       [4]
-        label: NEW VEHICLE LOANS
-        values:
-          [0]
-            5613213.0
-          [1]
-            28.2
-          [2]
-            -15.0
-      [5]
-        label: USED VEHICLE LOANS
-        values:
-          [0]
-            6746204.0
-          [1]
-            33.9
-          [2]
-            -10.2
-      [6]
-        label: Total LOANS AND LEASES
-        values:
-          [0]
-            19912409.0
-          [1]
-            100.0
-          [2]
-            -11.5
-      [7]
-        label: COMPONENTS
-        values:
-          [0]
-            40000000.0
-      [8]
-        label: ALL OTHER SECURED NON-REA… ALL OTHER UNSECURED LOANS…
-        values:
-          [0]
-            30000000.0
-      [9]
-        label: LOANS GRANTED YEAR-TO-DATE LOANS/LINES OF CREDIT SECUR…
-        values:
-          [0]
-            20000000.0
-      [10]
-        label: NEW VEHICLE LOANS USED VEHICLE LOANS
-        values:
-          [0]
-            10000000.0
-      [11]
-        label: YE'22 YE'23 YE'24 YE'25 Q1'2026 Q2'2026
-        values:
-          [0]
-            0.0
-      [12]
-        label: COMPONENTS USED VEHICLE LOANS NEW VEHICLE LOANS
-        values:
-          [0]
-            33.88
-      [13]
-        label: ALL OTHER UNSECURED LOANS/… ALL OTHER SECURED NON-REAL … LOANS/LINES OF CREDIT SECURE…
-        values:
-          [0]
-            25.36
-      [14]
-        label: BOPTI FEDERAL CREDIT UNION Rep ort Filt… 9. DELINQUENCIES COMPONENETS 05-31-2026 % Change vs Previous Year End 
-        values:
-          [0]
-            17.0
-      [15]
-        label: USED VEHICLE LOANS
-        values:
-          [0]
-            192016.0
-          [1]
-            27.1
-      [16]
-        label: NEW VEHICLE LOANS
-        values:
-          [0]
-            62053.0
-          [1]
-            -3.9
-      [17]
-        label: ALL OTHER SECURED NON-REAL ESTATE LOANS/LINES OF CREDIT
-        values:
-          [0]
-            68094.0
-          [1]
-            -6.9
-      [18]
-        label: ALL OTHER UNSECURED LOANS/LINES OF CREDIT
-        values:
-          [0]
-            256431.0
-          [1]
-            -9.2
-      [19]
-        label: Total
-        values:
-          [0]
-            578594.0
-          [1]
-            1.3
-    total_delinquent_loans: None
+        label: secured_first_lien
+        amount: 1133512.0
+        pct: 5.7
+        pct_change: -2.2
+    top_two_segments:
+      [0]
+        used_vehicle
+      [1]
+        new_vehicle
+    top_two_combined_pct: 62.1
+    total_loans: 19912409.0
+    total_loans_pct_change: -11.5
+    delinquency_segments:
+      [0]
+        label: used_vehicle
+        amount: 192016.0
+        pct: None
+        pct_change: 27.1
+      [1]
+        label: new_vehicle
+        amount: 62053.0
+        pct: None
+        pct_change: -3.9
+      [2]
+        label: other_secured_non_re
+        amount: 68094.0
+        pct: None
+        pct_change: -6.9
+      [3]
+        label: unsecured
+        amount: 256431.0
+        pct: None
+        pct_change: -9.2
+    total_delinquent_loans: 578594.0
+    total_delinquent_loans_pct_change: 1.3
 
 
 ##########################################################################################
@@ -849,95 +725,40 @@ status: OK
 flags: none
 
 parsed data:
-    raw_rows:
+    charge_off_segments:
       [0]
-        label: BOPTI FEDERAL CREDIT UNION Repo rt Filt… 10. CHARGE-OFFS AND RECOVERIES COMPONENTS 03-31-2026 % Change vs Previous Year End 
-        values:
-          [0]
-            18.0
+        label: unsecured
+        amount: 64797.0
+        pct: None
+        pct_change: -71.8
       [1]
-        label: ALL OTHER UNSECURED LOANS/LINES OF CREDIT
-        values:
-          [0]
-            64797.0
-          [1]
-            -71.8
+        label: used_vehicle
+        amount: 30.0
+        pct: None
+        pct_change: -83.2
+    total_charge_offs: 64827.0
+    total_charge_offs_pct_change: -73.5
+    recovery_segments:
+      [0]
+        label: unsecured
+        amount: 12328.0
+        pct: None
+        pct_change: -71.8
+      [1]
+        label: new_vehicle
+        amount: 359.0
+        pct: None
+        pct_change: 0.0
       [2]
-        label: USED VEHICLE LOANS
-        values:
-          [0]
-            30.0
-          [1]
-            -83.2
-      [3]
-        label: Total
-        values:
-          [0]
-            64827.0
-          [1]
-            -73.5
-      [4]
-        label: BOPTI FEDERAL CREDIT UNION Rep ort COMPONENTS 03-31-2026 % Change vs Previous Filt… Year End
-        values:
-          [0]
-            19.0
-      [5]
-        label: ALL OTHER UNSECURED LOANS/LINES OF CREDIT
-        values:
-          [0]
-            12328.0
-          [1]
-            -71.8
-      [6]
-        label: NEW VEHICLE LOANS
-        values:
-          [0]
-            359.0
-          [1]
-            0.0
-      [7]
-        label: USED VEHICLE LOANS
-        values:
-          [0]
-            8185.0
-          [1]
-            -83.2
-      [8]
-        label: Total
-        values:
-          [0]
-            20872.0
-          [1]
-            -73.4
-      [9]
-        label: R e BOPTI FEDERAL CREDIT UNION p… Repo rt 11. CECL Filt… CECL Reserve 05-31-2026 % Change vs Previous Year End
-        values:
-          [0]
-            20.0
-      [10]
-        label: LESS: ALLOWANCE FOR CREDIT LOSSES ON LOANS & LEASES - ENTER AN AMOUNT IF YOU HAVE ADOPTED ASC TOPIC 326: FINANCIAL INSTRUMENTS - CREDIT LOSSES CECL Reserve
-        values:
-          [0]
-            -122075.0
-          [1]
-            -46.71
-      [11]
-        label: Repo rt Filt…
-        values:
-          [0]
-            -300000.0
-      [12]
-        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 CECL Coverage to Net Loss
-        values:
-          [0]
-            0.0
-      [13]
-        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 CECL Reserve YTD Net Charge Offs Projected Year End Net Charge Off Coverage Ratio (YEP)
-        values:
-          [0]
-            0.0
-          [1]
-            0.0
+        label: used_vehicle
+        amount: 8185.0
+        pct: None
+        pct_change: -83.2
+    total_recoveries: 20872.0
+    total_recoveries_pct_change: -73.4
+    cecl_allowance: 122075.0
+    cecl_allowance_pct_change: -46.71
+    schedule_as_of_date: 03-31-2026
 
 
 ##########################################################################################
@@ -995,101 +816,34 @@ status: OK
 flags: none
 
 parsed data:
-    raw_rows:
+    share_segments:
       [0]
-        label: ort Fil… BOPTI FEDERAL CREDIT UNION  12. SHARES Rep ort Fil… Component 05-31-2026 % of Shares % Change vs Previous Year End 
-        values:
-          [0]
-            23.0
+        label: ira_keogh
+        amount: 7123495.0
+        pct: 14.8
+        pct_change: -8.4
       [1]
-        label: IRA/KEOGH Accounts
-        values:
-          [0]
-            7123495.0
-          [1]
-            14.8
-          [2]
-            -8.4
+        label: regular_shares
+        amount: 27627411.0
+        pct: 57.2
+        pct_change: -3.5
       [2]
-        label: Regular Shares
-        values:
-          [0]
-            27627411.0
-          [1]
-            57.2
-          [2]
-            -3.5
+        label: share_certificates
+        amount: 11682713.0
+        pct: 24.2
+        pct_change: -3.4
       [3]
-        label: Share Certificates
-        values:
-          [0]
-            11682713.0
-          [1]
-            24.2
-          [2]
-            -3.4
+        label: share_drafts
+        amount: 1663979.0
+        pct: 3.4
+        pct_change: -1.0
       [4]
-        label: Share Drafts
-        values:
-          [0]
-            1663979.0
-          [1]
-            3.4
-          [2]
-            -1.0
-      [5]
-        label: All Other Shares
-        values:
-          [0]
-            193560.0
-          [1]
-            0.4
-          [2]
-            66.5
-      [6]
-        label: Total Shares/Deposits Component Distribution
-        values:
-          [0]
-            48291158.0
-          [1]
-            100.0
-          [2]
-            -4.0
-      [7]
-        label: COMPONENTS All Other Shares
-        values:
-          [0]
-            60000000.0
-      [8]
-        label: IRA/KEOGH Accounts Money Market Shares Nonmember Deposits
-        values:
-          [0]
-            40000000.0
-      [9]
-        label: Regular Shares Share Certificates Share Drafts
-        values:
-          [0]
-            20000000.0
-      [10]
-        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 Shares/Deposits Component Distribution
-        values:
-          [0]
-            0.0
-      [11]
-        label: COMPONENTS Regular Shares Share Certificates IRA/KEOGH Accounts Share Drafts
-        values:
-          [0]
-            14.8
-      [12]
-        label: All Other Shares
-        values:
-          [0]
-            57.2
-      [13]
-        label: Money Market Shares Nonmember Deposits
-        values:
-          [0]
-            24.2
+        label: all_other_shares
+        amount: 193560.0
+        pct: 0.4
+        pct_change: 66.5
+    total_shares: 48291158.0
+    total_shares_pct_change: -4.0
 
 
 ##########################################################################################
@@ -1134,53 +888,19 @@ status: OK
 flags: none
 
 parsed data:
-    raw_rows:
+    investment_segments:
       [0]
-        label: ort Fil… BOPTI FEDERAL CREDIT UNION  13. INVESTMENT COMPONENTS 05-31-2026 % Change vs Previous Year End Rep
-        values:
-          [0]
-            25.0
+        label: htm_debt_securities
+        amount: 39299007.0
+        pct_change: 13.3
+        pct_of_total: 99.7
       [1]
-        label: Held-to-Maturity Debt Securities ort
-        values:
-          [0]
-            39299007.0
-          [1]
-            13.3
-      [2]
-        label: Fil… Other Investments
-        values:
-          [0]
-            109776.0
-          [1]
-            0.0
-      [3]
-        label: Total Investment Maturity Distribution
-        values:
-          [0]
-            39408783.0
-          [1]
-            13.2
-      [4]
-        label: Maturity <= 1 Year > 10 Years > 1-3 Years
-        values:
-          [0]
-            100000000.0
-      [5]
-        label: > 3-5 Years > 5-10 Years
-        values:
-          [0]
-            50000000.0
-      [6]
-        label: YE'22 YE'23 YE'24 YE'25 Q2'2026 Investment Composition
-        values:
-          [0]
-            0.0
-      [7]
-        label: COMPONENTS Held-to-Maturity Debt Securi… Other Investments
-        values:
-          [0]
-            109776.0
+        label: other_investments
+        amount: 109776.0
+        pct_change: 0.0
+        pct_of_total: 0.3
+    total_investments: 39408783.0
+    total_investments_pct_change: 13.2
 
 
 ##########################################################################################
@@ -1282,9 +1002,128 @@ status: OK
 flags: none
 
 parsed data:
-    raw_rows:
+    metrics:
       [0]
-        label: ort Filt… BOPTI FEDERAL CREDIT UNION  16. POLICY/LIMITS COMPLIANCE CATEGORY METRICS 05-31-2026 BEST PRACTICE COMPLIANCE  PROFITABILITY NET MARGIN / AVERAGE 2.95% ≥ 1.00% Within Target ASSETS PROFITABILITY NET OPERATING EXPENSES 1.91% ≤ 3.00% Within Limit / AVERAGE ASSETS PROFITABILITY RETURN ON AVERAGE 0.95% ≥ 0.80% Within Target ASSETS LIQUIDITY & MIX CASH AND SHORT-TERM 5.66% 8% – 15% Below Range INVESTMENTS / TOTAL ASSETS LIQUIDITY & MIX REGULAR SHARES / TOTAL 57.70% ≥ 70% Below Target SHARES & BORROWINGS LIQUIDITY & MIX TOTAL LOANS / TOTAL 31.28% 65% – 80% Below Range ASSETS LIQUIDITY & MIX TOTAL LOANS / TOTAL 42.25% 70% – 90% Below Range SHARES INTEREST & FUNDING COST OF FUNDS / 1.41% ≤ 1.50% Within Limit AVERAGE ASSETS INTEREST & FUNDING NET INTEREST MARGIN / 2.85% ≥ 3.00% Below Target AVERAGE ASSETS INTEREST & FUNDING YIELD ON AVERAGE LOANS 8.25% ≥ 4.00% Within Target GROWTH & MARKET LOAN GROWTH -27.52% 5% – 10% Below Range GROWTH & MARKET MARKET (SHARE) GROWTH -11.03% ≥ Market Avg GROWTH & MARKET MEMBERSHIP GROWTH -1.95% 3% – 7% Below Range EFFICIENCY OPERATING EXPENSES / 2.11% ≤ 3.50% Within Limit AVERAGE ASSETS CAPITAL & SOLVENCY NET WORTH / TOTAL 24.67% ≥ 10% Within Target ASSETS CAPITAL & SOLVENCY NET WORTH GROWTH 4.12% ≥ 5% YoY Below Target CAPITAL & SOLVENCY SOLVENCY EVALUATION 133.33% ≥ 7% Within Target ASSET QUALITY CLASSIFIED ASSETS/NET -0.78% < 40% Within Limit WORTH ASSET QUALITY DELINQUENT 1.73% < 1.5% Above Limit LOANS/TOTAL LOANS ASSET QUALITY NET CHARGE-OFFS /AVE 0.50% < 0.75% Within Limit LOANS
-        values:
-          [0]
-            29.0
+        category: PROFITABILITY
+        metric: N ET MARGIN / AVERAGE
+        value: 2.95
+        benchmark: ≥ 1.00%
+        compliance: Within Target
+      [1]
+        category: PROFITABILITY
+        metric: A SSETS N ET OPERATING EXPENSES
+        value: 1.91
+        benchmark: ≤ 3.00%
+        compliance: Within Limit
+      [2]
+        category: PROFITABILITY
+        metric: / AVERAGE ASSETS R ETURN ON AVERAGE
+        value: 0.95
+        benchmark: ≥ 0.80%
+        compliance: Within Target
+      [3]
+        category: LIQUIDITY & MIX
+        metric: A SSETS C
+I ASH AND SHORT-TERM
+NVESTMENTS / TOTAL
+        value: 5.66
+        benchmark: 8% – 15%
+        compliance: Below Range
+      [4]
+        category: LIQUIDITY & MIX
+        metric: A SSETS R EGULAR SHARES / TOTAL
+        value: 57.7
+        benchmark: ≥ 70%
+        compliance: Below Target
+      [5]
+        category: LIQUIDITY & MIX
+        metric: S HARES & BORROWINGS T OTAL LOANS / TOTAL
+        value: 31.28
+        benchmark: 65% – 80%
+        compliance: Below Range
+      [6]
+        category: LIQUIDITY & MIX
+        metric: A SSETS T OTAL LOANS / TOTAL
+        value: 42.25
+        benchmark: 70% – 90%
+        compliance: Below Range
+      [7]
+        category: INTEREST & FUNDING
+        metric: S HARES C OST OF FUNDS /
+        value: 1.41
+        benchmark: ≤ 1.50%
+        compliance: Within Limit
+      [8]
+        category: INTEREST & FUNDING
+        metric: A VERAGE ASSETS N ET INTEREST MARGIN /
+        value: 2.85
+        benchmark: ≥ 3.00%
+        compliance: Below Target
+      [9]
+        category: INTEREST & FUNDING
+        metric: A VERAGE ASSETS Y IELD ON AVERAGE LOANS
+        value: 8.25
+        benchmark: ≥ 4.00%
+        compliance: Within Target
+      [10]
+        category: GROWTH & MARKET
+        metric: L OAN GROWTH
+        value: -27.52
+        benchmark: 5% – 10%
+        compliance: Below Range
+      [11]
+        category: GROWTH & MARKET
+        metric: MARKET (SHARE) GROWTH
+        value: -11.03
+        benchmark: ≥ Market Avg
+        compliance: None
+      [12]
+        category: GROWTH & MARKET
+        metric: MEMBERSHIP GROWTH
+        value: -1.95
+        benchmark: 3% – 7%
+        compliance: Below Range
+      [13]
+        category: EFFICIENCY
+        metric: O PERATING EXPENSES /
+        value: 2.11
+        benchmark: ≤ 3.50%
+        compliance: Within Limit
+      [14]
+        category: CAPITAL & SOLVENCY
+        metric: A VERAGE ASSETS N ET WORTH / TOTAL
+        value: 24.67
+        benchmark: ≥ 10%
+        compliance: Within Target
+      [15]
+        category: CAPITAL & SOLVENCY
+        metric: A SSETS N ET WORTH GROWTH
+        value: 4.12
+        benchmark: ≥ 5% YoY
+        compliance: Below Target
+      [16]
+        category: CAPITAL & SOLVENCY
+        metric: S OLVENCY EVALUATION
+        value: 133.33
+        benchmark: ≥ 7%
+        compliance: Within Target
+      [17]
+        category: ASSET QUALITY
+        metric: C LASSIFIED ASSETS/NET
+        value: -0.78
+        benchmark: < 40%
+        compliance: Within Limit
+      [18]
+        category: ASSET QUALITY
+        metric: WORTH D ELINQUENT
+        value: 1.73
+        benchmark: < 1.5%
+        compliance: Above Limit
+      [19]
+        category: ASSET QUALITY
+        metric: L OANS/TOTAL LOANS N
+L ET CHARGE-OFFS /AVE
+OANS
+        value: 0.5
+        benchmark: < 0.75%
+        compliance: Within Limit

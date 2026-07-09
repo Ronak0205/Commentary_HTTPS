@@ -25,6 +25,12 @@ Per-metric compliance (mechanical, three-step — do not skip steps):
    A metric above a minimum floor is COMPLIANT. A metric below a maximum
    ceiling is COMPLIANT. Only a figure on the unfavorable side of its
    limit is a breach.
+Example of correct phrasing for a floor metric: net margin at 2.95% against
+a floor of "≥ 1.00%" is compliant -- write "net margin stood at 2.95%,
+above the 1.00% floor." Never write "below target guideline" for a metric
+that is compliant; that phrasing is reserved only for metrics that
+genuinely breach a floor.
+
 Do not write "misses," "falls short of," or "exceeds" (as a breach) for
 any metric without completing this sequence. If the sentence you're about
 to write and the three-step result disagree, the sentence is wrong —

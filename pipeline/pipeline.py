@@ -8,7 +8,7 @@ from services.commentary import generate_commentary
 from services.summary_commentary import generate_ceo_and_action_commentary
 
 from config.extraction_config import EXTRACTION_CONFIG
-from services.pdf_extract import extract_section_data, extract_institution_name, extract_report_date
+from services.pdf_extract import PARSERS, extract_section_data, extract_institution_name, extract_report_date
 from pipeline.validate import validate_section, validate_cross_source
 
 
@@ -93,22 +93,17 @@ def process_pdf(pdf_path, pdf_name, extracted_img_dir=None, data_dir=None):
         page_numbers = [p - 1 for p in pages]
         cfg = EXTRACTION_CONFIG.get(name, {})
 
-        # Only sections that are NOT fully covered by text extraction (i.e.
-        # not extractable at all, or explicitly marked "hybrid" because
-        # part of their content is chart-only, e.g. key_financial's page
-        # 13-14 stat callouts) still need the rendered page image sent to
-        # the model. Fully-covered sections skip image generation entirely
-        # -- this also avoids the "image + data disagree" confusion risk,
-        # since the model has no picture to second-guess the validated
-        # JSON against.
+        extracted_payload = extracted_payloads.get(name)
+
         needs_image = (not cfg.get("extractable")) or cfg.get("hybrid", False)
+        
+        if cfg.get("extractable") and not extracted_payload:
+          needs_image = True
 
         img_paths = (
             extract_page_images(pdf_path, extracted_img_dir, f"{pdf_name}_{name}", page_numbers)
             if needs_image else []
         )
-
-        extracted_payload = extracted_payloads.get(name)
 
         json_path = os.path.join(
             pdf_data_dir,
@@ -145,7 +140,6 @@ def process_pdf(pdf_path, pdf_name, extracted_img_dir=None, data_dir=None):
         "action_output": action_output,
         "final_output_path": final_output_path,
     }
-
 
 def _merge_outputs(pdf_name, pdf_data_dir, section_output_paths, ceo_output, action_output):
     merged = {

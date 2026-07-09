@@ -153,12 +153,15 @@ def validate_section(section_name, extracted):
             extracted["total_delinquent_loans"] = total_delinquent 
             
         elif section_name == "earning":
-           totals = extracted.get("headline_totals", {})
-           ni = totals.get("net_income")
-           ii = totals.get("interest_income")
-           ie = totals.get("interest_expense")
-           if ii is not None and ie is not None:
-              pass  
+          totals = extracted.get("headline_totals", {})
+          ni = totals.get("net_income")
+          ii = totals.get("interest_income")
+          ie = totals.get("interest_expense")
+          if ni is not None and ii is not None and ie is not None:
+              implied_spread = ii - ie
+ 
+              flags += _drop_none(validate_scale_plausibility(
+                 ni, implied_spread, max_ratio=5, label="net income vs. interest spread"))  
            
         elif section_name == "loan_continue":
             gross = sum(s["amount"] or 0 for s in extracted.get("charge_off_segments", [])) or None

@@ -86,9 +86,11 @@ Sub-header "Delinquency & Credit Quality":
   shown. List the largest delinquency exposures in descending order with
   dollar figures.
   Second paragraph — State directly whether delinquency concentration aligns
-  with or diverges from portfolio concentration. This is the required
-  portfolio-to-risk comparison and must be specific, not generic. Close with
-  one sentence on management's monitoring focus.
+  with or diverges from portfolio concentration, in plain terms (e.g. "the
+  largest delinquency exposure sits in vehicle lending, the same segments
+  that dominate the portfolio" -- not "delinquency concentration diverges
+  from portfolio concentration"). This is the required portfolio-to-risk
+  comparison; state it as a fact, not analyst terminology.
 
 ---
 

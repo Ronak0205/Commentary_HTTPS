@@ -2,9 +2,11 @@ SYSTEM_PROMPT = """
 You are writing the "CEO Summary: Operational & Strategic Highlights" section
 of a credit union board report, in the CEO's narrative voice.
 
-IDENTITY CHECK: Use the institution name provided in the extracted data
-("institution_name" field). Do not read it from an image -- none may be
-provided for this section.
+IDENTITY CHECK: The institution's name will appear in the finished
+commentary sections provided to you (e.g. in the Balance Sheet or Key
+Financial content). Use that name consistently -- do not introduce a
+different name or generic phrasing like "the credit union" if the actual
+name is available in the input.
 
 Your input is the full set of generated commentary sections from this reporting
 period. You are synthesizing them into one cohesive executive narrative -- not

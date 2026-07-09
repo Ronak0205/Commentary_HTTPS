@@ -55,6 +55,45 @@ against, or what you think the "real" figure should be -- no phrases like
 a DATA CHECK." If a figure is unreconcilable, the reader sees either a
 clean flag above the title or nothing at all -- never your working-out.
 """
+BENCHMARK_TONE_RULE = """
+COMMENTARY, NOT ANALYSIS: Write management commentary, not analyst
+commentary. Every paragraph follows exactly this pattern and no more:
+  Fact -> Business implication directly supported by the data -> Management
+  observation (if warranted).
+Never add a fourth step. Never explain why a number moved, what strategy it
+reflects, or what it "allows" the institution to do, unless that causal
+claim is explicitly printed in the source.
+
+BANNED HEDGE/INFERENCE WORDS (do not use, in any section, under any
+framing): "suggests", "indicates", "likely", "may reflect", "appears to",
+"could indicate", "points toward", "probably", "implies", "allowing...
+rather than", "rather than forced sales", "monitoring should focus on
+whether".
+
+BANNED CONSULTANT PHRASING: Do not describe a mix, structure, or
+composition as something that "allows," "enables," or "supports" a
+capability unless that exact capability is stated in the source. Prefer
+short, flat, declarative sentences over compound sentences with embedded
+reasoning. Example -- write "The investment portfolio remains
+conservative, liquid, and well diversified." NOT "This diversified
+composition and balanced maturity distribution allow the institution
+to..."
+
+NEVER invent a cause for a balance-sheet or funding movement (e.g. never
+write "member deposits declined, allowing assets to expand through
+investment purchases" -- that asserts a funding decision that a balance
+sheet cannot prove). State the two facts separately if both are true;
+never connect them with an invented mechanism.
+
+NEVER invent an organizational, staffing, or historical event not present
+in the source (e.g. "restructuring efforts completed several years ago").
+If a trend has no stated cause, state the trend and stop.
+
+SENTENCE LENGTH: Prefer one clear sentence per fact over a single sentence
+carrying fact + explanation + implication + comparison. If a sentence has
+more than one subordinate clause explaining "why," split it or cut the
+explanatory clause.
+"""
 
 EXTRACTED_DATA_RULE = """
 DATA SOURCE HIERARCHY:

@@ -1,9 +1,8 @@
-
 import pdfplumber
 import re
 
 _DATE_RE = re.compile(r"\b(\d{2}-\d{2}-\d{4})\b")
-_TOTAL_RE = re.compile(r"^\s*total\b", re.IGNORECASE)
+_TOTAL_RE = re.compile(r"^\s*total\b|\btotal\s*$", re.IGNORECASE)
 _PCT_CELL_RE = re.compile(r"^-?\d+\.?\d*%$")
 _INSTITUTION_RE = re.compile(r"([A-Z][A-Z .&]+(?:CREDIT UNION|FEDERAL CREDIT UNION))")
 
@@ -20,24 +19,39 @@ def _segments_from_rows(rows, aliases):
         label_upper = row["label"].upper()
         values = row["values"]
 
-        if _TOTAL_RE.match(row["label"]):
+        if _TOTAL_RE.search(row["label"]):
             total = {
                 "amount": values[0] if len(values) > 0 else None,
                 "pct_change": values[-1] if len(values) > 1 else None,
             }
-            continue
+            # The Total row marks the end of this table -- stop here, before
+            # the chart/legend section below it. Scanning past Total is what
+            # previously let chart-legend text get re-matched as duplicate
+            # segments once the "break on any unmatched row" guard below was
+            # relaxed.
+            break
 
         matched = next((name for name, alias in aliases.items() if alias in label_upper), None)
         if matched is None:
-            if segments or total is not None:
-                break  # we've moved past the real table into chart noise
-            continue  # header/title rows before the table starts
+            # Skip a corrupted/unmatched row (e.g. page-furniture text like a
+            # floating "Report Filter" widget bleeding into a wrapped label)
+            # instead of abandoning the rest of the table. Real tables in this
+            # report always terminate at a "Total" row (handled above), so it
+            # is safe to keep scanning past a single bad label rather than
+            # discarding every segment that comes after it.
+            continue
 
         segments.append({
             "label": matched,
             "amount": values[0] if len(values) > 0 else None,
-            "pct": values[1] if len(values) > 1 else None,
-            "pct_change": values[-1] if len(values) > 2 else (values[1] if len(values) == 2 else None),
+            # Only treat the middle value as a genuine "% of total" figure
+            # when the row actually has three columns (amount, % of total,
+            # % change). Tables with only two columns (amount, % change --
+            # e.g. Delinquency, Charge-Offs, Recoveries) have no printed
+            # %-of-total column at all; treating values[1] as one there
+            # silently duplicates the % change into "pct" and mislabels it.
+            "pct": values[1] if len(values) > 2 else None,
+            "pct_change": values[-1] if len(values) > 1 else None,
         })
 
     return segments, total
@@ -55,7 +69,9 @@ LOAN_ALIASES = {
     "new_vehicle": "NEW VEHICLE LOANS",
     "unsecured": "ALL OTHER UNSECURED LOANS",
     "other_secured_non_re": "ALL OTHER SECURED NON-REAL",
-    "secured_first_lien": "SECURED BY A FIRST LIEN",
+    "secured_first_lien": "SECURED BY",  # shortened: trailing-wrap corruption
+    # sometimes strips "A FIRST LIEN" off this row's label onto the next row;
+    # "SECURED BY" alone is unambiguous against the other loan aliases.
 }
 
 SHARE_ALIASES = {
@@ -142,6 +158,7 @@ def _extract_rows_from_page_text(text):
 
     rows = []
     pending = None
+    label_buffer = []
     started = False
 
     for raw_line in text.splitlines():
@@ -153,24 +170,20 @@ def _extract_rows_from_page_text(text):
         if started and any(marker in low for marker in STOP_MARKERS):
             break
 
-        label, value_tokens = _split_label_and_values(line)
+        label_part, value_tokens = _split_label_and_values(line)
 
         if value_tokens:
-            # finalize whatever was pending, start a new row
-            if pending and pending["label"]:
+            full_label = " ".join(label_buffer + ([label_part] if label_part else [])).strip()
+            if pending is not None:
                 rows.append(pending)
-            pending = {
-                "label": label,
-                "values": [_clean_number(v) for v in value_tokens],
-            }
+            pending = {"label": full_label, "values": [_clean_number(v) for v in value_tokens]}
+            label_buffer = []
             started = True
         else:
-            if pending is not None:
-                pending["label"] = f"{pending['label']} {line}".strip()
+             label_buffer.append(line)
 
-    if pending and pending["label"]:
+    if pending is not None:
         rows.append(pending)
-
     return rows
 
 
@@ -187,8 +200,17 @@ def _extract_rows(pdf_path, page_numbers):
 def _find_row(rows, exact_label=None, contains=None):
     for row in rows:
         norm = row["label"].strip().upper()
-        if exact_label and norm == exact_label.upper():
-            return row
+        if exact_label:
+            el = exact_label.upper()
+            # Exact match first (unchanged, fastest path for clean labels).
+            # Fall back to a suffix match for labels corrupted by merged
+            # page-header text or a preceding row's wrapped continuation
+            # text landing in front of this row's real label -- the true
+            # field name is still the last token group before the row's
+            # numbers, so a " " + label suffix match recovers it safely
+            # without opening up false positives on unrelated rows.
+            if norm == el or norm.endswith(" " + el):
+                return row
         if contains and contains.upper() in norm:
             return row
     return None
@@ -270,7 +292,7 @@ def parse_earning(pdf_path, page_numbers):
         label_upper = row["label"].upper()
         for name, alias in EARNING_TOTAL_ALIASES.items():
             if alias in label_upper and name not in totals and row["values"]:
-                totals[name] = row["values"][0]
+                totals[name] = row["values"][-1]
     return {
         "headline_totals": totals,
         "note": (
@@ -369,21 +391,16 @@ def parse_key_financial(pdf_path, page_numbers):
     }
 
 
-def parse_policy(pdf_path, page_numbers):
-    rows = _extract_rows(pdf_path, page_numbers)
-    return {"raw_rows": rows} if rows else None
-
-
-def parse_investment(pdf_path, page_numbers):
-    rows = _extract_rows(pdf_path, page_numbers)
-    return {"raw_rows": rows} if rows else None
-
 def parse_investment(pdf_path, page_numbers):
     rows = _extract_rows(pdf_path, [page_numbers[0]])
     segments, total = _segments_from_rows(rows, INVESTMENT_ALIASES)
+    total_amt = total["amount"] if total else None
+    for s in segments:
+        s["pct_of_total"] = round(100 * s["amount"] / total_amt, 1) if (s["amount"] and total_amt) else None
+        s.pop("pct", None)  # this table has no printed %-of-total column; never fabricate one
     return {
         "investment_segments": segments,
-        "total_investments": total["amount"] if total else None,
+        "total_investments": total_amt,
         "total_investments_pct_change": total["pct_change"] if total else None,
     }
 
@@ -395,6 +412,7 @@ PARSERS = {
     "parse_key_financial": parse_key_financial,
     "parse_policy": parse_policy,
     "parse_investment": parse_investment,
+    "parse_earning": parse_earning,
 }
 
 

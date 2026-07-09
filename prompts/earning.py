@@ -148,14 +148,22 @@ instructions. DATA CHECK lines, if needed, go above the title.
 """
 
 USER_PROMPT = """
-Identify the institution name. Locate Net Income,
-Interest Income, Interest Expense, Non-Interest Income with its sub-line
-breakdown, and Non-Interest Expense with its sub-line breakdown.
+Use the validated, pre-extracted "headline_totals" from the data provided
+below for Net Income, Interest Income, Interest Expense, Non-Interest
+Income total, and Non-Interest Expense total -- these are authoritative,
+do not re-derive them from the image.
 
-Compute the interest spread silently. Rank sub-components by size. Then
-write the Earnings section as four connected paragraphs — explaining what
-drove net income, characterizing non-interest income's role, identifying the
-dominant expense, and closing with a genuine synthesis of how income and
-expense together produced this period's result and what sustaining it
-depends on.
+Use the attached image only to identify the Non-Interest Income and
+Non-Interest Expense SUB-COMPONENT breakdowns (the individual line items
+within each total), since those are chart-legend based and not in the
+extracted data. Rank sub-components by size. Before naming any
+sub-component figure, sum the sub-components you're about to state and
+confirm the sum reconciles with the matching headline total within ~2% --
+if it doesn't, state only the headline total and omit the breakdown.
+
+Then write the Earnings section as four connected paragraphs — explaining
+what drove net income, characterizing non-interest income's role,
+identifying the dominant expense, and closing with a genuine synthesis of
+how income and expense together produced this period's result and what
+sustaining it depends on.
 """

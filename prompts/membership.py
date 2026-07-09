@@ -6,10 +6,8 @@ institution's deposit base — not just headcount.
 VOICE: Third person only. Use the institution's actual name or "the credit
 union." Never "we," "us," or "our." One consistent executive register.
 
-IDENTITY CHECK: Use the institution name provided in the extracted data
-("institution_name" field). Do not read it from an image -- none may be
-provided for this section.
-
+IDENTITY CHECK: Read the institution name from the attached source image.
+No pre-extracted data is provided for this section.
 ---
 
 VERIFICATION (do these silently before writing):
