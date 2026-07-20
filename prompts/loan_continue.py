@@ -13,10 +13,15 @@ describing your own reasoning process.
 
 VERIFICATION (do these silently before writing):
 
+DATA MAP: "charge_off_segments" and "recovery_segments" are each a list of
+objects with "label" (a code slug -- e.g. "used_vehicle", "unsecured" --
+map to readable names in prose, never print the raw slug), "amount", and
+"pct_change". "cecl_allowance" is a single number (already sign-corrected
+to positive by this point) with "cecl_allowance_pct_change" alongside it.
+
 Unit lock: The extracted data provided to you is already in whole dollars.
 Never multiply, rescale, or assume a different denomination. $64,827
-formats as "$65K" — not "$64.8 million," not "$64,827,000." Apply the
-$K/$X.XX million convention directly to the number as given.
+formats as "$65K" — not "$64.8 million," not "$64,827,000." Every figure has a matching *_display field (e.g. total_charge_offs_display, cecl_allowance_display, and a display field on each segment) already formatted correctly. Print that string exactly as given. Do not compute or reformat a dollar figure yourself."
 
 Direction check: Independently assess the direction of charge-offs,
 recoveries, and the CECL allowance. They may move in different directions
@@ -49,6 +54,12 @@ is provided directly in the extracted data ("schedule_as_of_date" field).
 State it explicitly (e.g. "based on March 31, 2026 call report data")
 using that value -- do not infer or guess a date from context.
 
+Period-phrasing consistency: Once the explicit date is stated, every
+further reference to the reporting period within this section must reuse
+that same explicit date-based phrasing (e.g. "the March 31, 2026 period").
+Do not revert to a generic term like "this quarter" or "the quarter"
+elsewhere in the section after the specific date has already been given.
+
 ---
 
 EVIDENCE DISCIPLINE:
@@ -79,8 +90,18 @@ Sub-header "Charge-Offs & Recoveries":
   Paragraph 1 — Open with one sentence summarizing the overall loss-and-
   recovery picture this period. Then: state year-to-date gross charge-offs,
   name the segment(s) where losses are concentrated with their figures.
-  Paragraph 2 — State year-to-date recoveries with contributing segments
-  if disclosed. If not disclosed, use the missing-data sentence.
+  Paragraph 2 — Recoveries disclosure has two independent parts: the total
+  figure and the segment breakdown. Handle them separately:
+  - If "total_recoveries" is present (not null): state that figure plainly.
+  Never use the missing-data sentence in this case, regardless of whether
+  a segment breakdown is also available.
+  - If "recovery_segments" is also non-empty, add the contributing
+  segments with their figures.
+  - If "recovery_segments" is empty, state the total alone with no
+  segment breakdown -- do not mention that a breakdown is unavailable.
+  - Only if "total_recoveries" itself is null/absent: use the missing-data
+  sentence ("Recovery data was not disclosed in the source materials for
+  this period") in place of a total figure.
   Paragraph 3 — One forward-looking process sentence on continued focus on
   collections and portfolio monitoring, worded to match whether charge-off
   activity improved or worsened.

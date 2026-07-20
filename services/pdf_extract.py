@@ -254,6 +254,16 @@ def parse_policy(pdf_path, page_numbers):
         })
 
     return {"metrics": metrics}
+def format_amount_display(amount):
+    if amount is None:
+        return None
+    sign = "-" if amount < 0 else ""
+    a = abs(amount)
+    if a >= 1_000_000:
+        return f"{sign}${a/1_000_000:.2f} million"
+    if a >= 1_000:
+        return f"{sign}${a/1000:.0f}K"
+    return f"{sign}${a:,.0f}"
 
 def parse_balance_sheet(pdf_path, page_numbers):
     rows = _extract_rows(pdf_path, page_numbers)
@@ -263,10 +273,17 @@ def parse_balance_sheet(pdf_path, page_numbers):
     def field(row):
         if not row or not row["values"]:
             return None
+        amount = row["values"][0] if len(row["values"]) > 0 else None
+        pct_change = row["values"][2] if len(row["values"]) > 2 else None
+        dollar_change = None
+        if amount is not None and pct_change is not None and pct_change != -100:
+          prior = amount / (1 + pct_change / 100)
+          dollar_change = round(amount - prior)
         return {
             "amount": row["values"][0] if len(row["values"]) > 0 else None,
             "pct_of_total": row["values"][1] if len(row["values"]) > 1 else None,
             "pct_change": row["values"][2] if len(row["values"]) > 2 else None,
+            "dollar_change": dollar_change,
         }
 
     return {
@@ -288,6 +305,11 @@ def parse_balance_sheet(pdf_path, page_numbers):
 def parse_earning(pdf_path, page_numbers):
     rows = _extract_rows(pdf_path, page_numbers)
     totals = {}
+    totals["net_interest_income"] = (
+      totals["interest_income"] - totals["interest_expense"]
+      if totals.get("interest_income") is not None and totals.get("interest_expense") is not None
+      else None
+  )
     for row in rows:
         label_upper = row["label"].upper()
         for name, alias in EARNING_TOTAL_ALIASES.items():
@@ -318,7 +340,7 @@ def parse_loan(pdf_path, page_numbers):
     portfolio_segments.sort(key=lambda s: s["amount"] or 0, reverse=True)
     top_two = portfolio_segments[:2]
     top_two_combined_pct = sum((s["pct"] or 0) for s in top_two)
-
+    delinquency_segments.sort(key=lambda s: s["amount"] or 0, reverse=True)
     return {
         "portfolio_segments": portfolio_segments,  # now sorted descending
         "top_two_segments": [s["label"] for s in top_two],
@@ -341,7 +363,8 @@ def parse_loan_continue(pdf_path, page_numbers):
     rec_segments, rec_total = _segments_from_rows(rows_rec, CHARGE_OFF_ALIASES)
 
     cecl_row = next((r for r in rows_cecl if "ALLOWANCE FOR CREDIT LOSSES" in r["label"].upper()), None)
-
+    for seg in co_segments + rec_segments:
+        seg["display"] = format_amount_display(seg["amount"]) 
     schedule_date = None
     if len(page_numbers) > 0:
         schedule_date = extract_report_date(pdf_path, page_number=page_numbers[0])
@@ -355,6 +378,7 @@ def parse_loan_continue(pdf_path, page_numbers):
         "cecl_allowance": abs(cecl_row["values"][0]) if cecl_row and cecl_row["values"] else None,
         "cecl_allowance_pct_change": cecl_row["values"][-1] if cecl_row and len(cecl_row["values"]) > 1 else None,
         "schedule_as_of_date": schedule_date,
+        "total_charge_offs_display": format_amount_display(co_total["amount"] if co_total else None)
     }
 
 

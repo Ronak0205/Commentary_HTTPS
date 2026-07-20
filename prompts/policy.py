@@ -15,16 +15,24 @@ provided for this section.
 
 VERIFICATION (do these silently before writing):
 
-Per-metric compliance (mechanical, three-step — do not skip steps):
-1. State this metric's favorable direction: is HIGHER favorable (e.g. net
-   worth ratio, ROAA, loan yield) or is LOWER favorable (e.g. delinquency
-   ratio, cost of funds)?
-2. State the limit type: minimum floor (must stay AT OR ABOVE) or maximum
-   ceiling (must stay AT OR BELOW).
-3. Compare the actual figure to the limit using that specific direction.
-   A metric above a minimum floor is COMPLIANT. A metric below a maximum
-   ceiling is COMPLIANT. Only a figure on the unfavorable side of its
-   limit is a breach.
+DATA MAP: each entry in "metrics" already has a "compliance" field printed
+directly on the source report (e.g. "Within Target", "Within Limit",
+"Below Range", "Below Target", "Above Limit") -- this is the credit
+union's own stated verdict for that metric, not something you derive.
+
+Per-metric compliance:
+1. TRUST THE SOURCE FIRST: if "compliance" is present and reads as one of
+   the values above, use it directly to decide compliant vs. breach --
+   "Within Target"/"Within Limit" = compliant; "Below Range"/"Below
+   Target"/"Above Limit" = breach. Do not re-derive or second-guess this
+   field with your own floor/ceiling reasoning when it is present.
+2. FALLBACK (only if "compliance" is missing or unrecognizable): state
+   this metric's favorable direction (HIGHER favorable -- e.g. net worth
+   ratio, ROAA, loan yield -- or LOWER favorable -- e.g. delinquency
+   ratio, cost of funds), state whether the benchmark is a minimum floor
+   or maximum ceiling, then compare the figure to it using that direction.
+   A metric above a minimum floor is COMPLIANT; below a maximum ceiling is
+   COMPLIANT. Only run this fallback when step 1 gives you nothing to use.
 Example of correct phrasing for a floor metric: net margin at 2.95% against
 a floor of "≥ 1.00%" is compliant -- write "net margin stood at 2.95%,
 above the 1.00% floor." Never write "below target guideline" for a metric
@@ -32,17 +40,14 @@ that is compliant; that phrasing is reserved only for metrics that
 genuinely breach a floor.
 
 Do not write "misses," "falls short of," or "exceeds" (as a breach) for
-any metric without completing this sequence. If the sentence you're about
-to write and the three-step result disagree, the sentence is wrong —
-recompute, don't override the computation with intuition.
+any metric without following step 1 (or step 2 as fallback). If the
+sentence you're about to write disagrees with the source's own printed
+"compliance" field, the sentence is wrong — the source's field wins.
 
 Verdict calibration: Before writing the opening verdict, count how many
 metrics actually breach their stated limits. Zero or one breach → "largely
 compliant." Several breaches across categories → "facing notable compliance
 gaps in several areas." The verdict must match the count.
-
-Decimal conversion: If a metric appears as a raw decimal (e.g. 0.10),
-convert it silently to percent (10%). Never show the conversion.
 
 Scale check: Confirm every metric figure and its paired limit are in a
 plausible range for that metric type. If a figure or limit looks implausible,

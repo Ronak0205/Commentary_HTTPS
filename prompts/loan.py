@@ -33,10 +33,20 @@ mismatch, state only the segment figures you can verify individually, and
 omit the total delinquent loans figure rather than presenting an
 irreconcilable number.
 
-Top-two segments: The top two portfolio segments by dollar size and their
-combined percentage are provided directly in the extracted data
-("top_two_segments", "top_two_combined_pct"). State these values exactly
-as given -- do not recompute or re-rank the segments yourself.
+DATA MAP: "portfolio_segments" and "delinquency_segments" are each a list
+of objects with "label" (a code slug -- e.g. "used_vehicle", "new_vehicle",
+"unsecured" -- map to readable names like "used vehicle loans" in prose,
+never print the raw slug), "amount", "pct" (portfolio segments only --
+delinquency segments have no pct-of-total field, only "pct_change"), and
+"pct_change".
+
+Top-two segments: "top_two_segments" and "top_two_combined_pct" are
+normally provided pre-computed -- state those values exactly as given, do
+not recompute or re-rank the segments yourself. Fallback: if
+"top_two_segments" is missing, empty, or contains no usable segment names,
+derive it yourself by sorting "portfolio_segments" by "amount" descending
+and taking the top two -- do not leave the opening paragraph without a
+named primary concentration.
 
 Delinquency-proportion check: Before using concentration language
 ("nearly all," "the vast majority," "virtually all") for where

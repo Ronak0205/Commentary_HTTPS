@@ -15,6 +15,22 @@ provided for this section.
 
 BEFORE WRITING — DO THESE CHECKS SILENTLY:
 
+DATA MAP: "headline_totals" is a flat object -- interest_income,
+interest_expense, non_interest_income_total, non_interest_expense_total,
+net_income are each a plain number, not a nested {amount, pct_change}
+object like other sections use. There is no prior-period figure or
+% change anywhere in this data -- step 11 below is not a hedge, it is a
+hard fact about this section's data shape: you cannot state a % change
+for any of these five totals because none exists in the input.
+
+The data may also include "non_interest_income_segments" and
+"non_interest_expense_segments" -- lists of {label, amount} sub-component
+pairs, already extracted and already reconciled against the matching
+headline_totals figure by the pipeline (within ~2%). These are
+authoritative when present. A missing or empty list means the pipeline
+could not reconcile a breakdown -- it does not mean sub-components don't
+exist, only that none can be safely stated.
+
 1. Compute the interest spread (Interest Income minus Interest Expense).
    This is typically the primary earnings driver and anchors the opening.
 
@@ -53,13 +69,15 @@ BEFORE WRITING — DO THESE CHECKS SILENTLY:
    title/legend before naming it -- never carry a figure from one chart
    into the other paragraph, even if the dollar values look plausible.
 
-9. Reconciliation gate (mandatory): The extracted data's "headline_totals"
-   field gives you the verified Non-Interest Income and Non-Interest Expense
-   totals as printed text -- these are authoritative. Before naming any
-   sub-component figure read from the image, sum the sub-components you're
-   about to state. If that sum doesn't reconcile with the matching headline
-   total within ~2%, do not print the sub-component breakdown at all -- state
-   only the headline total from the extracted data.
+9. Reconciliation gate (mandatory): If "non_interest_income_segments" and/or
+   "non_interest_expense_segments" are present and non-empty in the
+   extracted data, they have already been reconciled against the matching
+   "headline_totals" figure by the pipeline -- trust this silently, do not
+   re-sum or re-verify it yourself. Use those exact labels and figures,
+   ranked by size, for the sub-component breakdown. If a segments list is
+   missing or empty, the pipeline could not reconcile one (or none was
+   extracted) -- state only the matching headline total and do not attempt
+   to read a sub-component breakdown from the image in this case.
 
 10. Cross-source check: If Non-Interest Expense (or any other figure) appears
    on more than one source document (e.g. an income statement page and a
@@ -73,7 +91,7 @@ BEFORE WRITING — DO THESE CHECKS SILENTLY:
    prior-period figure or % change is printed on the source. Do not compute
    derived percentages not shown on the source.
 
-10.Disclosure exhaustion check: Before stating that non-interest income or
+12.Disclosure exhaustion check: Before stating that non-interest income or
 expense sub-components "are not individually detailed" or "not provided,"
 confirm they don't appear anywhere on the source, including separate
 breakdown charts or tables elsewhere in the packet. Only use a missing-data
@@ -153,13 +171,13 @@ below for Net Income, Interest Income, Interest Expense, Non-Interest
 Income total, and Non-Interest Expense total -- these are authoritative,
 do not re-derive them from the image.
 
-Use the attached image only to identify the Non-Interest Income and
-Non-Interest Expense SUB-COMPONENT breakdowns (the individual line items
-within each total), since those are chart-legend based and not in the
-extracted data. Rank sub-components by size. Before naming any
-sub-component figure, sum the sub-components you're about to state and
-confirm the sum reconciles with the matching headline total within ~2% --
-if it doesn't, state only the headline total and omit the breakdown.
+If "non_interest_income_segments" and/or "non_interest_expense_segments"
+are present in the data, they are pre-extracted and already reconciled
+against the matching headline total -- use those exact labels and figures
+for the sub-component breakdown, ranked by size, without re-deriving or
+re-verifying them yourself. If a segments list is missing or empty, state
+only the matching headline total and do not attempt to read a
+sub-component breakdown from the image.
 
 Then write the Earnings section as four connected paragraphs — explaining
 what drove net income, characterizing non-interest income's role,

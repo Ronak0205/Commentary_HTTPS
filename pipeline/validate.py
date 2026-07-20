@@ -23,6 +23,7 @@ def validate_segment_sum(segments, stated_total, tolerance=0.02, label="segments
     if diff is not None and diff > tolerance:
         return {
             "status": "DATA_CHECK",
+            "resolved": False,
             "reason": (
                 f"{label} sum to {segment_sum:,.1f}, stated total is "
                 f"{stated_total:,.1f} ({diff * 100:.1f}% mismatch)"
@@ -39,6 +40,7 @@ def validate_percent_composition(segments, tolerance=2.0):
     if abs(total_pct - 100) > tolerance:
         return {
             "status": "DATA_CHECK",
+            "resolved": False,
             "reason": f"segment percentages sum to {total_pct:.1f}%, not ~100%",
         }
     return None
@@ -70,6 +72,7 @@ def validate_delinquency_segments(delinquency_segments, total_delinquent, tolera
             if amt is not None and amt > total_delinquent:
                 flags.append({
                     "status": "DATA_CHECK",
+                    "resolved": False,
                     "reason": (
                         f"segment '{seg['label']}' ({amt:,.1f}) exceeds total "
                         f"delinquent loans ({total_delinquent:,.1f}) -- likely unit mismatch"
@@ -89,6 +92,7 @@ def validate_recoveries_vs_chargeoffs(recoveries_total, gross_chargeoffs_total):
     if recoveries_total >= gross_chargeoffs_total * 0.9:
         return {
             "status": "DATA_CHECK",
+            "resolved": False,
             "reason": (
                 f"recoveries ({recoveries_total:,.1f}) are atypically close to or "
                 f"exceed gross charge-offs ({gross_chargeoffs_total:,.1f}) -- verify"
@@ -103,6 +107,7 @@ def validate_equity_components(undivided_earnings, reserves, total_equity, toler
     if undivided_earnings is not None and undivided_earnings > total_equity:
         return {
             "status": "DATA_CHECK",
+            "resolved": False,
             "reason": (
                 f"undivided earnings ({undivided_earnings:,.1f}) exceeds total "
                 f"equity ({total_equity:,.1f}) -- likely misread unit"
@@ -114,6 +119,7 @@ def validate_equity_components(undivided_earnings, reserves, total_equity, toler
         if diff is not None and diff > tolerance and combined > total_equity:
             return {
                 "status": "DATA_CHECK",
+                "resolved": False,
                 "reason": (
                     f"undivided earnings + reserves ({combined:,.1f}) exceeds total "
                     f"equity ({total_equity:,.1f}) beyond normal rounding"
@@ -128,6 +134,7 @@ def validate_scale_plausibility(value, reference, max_ratio=3, label="figure"):
     if abs(value) > abs(reference) * max_ratio:
         return {
             "status": "DATA_CHECK",
+            "resolved": False,
             "reason": (
                 f"{label} ({value:,.1f}) is implausibly large relative to reference "
                 f"({reference:,.1f}) -- likely unit/decimal error"
@@ -135,6 +142,36 @@ def validate_scale_plausibility(value, reference, max_ratio=3, label="figure"):
         }
     return None
 
+def validate_earning_segments(income_segments, income_total, expense_segments, expense_total, tolerance=0.02):
+    """
+    Reconciles the earning_extract sub-component segments against
+    parse_earning()'s own headline_totals (table-sourced, authoritative).
+    Mirrors validate_segment_sum()'s existing pattern used for loan/share/
+    investment segments.
+
+    On mismatch, the offending segment list is dropped (mirrors
+    validate_delinquency_segments()'s handling of an irreconcilable total)
+    so the commentary writer is never handed a breakdown it cannot trust --
+    it falls back to the headline total alone, per earning.py's
+    reconciliation-gate instruction.
+    """
+    flags = []
+
+    income_flag = validate_segment_sum(
+        income_segments or [], income_total, tolerance, label="non-interest income segments"
+    )
+    if income_flag:
+        flags.append(income_flag)
+        income_segments = []
+
+    expense_flag = validate_segment_sum(
+        expense_segments or [], expense_total, tolerance, label="non-interest expense segments"
+    )
+    if expense_flag:
+        flags.append(expense_flag)
+        expense_segments = []
+
+    return flags, income_segments, expense_segments
 
 def validate_section(section_name, extracted):
     if not extracted:
@@ -162,6 +199,19 @@ def validate_section(section_name, extracted):
  
               flags += _drop_none(validate_scale_plausibility(
                  ni, implied_spread, max_ratio=5, label="net income vs. interest spread"))  
+
+          income_segments = extracted.get("non_interest_income_segments")
+          expense_segments = extracted.get("non_interest_expense_segments")
+          if income_segments is not None or expense_segments is not None:
+              seg_flags, resolved_income, resolved_expense = validate_earning_segments(
+                  income_segments,
+                  totals.get("non_interest_income_total"),
+                  expense_segments,
+                  totals.get("non_interest_expense_total"),
+              )
+              flags += seg_flags
+              extracted["non_interest_income_segments"] = resolved_income
+              extracted["non_interest_expense_segments"] = resolved_expense
            
         elif section_name == "loan_continue":
             gross = sum(s["amount"] or 0 for s in extracted.get("charge_off_segments", [])) or None

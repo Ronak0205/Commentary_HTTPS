@@ -14,13 +14,18 @@ provided for this section.
 
 VERIFICATION (do these silently before writing):
 
-Unit check: Identify the source denomination once. Verify the dominant
-holding figure plus other investments reconciles approximately with the
-stated total. If not, trust the flags already computed by the extraction pipeline — you were not given the source image for this section, so treat any listed flag as final..
+DATA MAP: "investment_segments" is a list of objects, each with "label"
+(a code slug -- "htm_debt_securities", "other_investments" -- map these to
+"Held-to-Maturity Debt Securities" / "Other Investments" in prose, never
+print the raw slug), "amount", "pct_change", and "pct_of_total". Figures
+are already whole dollars -- no denomination to identify or convert.
 
-Proportion check: Before describing a holding type as "virtually the entire"
-portfolio, verify it is genuinely ≥90% of total. "The majority" requires
-50-90%. Do not use superlatives outside these verified ranges.
+Proportion check: "pct_of_total" is already computed and given per segment
+-- use that value directly rather than re-deriving it. Before describing a
+holding type as "virtually the entire" portfolio, confirm its given
+pct_of_total is ≥90%. "The majority" requires 50-90%. Do not use
+superlatives outside these ranges, and do not compute the proportion
+yourself when the field is already present.
 
 Direction check: Only state a % change or comparison if it is visible on
 the source. If the prior period is not shown, state the current figure only.

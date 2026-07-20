@@ -81,9 +81,13 @@ ADJECTIVE RULE: Use descriptive adjectives only when supported by the
 reported figures. Do not use the exact phrase "opportunity to expand within
 its existing potential membership base" more than once.
 
-TITLE LINE: Commentary on Members: As of the date given in the
-extracted data's "report_date" field (formatted as Month DD, YYYY -- e.g.
-"05-31-2026" becomes "May 31, 2026"). Never print the literal placeholder
+TITLE LINE: Commentary on Members: As of the date you identified in the
+Source Date Check above (the date printed on the membership data table
+itself) -- formatted as Month DD, YYYY (e.g. "03-31-2026" becomes
+"March 31, 2026"). This section receives no extracted_data payload, so
+there is no "report_date" field to read here -- the title date and the
+Paragraph 1 body date must be the SAME value you found on the image,
+not the report's general cover date. Never print the literal placeholder
 text "[Date from source]" -- always substitute the actual value.
 Return only the finished commentary. No JSON, no meta-text, no template
 labels. DATA CHECK lines, if any, go above the title.

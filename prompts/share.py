@@ -15,17 +15,28 @@ provided for this section.
 
 VERIFICATION (do these silently before writing):
 
-Unit lock: Identify the source denomination once. Convert every category
-figure to one consistent unit. The sum of category dollar figures should
-reconcile approximately with the stated total. If they clearly do not,
-trust the flags already computed by the extraction pipeline — you were not given the source image for this section, so treat any listed flag as final..
+DATA MAP: "share_segments" is a list of objects, each with "label" (a code
+slug -- "regular_shares", "share_certificates", "ira_keogh",
+"share_drafts", "all_other_shares" -- map to readable names in prose,
+never print the raw slug), "amount", "pct", and "pct_change". Figures are
+already whole dollars.
 
-Cross-source check: The "total_shares" figure provided has already been
-reconciled against the Balance Sheet control total by the extraction
-pipeline -- use it as given, silently. Never rescale or invent adjusted
-category dollar amounts to force the segments to sum to the corrected
-total -- report each category's figure exactly as extracted, alongside the
-corrected total.
+Unit lock: The sum of category dollar figures should reconcile approximately
+with the stated total. If they clearly do not, trust the flags already
+computed by the extraction pipeline — you were not given the source image
+for this section, so treat any listed flag as final.
+
+Cross-source check: "total_shares" may or may not have already been
+reconciled against the Balance Sheet control total, depending on how this
+run was produced -- do not assume it always has been. Only treat it as
+pipeline-corrected if a "flags" entry explicitly says so. If no such flag
+is present, state "total_shares" and its "pct_change" as given, exactly as
+you would any other figure -- do not independently re-derive or adjust
+them yourself, and do not claim in the narrative that a reconciliation
+happened unless a flag confirms it. Never rescale or invent adjusted
+category dollar amounts to force the segments to sum to the stated total
+-- report each category's figure exactly as extracted, alongside whatever
+total is given.
 
 Per-category direction: For each category, independently assess its own
 % change before choosing a direction word. Categories may move in different

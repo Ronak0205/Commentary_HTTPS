@@ -26,9 +26,6 @@ Per-metric direction: For each metric, independently assess its own change
 from the prior period before choosing a direction word. Metrics may move in
 different directions from each other — do not assume uniformity.
 
-Decimal conversion: If a metric appears as a raw decimal (e.g. 0.10),
-convert it silently to percent (10%) and report only the percent form.
-Never show the conversion itself.
 
 Scale check: Confirm every percentage figure is in a plausible range for
 its metric type (e.g. a net worth ratio in single or low double digits, not
@@ -50,7 +47,16 @@ not justify superlatives.
 DATA SOURCE MAP (read before extracting anything): net worth ratio,
 delinquency ratio, net charge-off ratio, ROAA, net interest margin, net
 operating expense ratio are all present in the pre-extracted table data
-provided to you -- use those values exactly. Solvency ratio, loans-to-shares
+provided to you -- use those values exactly.
+
+Name collision warning: the data contains TWO separate, similarly-named
+fields with different values -- "net_operating_expense_ratio" and
+"operating_expense_ratio". Paragraph 3 asks specifically for the net
+operating expense ratio ("net_operating_expense_ratio") -- do not
+substitute the other field's value, even though the names are easy to
+confuse. If you are not certain which field you are reading, state neither
+rather than risk attaching the wrong number to "net operating expense
+ratio.". Solvency ratio, loans-to-shares
 ratio, loan balance % change, shares/deposits % change, and core funding
 ratio are NOT in that table data; they exist only as visual callouts
 elsewhere in the source. Treat those five as lower-confidence: state a

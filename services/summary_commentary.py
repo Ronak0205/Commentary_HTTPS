@@ -164,7 +164,7 @@ def _call_model(module_name, system_prompt, user_prompt, force_no_copy=False):
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        think=False,
+        think=think,
         options={"temperature": 0.2, "num_ctx": 16384},
     )
     return response["message"]["content"]
